@@ -1,6 +1,6 @@
 cmake_policy(SET CMP0048 NEW)
 
-Project(SimpleHTTPServer VERSION 1.0.3 LANGUAGES C)
+Project(FlameRoute VERSION 1.0.3 LANGUAGES C)
 cmake_minimum_required(VERSION 3.0)
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -22,4 +22,4 @@ cmake_policy(SET CMP0079 NEW)
 find_package(Threads REQUIRED)
 find_package(OpenSSL REQUIRED)
 
-install(TARGETS http-server DESTINATION bin)
+install(TARGETS flame-route DESTINATION bin)

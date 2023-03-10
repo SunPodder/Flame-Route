@@ -1,10 +1,10 @@
-add_executable(http-server
+add_executable(flame-route
     main.c
 )
 
 add_subdirectory(http)
-target_link_libraries(http-server PUBLIC HTTP)
+target_link_libraries(flame-route PUBLIC HTTP)
 add_subdirectory(utils)
-target_link_libraries(http-server PUBLIC UTILS)
+target_link_libraries(flame-route PUBLIC UTILS)
 add_subdirectory(mime)
-target_link_libraries(http-server PUBLIC MIME)
+target_link_libraries(flame-route PUBLIC MIME)

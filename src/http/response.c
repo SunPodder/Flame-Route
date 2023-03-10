@@ -63,7 +63,7 @@ void HTTPSendFile(int socket, char *mimeType, int fd){
  * @param mimeType: mime type of the content
  * @param response: content to be sent
  */
-void HTTPResponse(int socket, char* mimeType,char* response){
+void HTTPSendResponse(int socket, char* mimeType,char* response){
     HTTPSendHeaders(socket, strlen(response), mimeType);
     send(socket, "\n", 1, 0);
     send(socket, response, strlen(response), 0);

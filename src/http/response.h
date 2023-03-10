@@ -1,2 +1,7 @@
+typedef struct {
+    char* mimeType;
+    char* body;
+} HTTPResponse;
+
 void HTTPSendFile(int socket, char* mimeType, int fd);
-void HTTPResponse(int socket, char* mimeType, char* response);
+void HTTPRawResponse(int socket, char* mimeType, char* response);
