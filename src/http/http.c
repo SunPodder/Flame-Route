@@ -19,7 +19,7 @@
 #include <bits/in_addr.h>
 #include "response.h"
 #include "mime/mime.h"
-#include "utils.h"
+#include "utils/utils.h"
 
 
 
@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
       if (strcmp(path, "/") == 0) {
         //TODO: List the requested directory and send the index
         send(new_socket, HTTP404, strlen(HTTP404), 0);
-        HTTPRaw(new_socket, "text/html","<h1>Index of dir:</h1>");
+        HTTPResponse(new_socket, "text/html","<h1>Index of dir:</h1>");
       } else {
 
         send(new_socket, HTTP404, strlen(HTTP404), 0);
@@ -131,7 +131,7 @@ int main(int argc, char *argv[]) {
 
         char* res = (char*)malloc(sizeof(path) + strlen(s));
         sprintf(res, s, path);
-        HTTPRaw(new_socket, "text/html", res);
+        HTTPResponse(new_socket, "text/html", res);
         free(res);
       }
 
@@ -140,7 +140,8 @@ int main(int argc, char *argv[]) {
 
       int fd = open(file, O_RDONLY);
       send(new_socket, HTTP200, strlen(HTTP200), 0);
-      HTTPResponse(new_socket, getMimeType(file), fd);
+      HTTPSendFile(new_socket, getMimeType(file), fd);
+      close(fd);
     }
 
     free(file);

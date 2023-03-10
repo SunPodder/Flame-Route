@@ -1,6 +1,6 @@
 #include <string.h>
 #include "mime.h"
-#include "mime-table/mime-lookup.def"
+#include "mime-lookup.def"
 
 
 static char *getFileExtension(char *filename) {

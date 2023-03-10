@@ -11,11 +11,15 @@ set(CMAKE_C_FLAGS "-Wall -Wextra")
 set(CMAKE_C_FLAGS_DEBUG "-g")
 set(CMAKE_C_FLAGS_RELEASE "-O3")
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+
 add_subdirectory(src)
-add_subdirectory(src/mime)
 
 
 cmake_policy(SET CMP0079 NEW)
-target_link_libraries(http PUBLIC MIME)
+find_package(Threads REQUIRED)
+find_package(OpenSSL REQUIRED)
 
-install(TARGETS http DESTINATION bin)
+install(TARGETS http-server DESTINATION bin)
