@@ -16,7 +16,12 @@ FlameServer create_flame_server(){
     return server;
 }
 
-
+/*
+ * This function is called by server main loop
+ * in a new thread to handle each connection
+ *
+ * @param soc: the socket file descriptor of the accepted connection
+ */
 static void *handle_connection(void* soc){
     // TODO:
     // 1. Read the request from the socket
@@ -31,16 +36,48 @@ static void *handle_connection(void* soc){
     // 11. close the socket
 
     int new_socket = *(int*)soc;
+    int kMaxBufferSize = 3000;
+    char *buffer = (char*)malloc(kMaxBufferSize);
+    int pos = 0, size = kMaxBufferSize;
+    while(1){
+        if (pos + 1 >= size) {
+            // Buffer is full, resize it
+            size *= 2;
+            char* new_buffer = realloc(buffer, size);
+            if (!new_buffer) {
+                fprintf(stderr, "Error: failed to resize buffer\n");
+                exit(1);
+            }
+            buffer = new_buffer;
+        }
+
+        // Read next chunk of data
+        int n = read(new_socket, buffer + pos, size - pos - 1);
+        if (n <= 0) {
+            // End of stream or error
+            break;
+        }
+        // Update buffer position
+        pos += n;
+        buffer[pos] = '\0';
+
+        // Check if entire request has been read
+        if (strstr(buffer, "\r\n\r\n") != NULL) {
+            break;
+        }
+    }
+
+    printf("%s\n", buffer);
+    close(new_socket);
+    free(buffer);
+    return NULL;
 }
 
+/*
+ * Sets up the socket and starts listening for connections
+ * @param server: the server struct
+ */
 int ignite_server(FlameServer server){
-    // TODO:
-    // 1. Create a socket
-    // 2. Bind the socket to the server address and port
-    // 3. Listen for connections
-    // 4. Accept connections
-    // 5. transfer the connection to a new thread
-    // 6. return 0 if the server is successfully ignited
     
     int server_fd, new_socket;
     struct sockaddr_in address;
@@ -48,14 +85,13 @@ int ignite_server(FlameServer server){
     int addrlen = sizeof(address);
 
     // Creating socket file descriptor
-    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
-    {
+    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
         perror("socket failed");
         exit(EXIT_FAILURE);
     }
 
     if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
-                &opt, sizeof(opt))){
+                &opt, sizeof(opt))) {
         perror("setsockopt");
         exit(EXIT_FAILURE);
     }
@@ -65,15 +101,17 @@ int ignite_server(FlameServer server){
 
     // binding socket to the port
     if (bind(server_fd, (struct sockaddr *)&address,
-                                 sizeof(address))<0){
+                                 sizeof(address))<0) {
         perror("bind failed");
         exit(EXIT_FAILURE);
     }
     // listen for connections
-    if (listen(server_fd, 3) < 0){
+    if (listen(server_fd, 3) < 0) {
         perror("listen");
         exit(EXIT_FAILURE);
     }
+    
+    printf("Server started at %s:%d\n", server.address, server.port);
 
     while(1){
         // accept connection
@@ -82,7 +120,8 @@ int ignite_server(FlameServer server){
             perror("accept");
             continue;
         }
-        // create a new thread to handle the connection
+
+        // handle the connection in a new thread
         pthread_t thread_id;
         if( pthread_create( &thread_id, NULL,  handle_connection, (void*) &new_socket) < 0){
             perror("could not create thread");

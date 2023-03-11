@@ -16,9 +16,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_subdirectory(src)
+add_subdirectory(src/http)
+add_subdirectory(src/mime)
+add_subdirectory(src/utils)
+add_subdirectory(examples)
 
-
-cmake_policy(SET CMP0079 NEW)
 find_package(Threads REQUIRED)
 find_package(OpenSSL REQUIRED)
 

@@ -1,22 +1,18 @@
 #include "request.h"
 #include "response.h"
+#include "method.h"
 
+#pragma once
 typedef struct {
     int port;
     char* address;
+
+    // TODO:
+    // Hashmap to store routes <path, Route>
+    // Hashmap to store static routes <path, file_path>
+
 } FlameServer;
 
-typedef enum {
-    GET,
-    POST,
-    PUT,
-    DELETE,
-    HEAD,
-    OPTIONS,
-    PATCH,
-    TRACE,
-    CONNECT
-} HTTPMethod;
 
 FlameServer create_flame_server();
 int ignite_server(FlameServer server);

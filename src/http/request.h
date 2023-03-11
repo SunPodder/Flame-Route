@@ -1,6 +1,12 @@
+#include "method.h"
+#include "utils/string-map.h"
+
+#pragma once
 typedef struct {
     char *path;
-    char *method;
+    HTTPMethod method;
     char *body;
-    char *headers;
+    StringMap *headers;
 } HTTPRequest;
+
+HTTPRequest* parse_request(char* request);
