@@ -1,11 +1,13 @@
 # TODO
-- [ ] Turn http into a project independant library and implement a basic server in the main function
-- [ ] GET 1.1
+- [x] Turn http into a project independant library and implement a basic server in the main function
+- [x] GET 1.1
 - [ ] POST
 - [ ] PUT
 - [ ] DELETE
-- [x] fix subdirectory index file support
-- [ ] fix directory redirect to index file
-- [ ] send directory index
+- [ ] routing
+- [ ] static files
+- [ ] templates
+- [ ] middlewares
+- [ ] database support
+- [ ] builtin auth
 - [x] better way for determining content types
-- [ ] caching

@@ -1,5 +1,5 @@
-# c-http-server
-A simple HTTP Server written in c.
+# Flame Route
+A web server backend framework written in C
 
 ## How to build
 
@@ -7,17 +7,9 @@ A simple HTTP Server written in c.
 mkdir build
 cd build
 cmake ..
-cmake --build .
-
-# install
-cmake --install .
+make
 ```
 
-## How to use
-```bash
-# PORT 8080 is default
-# you can use whatever you like
-http 8080
-```
+This will build all parts of the framework and a example server. You can then link the framework to your own projects.
 
-More features will be added soon. :)
+Currently there's no documentation. See `examples/main.c` to have a understanding of how things will work. It's still not fully functional.
