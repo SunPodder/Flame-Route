@@ -1,17 +1,25 @@
-typedef struct entry_t {
-    char *key;
-    char *value;
-    struct entry_t *next;
-} entry_t;
+#ifndef ROUTE_MAP_H
+#define ROUTE_MAP_H
 
+#include "http/route.h"
 
+#pragma once
+typedef struct route_entry_t {
+    char *path;
+    Route *route;
+    struct route_entry_t *next;
+} route_entry_t;
+
+#pragma once
 typedef struct {
-    entry_t **entries;
-} HashTable;
+    route_entry_t **entries;
+} RouteMap;
 
 
-HashTable* ht_create(unsigned int TABLE_SIZE);
-char* ht_get(HashTable* HashTable, char* key);
-void ht_set(HashTable* HashTable, char* key, char* value);
-void ht_dump(HashTable* HashTable);
+RouteMap *route_map_create(unsigned int TABLE_SIZE);
+Route *route_map_get(RouteMap* RouteMap, char* path);
+void route_map_set(RouteMap* RouteMap, char* path, Route* route);
+void route_map_dump(RouteMap* RouteMap);
+
+#endif // ROUTE_MAP_H
 

@@ -1,5 +1,5 @@
-#include "method.h"
-#include "utils/string-map.h"
+#include <http/method.h>
+#include <utils/string-map.h>
 
 #pragma once
 typedef struct {

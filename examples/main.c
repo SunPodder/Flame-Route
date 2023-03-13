@@ -13,9 +13,9 @@ HTTPResponse hello_world(HTTPRequest request, HTTPResponse response){
 int main(){
     FlameServer server = create_flame_server();
 
-    register_route(server, "/", (HTTPMethod[]){GET}, Home);
-    register_route(server, "/hello", (HTTPMethod[]){GET, POST}, hello_world);
+    register_route(&server, "/", (HTTPMethod[]){GET}, &Home);
+    register_route(&server, "/hello", (HTTPMethod[]){GET, POST}, &hello_world);
 
-    ignite_server(server);
+    ignite_server(&server);
     return 0;
 }
