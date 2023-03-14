@@ -10,32 +10,38 @@
 
 
 char *ServerName = "C HTTP Server/1.0";
+char* HTTPStatusLine = "HTTP/1.1 %d %s\n\r";
 
+/*
+ * Internal helper function
+ * @return: current time in string format
+ */
 char* getResponseTime(){
     time_t date;
     time(&date);
     return ctime(&date);
 }
 
-void HTTP200(int *socket){
-    char *raw = "HTTP/1.1 200 OK\n\r";
-    send(*socket, raw, strlen(raw), 0);
+/*
+ * Internal helper function
+ * @param code: HTTP status code
+ * @return: HTTP status string
+ */
+char* getHTTPStatusFromCode(int code){
+    switch(code){
+        case 200:
+            return "OK";
+        case 404:
+            return "Not Found";
+        case 405:
+            return "Method Not Allowed";
+        case 500:
+            return "Internal Server Error";
+        default:
+            return "Unknown";
+    }
 }
 
-void HTTP404(int *socket){
-    char *raw = "HTTP/1.1 404 Not Found\n\r";
-    send(*socket, raw, strlen(raw), 0);
-}
-
-void HTTP405(int *socket){
-    char *raw = "HTTP/1.1 405 Method Not Allowed\n\r";
-    send(*socket, raw, strlen(raw), 0);
-}
-
-void HTTP500(int *socket){
-    char *raw = "HTTP/1.1 500 Internal Server Error\n\r";
-    send(*socket, raw, strlen(raw), 0);
-}
 
 /*
  * @param socket: socket to send the response to
@@ -59,7 +65,6 @@ void HTTPSendHeaders(int socket, int contentSize, char* mimeType){
 
     send(socket, response, strlen(response), 0);
     send(socket, "\n", 1, 0);
-    printf("Response Headers:\n%s", response);
     free(response);
 }
 
@@ -69,21 +74,51 @@ void HTTPSendHeaders(int socket, int contentSize, char* mimeType){
  * @param mimeType: mime type of the content
  * @param fd: file descriptor of the file to be sent
  */
-void HTTPSendFile(int socket, char *mimeType, int fd){
+void HTTPSendFile(int *socket, char *mimeType, int fd){
     int size = lseek(fd, 0, SEEK_END);
     lseek(fd, 0, SEEK_SET);
 
     HTTPSendHeaders(fd, size, mimeType);
-    sendfile(socket, fd, 0, size);
+    sendfile(*socket, fd, 0, size);
 }
 
 /*
  * @param socket: socket to send the response to
- * @param mimeType: mime type of the content
- * @param response: content to be sent
+ * @param response: HTTPResponse object
  */
-void HTTPSendResponse(int socket, char* mimeType,char* response){
-    HTTPSendHeaders(socket, strlen(response), mimeType);
-    send(socket, "\n", 1, 0);
-    send(socket, response, strlen(response), 0);
+void HTTPSendResponse(int *socket, HTTPResponse *response){
+    char* status = malloc(100);
+    sprintf(status, HTTPStatusLine, response->status, getHTTPStatusFromCode(response->status));
+    send(*socket, status, strlen(status), 0);
+    free(status);
+
+    HTTPSendHeaders(*socket, strlen(response->body), response->mimeType);
+    send(*socket, "\n", 1, 0);
+    send(*socket, response, strlen(response->body), 0);
+}
+
+
+
+void HTTP404(int *socket){
+    HTTPResponse response;
+    response.status = 404;
+    response.body = "Not Found";
+    response.mimeType = "text/plain";
+    HTTPSendResponse(socket, &response);
+}
+
+void HTTP405(int *socket){
+    HTTPResponse response;
+    response.status = 405;
+    response.body = "Method Not Allowed";
+    response.mimeType = "text/plain";
+    HTTPSendResponse(socket, &response);
+}
+
+void HTTP500(int *socket){
+    HTTPResponse response;
+    response.status = 500;
+    response.body = "Internal Server Error";
+    response.mimeType = "text/plain";
+    HTTPSendResponse(socket, &response);
 }
