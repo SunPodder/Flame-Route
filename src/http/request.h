@@ -4,9 +4,9 @@
 #pragma once
 typedef struct {
     char *path;
-    HTTPMethod method;
     char *body;
+    HTTPMethod method;
     StringMap *headers;
 } HTTPRequest;
 
-HTTPRequest* parse_request(char* request);
+HTTPRequest *parse_request(char* request);

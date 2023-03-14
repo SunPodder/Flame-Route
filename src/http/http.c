@@ -1,3 +1,5 @@
+#include "utils/string-map.h"
+#include <asm-generic/fcntl.h>
 #include <http/response.h>
 #include <utils/route-map.h>
 #include <sys/socket.h>
@@ -10,6 +12,8 @@
 #include <pthread.h>
 #include <http/http.h>
 #include <http/route.h>
+#include <utils/utils.h>
+#include <mime/mime.h>
 
 struct arg_struct {
     FlameServer *server;
@@ -38,24 +42,34 @@ Route *find_route(FlameServer *server, char *path, HTTPMethod method){
     return NULL;
 }
 
+int find_static_file(FlameServer *server, char *path){
+    for(int i = 0; i < server->_static_files_count; i++){
+        char* static_route = str_map_get(&server->static_routes[i], path);
+        if(static_route != NULL){
+            if(strcmp(static_route, path) == 0){
+                // check if file exists
+                if(access(static_route, F_OK) != -1){
+                    int fd = open(path, O_RDONLY);
+                    return fd;
+                }
+            }
+        }
+    }
+    return -1;
+}
+
+char* get_file_name_from_url(char* url){
+    url++;
+    return url;
+}
+
 /*
  * This function is called by server main loop
  * in a new thread to handle each connection
- *
- * @param soc: the socket file descriptor of the accepted connection
+ * @param args: pointer to a struct containing
+ * the server and the socket
  */
 static void *handle_connection(struct arg_struct *args){
-    // TODO:
-    // 1. Read the request from the socket
-    // 2. Parse the request
-    // 3. Find the route
-    // 4. check it the route http method matches the request method
-    // 5. call the route callback
-    // 6. send the response to the client
-    // 8. if route is not found send 404
-    // 9. if method is not allowed send 405
-    // 10. if the route is static send the file
-    // 11. close the socket
 
     int *new_socket = args->socket;
     int kMaxBufferSize = 3000;
@@ -89,24 +103,50 @@ static void *handle_connection(struct arg_struct *args){
         }
     }
 
-    printf("%s\n\n", buffer);
     HTTPRequest *request = parse_request(buffer);
-
     Route *route = find_route(args->server, request->path, request->method);
 
     if(route == NULL){
-        HTTP404(new_socket);
-        HTTPSendResponse(*new_socket, "text/html", "404 Not Found");
+        // route not defined
+        // check if static file
+        int isStatic = 0;
+        for(int i = 0; i < args->server->_static_files_count; i++){
+            if(str_map_get(args->server->static_routes, request->path) != NULL){
+                isStatic = 1;
+                break;
+            }
+        }
+
+        if(!isStatic){
+            // not a static route
+            HTTP404(new_socket);
+        } else {
+            char* filename = get_file_name_from_url(request->path);
+            int static_file = find_static_file(args->server, filename);
+
+            if(static_file == -1){
+                // file not found
+                HTTP404(new_socket);
+            } else {
+                HTTPSendFile(new_socket, getMimeType(filename),static_file);
+            }
+        }
+
+
+        // call defined method for the route
+        HTTPResponse *response = (HTTPResponse*)malloc(sizeof(HTTPResponse));
+        route->callback(*request, *response);
+        
+        HTTPSendResponse(new_socket, response);
         close(*new_socket);
         free(buffer);
         return NULL;
     }
 
-    HTTP200(new_socket);
     HTTPResponse *response = (HTTPResponse*)malloc(sizeof(HTTPResponse));
     route->callback(*request, *response);
 
-    HTTPSendResponse(*new_socket, "text/html", response->body);
+    HTTPSendResponse(new_socket, response);
 
     close(*new_socket);
     free(buffer);
