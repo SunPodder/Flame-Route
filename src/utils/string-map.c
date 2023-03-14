@@ -4,21 +4,7 @@
 #include "string-map.h"
 
 
-unsigned int hash(const char *key, unsigned int TABLE_SIZE) {
-    unsigned long int value = 0;
-    unsigned int i = 0;
-    unsigned int key_len = strlen(key);
-
-    // do several rounds of multiplication
-    for (; i < key_len; ++i) {
-        value = value * 37 + key[i];
-    }
-
-    // make sure value is 0 <= value < TABLE_SIZE
-    value = value % TABLE_SIZE;
-
-    return value;
-}
+extern unsigned int hash(const char *str, unsigned int len);
 
 StringMap *str_map_create(unsigned int TABLE_SIZE) {
     // allocate table
