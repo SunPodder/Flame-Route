@@ -2,9 +2,10 @@
 - [x] Turn http into a project independant library and implement a basic server in the main function
 - [x] better way for determining content types
 - [x] GET 1.1
+- [ ] Logger
 - [ ] POST
 - [x] routing
-- [ ] static files
+- [x] static files
 - [ ] templates
 - [ ] dynamic routes
 - [ ] SSL

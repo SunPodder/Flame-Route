@@ -74,12 +74,14 @@ void HTTPSendHeaders(int socket, int contentSize, char* mimeType){
  * @param mimeType: mime type of the content
  * @param fd: file descriptor of the file to be sent
  */
-void HTTPSendFile(int *socket, char *mimeType, int fd){
-    int size = lseek(fd, 0, SEEK_END);
-    lseek(fd, 0, SEEK_SET);
+void HTTPSendFile(int *socket, char *mimeType, int *fd){
+    int size = lseek(*fd, 0, SEEK_END);
+    lseek(*fd, 0, SEEK_SET);
 
-    HTTPSendHeaders(fd, size, mimeType);
-    sendfile(*socket, fd, 0, size);
+    send(*socket, "HTTP/1.1 200 OK\n\r", 17, 0);
+    HTTPSendHeaders(*socket, size, mimeType);
+    sendfile(*socket, *fd, 0, size);
+    send(*socket, "\n\r\n\r", 4, 0);
 }
 
 /*

@@ -27,6 +27,8 @@ FlameServer create_flame_server(){
     server.port = 8080;
     server.routes = route_map_create(10);
     server.static_routes = str_map_create(10);
+    server._static_routes_count = 0;
+    server._routes_count = 0;
     return server;
 }
 
@@ -49,16 +51,19 @@ char* get_file_name_from_url(char* url){
 }
 
 int find_static_file(FlameServer *server, char *path){
+    char** keys = str_map_get_keys(server->static_routes);
+
     for(int i = 0; i < server->_static_routes_count; i++){
-        char* static_route = str_map_get(&server->static_routes[i], path);
-        if(static_route != NULL){
-            if(strcmp(static_route, path) == 0){
-                // check if file exists
-                strcpy(static_route, get_file_name_from_url(path));
-                if(access(static_route, F_OK) != -1){
-                    int fd = open(path, O_RDONLY);
-                    return fd;
-                }
+        if(strStartsWith(path, keys[i]) == 1){
+            char *filepath = malloc(200);
+            strcpy(filepath, server->static_routes->entries[i]->value);
+            strcat(filepath,
+                    get_file_name_from_url(
+                        strReplace(path, keys[i], "")));
+
+            if(access(filepath, F_OK) != -1){
+                int file = open(filepath, O_RDONLY);
+                return file;
             }
         }
     }
@@ -97,27 +102,13 @@ void read_request(int *socket, int kMaxBufferSize, char *buffer){
 }
 
 void handle_static_or_404(int *socket, FlameServer *server, char *path){
-    int isStatic = 0;
-    for(int i = 0; i < server->_static_routes_count; i++){
-        if(str_map_get(server->static_routes, path) != NULL){
-            isStatic = 1;
-            break;
-        }
-    }
-
-    if(!isStatic){
-        // not a static route
+    int static_file = find_static_file(server, path);
+        
+    if(static_file == -1){
+        // file not found
         HTTP404(socket);
     } else {
-        char* filename = get_file_name_from_url(path);
-        int static_file = find_static_file(server, filename);
-        
-        if(static_file == -1){
-            // file not found
-            HTTP404(socket);
-        } else {
-            HTTPSendFile(socket, getMimeType(filename),static_file);
-        }
+        HTTPSendFile(socket, getMimeType(path), &static_file);
     }
 }
 
@@ -142,6 +133,8 @@ static void *handle_connection(struct arg_struct *args){
 
     if(route == NULL){
         handle_static_or_404(new_socket, args->server, request->path);
+        close(*new_socket);
+        free(buffer);
         return NULL;
     }
 
@@ -237,5 +230,5 @@ void register_route(FlameServer *server, char *path, HTTPMethod method[],
 
 void register_static_route(FlameServer *server, char *path, char *file_path){
     str_map_set(server->static_routes, path, file_path);
-    server->_static_routes_count++;
+    server->_static_routes_count += 1;
 }

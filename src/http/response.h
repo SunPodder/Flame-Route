@@ -12,5 +12,5 @@ void HTTP405(int *socket);
 void HTTP500(int *socket);
 void HTTPRedirect(int socket, char* mimeType, char* body, char* location);
 
-void HTTPSendFile(int *socket, char* mimeType, int fd);
+void HTTPSendFile(int *socket, char* mimeType, int *fd);
 void HTTPSendResponse(int *socket, HTTPResponse *response);

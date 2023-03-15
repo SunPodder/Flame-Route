@@ -12,7 +12,8 @@ typedef struct {
 
 
 StringMap* str_map_create(unsigned int TABLE_SIZE);
-char* str_map_get(StringMap* StringMap, char* key);
-void str_map_set(StringMap* StringMap, char* key, char* value);
-void str_map_dump(StringMap* StringMap);
+char* str_map_get(StringMap* map, char* key);
+char** str_map_get_keys(StringMap* map);
+void str_map_set(StringMap* map, char* key, char* value);
+void str_map_dump(StringMap* map);
 

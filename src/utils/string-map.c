@@ -8,18 +8,18 @@ extern unsigned int hash(const char *str, unsigned int len);
 
 StringMap *str_map_create(unsigned int TABLE_SIZE) {
     // allocate table
-    StringMap *StringMap = malloc(sizeof(StringMap) * 1);
+    StringMap *map = malloc(sizeof(StringMap) * 1);
 
     // allocate table entries
-    StringMap->entries = malloc(sizeof(entry_t*) * TABLE_SIZE);
+    map->entries = malloc(sizeof(entry_t*) * TABLE_SIZE);
 
     // set each to null (needed for proper operation)
     int i = 0;
     for (; i < TABLE_SIZE; ++i) {
-        StringMap->entries[i] = NULL;
+        map->entries[i] = NULL;
     }
 
-    return StringMap;
+    return map;
 }
 
 entry_t *str_map_pair(const char *key, const char *value) {
@@ -39,15 +39,15 @@ entry_t *str_map_pair(const char *key, const char *value) {
 }
 
 
-void str_map_set(StringMap *StringMap, char *key, char *value) {
-    unsigned int slot = hash(key, sizeof(StringMap->entries) / sizeof(entry_t*));
+void str_map_set(StringMap *map, char *key, char *value) {
+    unsigned int slot = hash(key, sizeof(map->entries) / sizeof(entry_t*));
 
     // try to look up an entry set
-    entry_t *entry = StringMap->entries[slot];
+    entry_t *entry = map->entries[slot];
 
     // no entry means slot empty, insert immediately
     if (entry == NULL) {
-        StringMap->entries[slot] = str_map_pair(key, value);
+        map->entries[slot] = str_map_pair(key, value);
         return;
     }
 
@@ -74,6 +74,17 @@ void str_map_set(StringMap *StringMap, char *key, char *value) {
     prev->next = str_map_pair(key, value);
 }
 
+
+char** str_map_get_keys(StringMap *map){
+    char** keys = malloc(sizeof(char*) * (sizeof(map->entries) / sizeof(entry_t*)));
+    for(int i = 0; i < sizeof(map->entries) / sizeof(entry_t*); i++){
+        entry_t *entry = map->entries[i];
+        if(entry != NULL){
+            keys[i] = entry->key;
+        }
+    }
+    return keys;
+}
 
 char* str_map_get(StringMap *StringMap, char *key) {
     unsigned int slot = hash(key, sizeof(StringMap->entries)/sizeof(entry_t*));
