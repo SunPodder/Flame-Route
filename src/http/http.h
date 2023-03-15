@@ -11,7 +11,7 @@ typedef struct {
     RouteMap *routes;   // <char(path), Route>
     StringMap *static_routes;   // <char(path), char(file_path)>
 
-    int _static_files_count;
+    int _static_routes_count;
     int _routes_count;
 } FlameServer;
 

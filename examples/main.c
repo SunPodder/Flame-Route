@@ -1,13 +1,13 @@
 #include "http/http.h"
 
-HTTPResponse Home(HTTPRequest request, HTTPResponse response){
-    response.body = "Index Page";
-    return response;
+HTTPResponse Home(HTTPRequest *request, HTTPResponse *response){
+    response->body = "Index Page";
+    return *response;
 }
 
-HTTPResponse hello_world(HTTPRequest request, HTTPResponse response){
-    response.body = "Hello World!";
-    return response;
+HTTPResponse hello_world(HTTPRequest *request, HTTPResponse *response){
+    response->body = "Hello World!";
+    return *response;
 }
 
 int main(){
@@ -15,6 +15,8 @@ int main(){
 
     register_route(&server, "/", (HTTPMethod[]){GET}, &Home);
     register_route(&server, "/hello", (HTTPMethod[]){GET, POST}, &hello_world);
+
+    register_static_route(&server, "/static", "./");
 
     ignite_server(&server);
     return 0;

@@ -94,7 +94,8 @@ void HTTPSendResponse(int *socket, HTTPResponse *response){
 
     HTTPSendHeaders(*socket, strlen(response->body), response->mimeType);
     send(*socket, "\n", 1, 0);
-    send(*socket, response, strlen(response->body), 0);
+    send(*socket, response->body, strlen(response->body), 0);
+    send(*socket, "\n\r\n\r", 4, 0);
 }
 
 

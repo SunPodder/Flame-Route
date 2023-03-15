@@ -25,7 +25,8 @@ FlameServer create_flame_server(){
     FlameServer server;
     server.address = "127.0.0.1";
     server.port = 8080;
-    server.routes = route_map_create(100);
+    server.routes = route_map_create(10);
+    server.static_routes = str_map_create(10);
     return server;
 }
 
@@ -42,12 +43,18 @@ Route *find_route(FlameServer *server, char *path, HTTPMethod method){
     return NULL;
 }
 
+char* get_file_name_from_url(char* url){
+    url++;
+    return url;
+}
+
 int find_static_file(FlameServer *server, char *path){
-    for(int i = 0; i < server->_static_files_count; i++){
+    for(int i = 0; i < server->_static_routes_count; i++){
         char* static_route = str_map_get(&server->static_routes[i], path);
         if(static_route != NULL){
             if(strcmp(static_route, path) == 0){
                 // check if file exists
+                strcpy(static_route, get_file_name_from_url(path));
                 if(access(static_route, F_OK) != -1){
                     int fd = open(path, O_RDONLY);
                     return fd;
@@ -58,22 +65,7 @@ int find_static_file(FlameServer *server, char *path){
     return -1;
 }
 
-char* get_file_name_from_url(char* url){
-    url++;
-    return url;
-}
-
-/*
- * This function is called by server main loop
- * in a new thread to handle each connection
- * @param args: pointer to a struct containing
- * the server and the socket
- */
-static void *handle_connection(struct arg_struct *args){
-
-    int *new_socket = args->socket;
-    int kMaxBufferSize = 3000;
-    char *buffer = (char*)malloc(kMaxBufferSize);
+void read_request(int *socket, int kMaxBufferSize, char *buffer){
     int pos = 0, size = kMaxBufferSize;
     while(1){
         if (pos + 1 >= size) {
@@ -88,7 +80,7 @@ static void *handle_connection(struct arg_struct *args){
         }
 
         // Read next chunk of data
-        int n = read(*new_socket, buffer + pos, size - pos - 1);
+        int n = read(*socket, buffer + pos, size - pos - 1);
         if (n <= 0) {
             // End of stream or error
             break;
@@ -102,50 +94,62 @@ static void *handle_connection(struct arg_struct *args){
             break;
         }
     }
+}
+
+void handle_static_or_404(int *socket, FlameServer *server, char *path){
+    int isStatic = 0;
+    for(int i = 0; i < server->_static_routes_count; i++){
+        if(str_map_get(server->static_routes, path) != NULL){
+            isStatic = 1;
+            break;
+        }
+    }
+
+    if(!isStatic){
+        // not a static route
+        HTTP404(socket);
+    } else {
+        char* filename = get_file_name_from_url(path);
+        int static_file = find_static_file(server, filename);
+        
+        if(static_file == -1){
+            // file not found
+            HTTP404(socket);
+        } else {
+            HTTPSendFile(socket, getMimeType(filename),static_file);
+        }
+    }
+}
+
+/*
+ * This function is called by server main loop
+ * in a new thread to handle each connection
+ * @param args: pointer to a struct containing
+ * the server and the socket
+ */
+static void *handle_connection(struct arg_struct *args){
+
+    int kMaxBufferSize = 3000;
+    char *buffer = (char*)malloc(kMaxBufferSize);
+    int *new_socket = args->socket;
+    read_request(new_socket, kMaxBufferSize, buffer);
 
     HTTPRequest *request = parse_request(buffer);
+
+    printf("GET - %s\n", request->path);
+
     Route *route = find_route(args->server, request->path, request->method);
 
     if(route == NULL){
-        // route not defined
-        // check if static file
-        int isStatic = 0;
-        for(int i = 0; i < args->server->_static_files_count; i++){
-            if(str_map_get(args->server->static_routes, request->path) != NULL){
-                isStatic = 1;
-                break;
-            }
-        }
-
-        if(!isStatic){
-            // not a static route
-            HTTP404(new_socket);
-        } else {
-            char* filename = get_file_name_from_url(request->path);
-            int static_file = find_static_file(args->server, filename);
-
-            if(static_file == -1){
-                // file not found
-                HTTP404(new_socket);
-            } else {
-                HTTPSendFile(new_socket, getMimeType(filename),static_file);
-            }
-        }
-
-
-        // call defined method for the route
-        HTTPResponse *response = (HTTPResponse*)malloc(sizeof(HTTPResponse));
-        route->callback(*request, *response);
-        
-        HTTPSendResponse(new_socket, response);
-        close(*new_socket);
-        free(buffer);
+        handle_static_or_404(new_socket, args->server, request->path);
         return NULL;
     }
 
     HTTPResponse *response = (HTTPResponse*)malloc(sizeof(HTTPResponse));
-    route->callback(*request, *response);
+    response->status = 200;
+    response->mimeType = "text/html";
 
+    route->callback(request, response);
     HTTPSendResponse(new_socket, response);
 
     close(*new_socket);
@@ -217,15 +221,21 @@ int ignite_server(FlameServer *server){
     return 0;
 }
 
-void register_route(FlameServer *server, char *path,
-        HTTPMethod method[], HTTPResponse (*callback)(
-            HTTPRequest *request, HTTPResponse *response)){
-    // TODO:
-    // 1. Create a route struct
-    // 2. Add the route to the server routes hashmap <path, route>
+void register_route(FlameServer *server, char *path, HTTPMethod method[],
+        HTTPResponse (*callback)(HTTPRequest *request, HTTPResponse *response)){
+
+    Route *route = (Route*)malloc(sizeof(Route));
+    route->path = path;
+    for(int i = 0; i < sizeof(&method)/sizeof(method[0]); i++){
+        route->methods[i] = method[i];
+    }
+    route->callback = callback;
+
+    route_map_set(server->routes, path, route);
+    server->_routes_count++;
 }
 
 void register_static_route(FlameServer *server, char *path, char *file_path){
-    // TODO:
-    // add the route to the server's static routes
+    str_map_set(server->static_routes, path, file_path);
+    server->_static_routes_count++;
 }

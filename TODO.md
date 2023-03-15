@@ -3,7 +3,7 @@
 - [x] better way for determining content types
 - [x] GET 1.1
 - [ ] POST
-- [ ] routing
+- [x] routing
 - [ ] static files
 - [ ] templates
 - [ ] dynamic routes

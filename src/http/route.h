@@ -9,7 +9,7 @@
 typedef struct {
     char* path;
     HTTPMethod methods[9];
-    HTTPResponse (*callback)(HTTPRequest request, HTTPResponse response);
+    HTTPResponse (*callback)(HTTPRequest *request, HTTPResponse *response);
 } Route;
 
 #endif // ROUTE_H
