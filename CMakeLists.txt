@@ -1,6 +1,6 @@
 cmake_policy(SET CMP0048 NEW)
 
-Project(FlameRoute VERSION 1.0.3 LANGUAGES C)
+Project(FlameRoute VERSION 0.0.3 LANGUAGES C)
 cmake_minimum_required(VERSION 3.0)
 
 if(NOT CMAKE_BUILD_TYPE)

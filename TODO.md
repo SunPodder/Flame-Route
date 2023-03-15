@@ -1,13 +1,18 @@
 # TODO
 - [x] Turn http into a project independant library and implement a basic server in the main function
+- [x] better way for determining content types
 - [x] GET 1.1
 - [ ] POST
-- [ ] PUT
-- [ ] DELETE
 - [ ] routing
 - [ ] static files
 - [ ] templates
+- [ ] dynamic routes
+- [ ] SSL
+- [ ] PUT
+- [ ] DELETE
+- [ ] compression
+- [ ] documentation
+- [ ] modularize code so it's easier to make extensions and plugins
 - [ ] middlewares
 - [ ] database support
 - [ ] builtin auth
-- [x] better way for determining content types

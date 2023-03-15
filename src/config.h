@@ -1,2 +1,2 @@
-#define VERSION 1.0.3
-#define NAME "C HTTP Server"
+#define VERSION 0.0.0
+#define NAME "Flame Route"
