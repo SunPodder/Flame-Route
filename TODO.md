@@ -1,5 +1,5 @@
 # TODO
-- [x] Turn http into a project independant library and implement a basic server in the main function
+- [x] Turn http into a project independant library
 - [x] better way for determining content types
 - [x] GET 1.1
 - [ ] Logger
@@ -8,6 +8,7 @@
 - [x] static files
 - [ ] templates
 - [ ] dynamic routes
+- [ ] executable to build project producing a dist/public folder
 - [ ] SSL
 - [ ] PUT
 - [ ] DELETE

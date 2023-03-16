@@ -1,6 +1,6 @@
 cmake_policy(SET CMP0048 NEW)
 
-Project(FlameRoute VERSION 0.0.3 LANGUAGES C)
+Project(FlameRoute VERSION 0.0.3 LANGUAGES CXX C)
 cmake_minimum_required(VERSION 3.0)
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -18,7 +18,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_subdirectory(src)
 add_subdirectory(src/http)
 add_subdirectory(src/mime)
-add_subdirectory(src/utils)
 add_subdirectory(examples)
 
 find_package(Threads REQUIRED)

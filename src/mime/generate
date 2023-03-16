@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+gperf -CD -t mime.gperf -N lookup_mime -L C++ > mime-lookup.def

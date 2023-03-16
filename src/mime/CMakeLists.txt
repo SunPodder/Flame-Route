@@ -1,1 +1,1 @@
-add_library(MIME mime.c)
+add_library(MIME mime.cpp)
