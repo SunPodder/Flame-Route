@@ -1,4 +1,4 @@
 add_executable(flame-route
-    main.c
+    main.cpp
 )
 
