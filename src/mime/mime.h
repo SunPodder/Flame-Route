@@ -1,1 +1,0 @@
-char* getMimeType(char* filename);

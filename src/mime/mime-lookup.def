@@ -1,8 +1,8 @@
-/* ANSI-C code produced by gperf version 3.1 */
-/* Command-line: gperf -CD -t mime-lookup.gperf  */
+/* C++ code produced by gperf version 3.1 */
+/* Command-line: gperf -CD -t -N lookup_mime -L C++ mime.gperf  */
 /* Computed positions: -k'1-4,6,$' */
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #if !((' ' == 32) && ('!' == 33) && ('"' == 34) && ('#' == 35) \
       && ('%' == 37) && ('&' == 38) && ('\'' == 39) && ('(' == 40) \
@@ -31,7 +31,7 @@
 #error "gperf generated tables don't work with this execution character set. Please report a bug to <bug-gperf@gnu.org>."
 #endif
 
-#line 1 "mime-lookup.gperf"
+#line 1 "mime.gperf"
 struct file { char* name; char* mime; };
 
 #define TOTAL_KEYWORDS 985
@@ -41,15 +41,16 @@ struct file { char* name; char* mime; };
 #define MAX_HASH_VALUE 4819
 /* maximum key range = 4819, duplicates = 2 */
 
-#ifdef __GNUC__
-__inline
-#else
-#ifdef __cplusplus
-inline
-#endif
-#endif
-static unsigned int
-hash (register const char *str, register size_t len)
+class Perfect_Hash
+{
+private:
+  static inline unsigned int hash (const char *str, size_t len);
+public:
+  static const struct file *lookup_mime (const char *str, size_t len);
+};
+
+inline unsigned int
+Perfect_Hash::hash (const char *str, size_t len)
 {
   static const unsigned short asso_values[] =
     {
@@ -82,2004 +83,2004 @@ hash (register const char *str, register size_t len)
       4820, 4820, 4820, 4820, 4820, 4820, 4820, 4820, 4820, 4820,
       4820, 4820, 4820, 4820, 4820
     };
-  register unsigned int hval = len;
+  unsigned int hval = len;
 
   switch (hval)
     {
       default:
-        hval += asso_values[(unsigned char)str[5]];
+        hval += asso_values[static_cast<unsigned char>(str[5])];
       /*FALLTHROUGH*/
       case 5:
       case 4:
-        hval += asso_values[(unsigned char)str[3]];
+        hval += asso_values[static_cast<unsigned char>(str[3])];
       /*FALLTHROUGH*/
       case 3:
-        hval += asso_values[(unsigned char)str[2]];
+        hval += asso_values[static_cast<unsigned char>(str[2])];
       /*FALLTHROUGH*/
       case 2:
-        hval += asso_values[(unsigned char)str[1]+19];
+        hval += asso_values[static_cast<unsigned char>(str[1]+19)];
       /*FALLTHROUGH*/
       case 1:
-        hval += asso_values[(unsigned char)str[0]];
+        hval += asso_values[static_cast<unsigned char>(str[0])];
         break;
     }
-  return hval + asso_values[(unsigned char)str[len - 1]];
+  return hval + asso_values[static_cast<unsigned char>(str[len - 1])];
 }
 
 const struct file *
-in_word_set (register const char *str, register size_t len)
+Perfect_Hash::lookup_mime (const char *str, size_t len)
 {
   static const struct file wordlist[] =
     {
-#line 908 "mime-lookup.gperf"
+#line 908 "mime.gperf"
       {"s", "text/x-asm"},
-#line 506 "mime-lookup.gperf"
+#line 506 "mime.gperf"
       {"sus", "application/vnd.sus-calendar"},
-#line 395 "mime-lookup.gperf"
+#line 395 "mime.gperf"
       {"mus", "application/vnd.musician"},
-#line 884 "mime-lookup.gperf"
+#line 884 "mime.gperf"
       {"t", "text/troff"},
-#line 223 "mime-lookup.gperf"
+#line 223 "mime.gperf"
       {"slt", "application/vnd.epson.salt"},
-#line 977 "mime-lookup.gperf"
+#line 977 "mime.gperf"
       {"mks", "video/x-matroska"},
-#line 359 "mime-lookup.gperf"
+#line 359 "mime.gperf"
       {"xls", "application/vnd.ms-excel"},
-#line 326 "mime-lookup.gperf"
+#line 326 "mime.gperf"
       {"skm", "application/vnd.koan"},
-#line 53 "mime-lookup.gperf"
+#line 53 "mime.gperf"
       {"mets", "application/mets+xml"},
-#line 360 "mime-lookup.gperf"
+#line 360 "mime.gperf"
       {"xlm", "application/vnd.ms-excel"},
-#line 367 "mime-lookup.gperf"
+#line 367 "mime.gperf"
       {"xlsm", "application/vnd.ms-excel.sheet.macroenabled.12"},
-#line 98 "mime-lookup.gperf"
+#line 98 "mime.gperf"
       {"pls", "application/pls+xml"},
-#line 92 "mime-lookup.gperf"
+#line 92 "mime.gperf"
       {"p8", "application/pkcs8"},
-#line 925 "mime-lookup.gperf"
+#line 925 "mime.gperf"
       {"pas", "text/x-pascal"},
-#line 325 "mime-lookup.gperf"
+#line 325 "mime.gperf"
       {"skt", "application/vnd.koan"},
-#line 368 "mime-lookup.gperf"
+#line 368 "mime.gperf"
       {"xltm", "application/vnd.ms-excel.template.macroenabled.12"},
-#line 363 "mime-lookup.gperf"
+#line 363 "mime.gperf"
       {"xlt", "application/vnd.ms-excel"},
-#line 910 "mime-lookup.gperf"
+#line 910 "mime.gperf"
       {"c", "text/x-c"},
-#line 374 "mime-lookup.gperf"
+#line 374 "mime.gperf"
       {"cat", "application/vnd.ms-pki.seccat"},
-#line 91 "mime-lookup.gperf"
+#line 91 "mime.gperf"
       {"p7s", "application/pkcs7-signature"},
-#line 42 "mime-lookup.gperf"
+#line 42 "mime.gperf"
       {"mads", "application/mads+xml"},
-#line 381 "mime-lookup.gperf"
+#line 381 "mime.gperf"
       {"sldm", "application/vnd.ms-powerpoint.slide.macroenabled.12"},
-#line 924 "mime-lookup.gperf"
+#line 924 "mime.gperf"
       {"p", "text/x-pascal"},
-#line 89 "mime-lookup.gperf"
+#line 89 "mime.gperf"
       {"p7m", "application/pkcs7-mime"},
-#line 507 "mime-lookup.gperf"
+#line 507 "mime.gperf"
       {"susp", "application/vnd.sus-calendar"},
-#line 873 "mime-lookup.gperf"
+#line 873 "mime.gperf"
       {"text", "text/plain"},
-#line 211 "mime-lookup.gperf"
+#line 211 "mime.gperf"
       {"mlp", "application/vnd.dolby.mlp"},
-#line 370 "mime-lookup.gperf"
+#line 370 "mime.gperf"
       {"chm", "application/vnd.ms-htmlhelp"},
-#line 435 "mime-lookup.gperf"
+#line 435 "mime.gperf"
       {"xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"},
-#line 685 "mime-lookup.gperf"
+#line 685 "mime.gperf"
       {"tex", "application/x-tex"},
-#line 362 "mime-lookup.gperf"
+#line 362 "mime.gperf"
       {"xlc", "application/vnd.ms-excel"},
-#line 509 "mime-lookup.gperf"
+#line 509 "mime.gperf"
       {"sis", "application/vnd.symbian.install"},
-#line 710 "mime-lookup.gperf"
+#line 710 "mime.gperf"
       {"xht", "application/xhtml+xml"},
-#line 436 "mime-lookup.gperf"
+#line 436 "mime.gperf"
       {"xltx", "application/vnd.openxmlformats-officedocument.spreadsheetml.template"},
-#line 323 "mime-lookup.gperf"
+#line 323 "mime.gperf"
       {"skp", "application/vnd.koan"},
-#line 352 "mime-lookup.gperf"
+#line 352 "mime.gperf"
       {"plc", "application/vnd.mobius.plc"},
-#line 920 "mime-lookup.gperf"
+#line 920 "mime.gperf"
       {"f90", "text/x-fortran"},
-#line 674 "mime-lookup.gperf"
+#line 674 "mime.gperf"
       {"xap", "application/x-silverlight-app"},
-#line 180 "mime-lookup.gperf"
+#line 180 "mime.gperf"
       {"c4p", "application/vnd.clonk.c4group"},
-#line 643 "mime-lookup.gperf"
+#line 643 "mime.gperf"
       {"clp", "application/x-msclip"},
-#line 516 "mime-lookup.gperf"
+#line 516 "mime.gperf"
       {"cap", "application/vnd.tcpdump.pcap"},
-#line 432 "mime-lookup.gperf"
+#line 432 "mime.gperf"
       {"sldx", "application/vnd.openxmlformats-officedocument.presentationml.slide"},
-#line 676 "mime-lookup.gperf"
+#line 676 "mime.gperf"
       {"sit", "application/x-stuffit"},
-#line 373 "mime-lookup.gperf"
+#line 373 "mime.gperf"
       {"thmx", "application/vnd.ms-officetheme"},
-#line 90 "mime-lookup.gperf"
+#line 90 "mime.gperf"
       {"p7c", "application/pkcs7-mime"},
-#line 70 "mime-lookup.gperf"
+#line 70 "mime.gperf"
       {"dump", "application/octet-stream"},
-#line 901 "mime-lookup.gperf"
+#line 901 "mime.gperf"
       {"flx", "text/vnd.fmi.flexstor"},
-#line 324 "mime-lookup.gperf"
+#line 324 "mime.gperf"
       {"skd", "application/vnd.koan"},
-#line 919 "mime-lookup.gperf"
+#line 919 "mime.gperf"
       {"f77", "text/x-fortran"},
-#line 473 "mime-lookup.gperf"
+#line 473 "mime.gperf"
       {"semd", "application/vnd.semd"},
-#line 827 "mime-lookup.gperf"
+#line 827 "mime.gperf"
       {"fh5", "image/x-freehand"},
-#line 118 "mime-lookup.gperf"
+#line 118 "mime.gperf"
       {"scs", "application/scvp-cv-response"},
-#line 178 "mime-lookup.gperf"
+#line 178 "mime.gperf"
       {"c4d", "application/vnd.clonk.c4group"},
-#line 917 "mime-lookup.gperf"
+#line 917 "mime.gperf"
       {"f", "text/x-fortran"},
-#line 336 "mime-lookup.gperf"
+#line 336 "mime.gperf"
       {"scm", "application/vnd.lotus-screencam"},
-#line 348 "mime-lookup.gperf"
+#line 348 "mime.gperf"
       {"dis", "application/vnd.mobius.dis"},
-#line 510 "mime-lookup.gperf"
+#line 510 "mime.gperf"
       {"sisx", "application/vnd.symbian.install"},
-#line 550 "mime-lookup.gperf"
+#line 550 "mime.gperf"
       {"saf", "application/vnd.yamaha.smaf-audio"},
-#line 828 "mime-lookup.gperf"
+#line 828 "mime.gperf"
       {"fh7", "image/x-freehand"},
-#line 677 "mime-lookup.gperf"
+#line 677 "mime.gperf"
       {"sitx", "application/x-stuffitx"},
-#line 287 "mime-lookup.gperf"
+#line 287 "mime.gperf"
       {"sc", "application/vnd.ibm.secure-container"},
-#line 66 "mime-lookup.gperf"
+#line 66 "mime.gperf"
       {"dist", "application/octet-stream"},
-#line 474 "mime-lookup.gperf"
+#line 474 "mime.gperf"
       {"semf", "application/vnd.semf"},
-#line 695 "mime-lookup.gperf"
+#line 695 "mime.gperf"
       {"xlf", "application/x-xliff+xml"},
-#line 179 "mime-lookup.gperf"
+#line 179 "mime.gperf"
       {"c4f", "application/vnd.clonk.c4group"},
-#line 825 "mime-lookup.gperf"
+#line 825 "mime.gperf"
       {"fhc", "image/x-freehand"},
-#line 762 "mime-lookup.gperf"
+#line 762 "mime.gperf"
       {"caf", "audio/x-caf"},
-#line 597 "mime-lookup.gperf"
+#line 597 "mime.gperf"
       {"cct", "application/x-director"},
-#line 570 "mime-lookup.gperf"
+#line 570 "mime.gperf"
       {"aas", "application/x-authorware-seg"},
-#line 450 "mime-lookup.gperf"
+#line 450 "mime.gperf"
       {"plf", "application/vnd.pocketlearn"},
-#line 45 "mime-lookup.gperf"
+#line 45 "mime.gperf"
       {"ma", "application/mathematica"},
-#line 832 "mime-lookup.gperf"
+#line 832 "mime.gperf"
       {"pic", "image/x-pict"},
-#line 833 "mime-lookup.gperf"
+#line 833 "mime.gperf"
       {"pct", "image/x-pict"},
-#line 569 "mime-lookup.gperf"
+#line 569 "mime.gperf"
       {"aam", "application/x-authorware-map"},
-#line 124 "mime-lookup.gperf"
+#line 124 "mime.gperf"
       {"shf", "application/shf+xml"},
-#line 911 "mime-lookup.gperf"
+#line 911 "mime.gperf"
       {"cc", "text/x-c"},
-#line 830 "mime-lookup.gperf"
+#line 830 "mime.gperf"
       {"sid", "image/x-mrsid-image"},
-#line 728 "mime-lookup.gperf"
+#line 728 "mime.gperf"
       {"mid", "audio/midi"},
-#line 347 "mime-lookup.gperf"
+#line 347 "mime.gperf"
       {"daf", "application/vnd.mobius.daf"},
-#line 916 "mime-lookup.gperf"
+#line 916 "mime.gperf"
       {"dic", "text/x-c"},
-#line 302 "mime-lookup.gperf"
+#line 302 "mime.gperf"
       {"fcs", "application/vnd.isac.fcs"},
-#line 646 "mime-lookup.gperf"
+#line 646 "mime.gperf"
       {"com", "application/x-msdownload"},
-#line 35 "mime-lookup.gperf"
+#line 35 "mime.gperf"
       {"class", "application/java-vm"},
-#line 365 "mime-lookup.gperf"
+#line 365 "mime.gperf"
       {"xlam", "application/vnd.ms-excel.addin.macroenabled.12"},
-#line 875 "mime-lookup.gperf"
+#line 875 "mime.gperf"
       {"def", "text/plain"},
-#line 389 "mime-lookup.gperf"
+#line 389 "mime.gperf"
       {"wks", "application/vnd.ms-works"},
-#line 831 "mime-lookup.gperf"
+#line 831 "mime.gperf"
       {"pcx", "image/x-pcx"},
-#line 383 "mime-lookup.gperf"
+#line 383 "mime.gperf"
       {"potm", "application/vnd.ms-powerpoint.template.macroenabled.12"},
-#line 513 "mime-lookup.gperf"
+#line 513 "mime.gperf"
       {"xdm", "application/vnd.syncml.dm+xml"},
-#line 378 "mime-lookup.gperf"
+#line 378 "mime.gperf"
       {"pot", "application/vnd.ms-powerpoint"},
-#line 54 "mime-lookup.gperf"
+#line 54 "mime.gperf"
       {"mods", "application/mods+xml"},
-#line 533 "mime-lookup.gperf"
+#line 533 "mime.gperf"
       {"vis", "application/vnd.visionary"},
-#line 658 "mime-lookup.gperf"
+#line 658 "mime.gperf"
       {"scd", "application/x-msschedule"},
-#line 346 "mime-lookup.gperf"
+#line 346 "mime.gperf"
       {"mif", "application/vnd.mif"},
-#line 387 "mime-lookup.gperf"
+#line 387 "mime.gperf"
       {"dotm", "application/vnd.ms-word.template.macroenabled.12"},
-#line 339 "mime-lookup.gperf"
+#line 339 "mime.gperf"
       {"mcd", "application/vnd.mcd"},
-#line 758 "mime-lookup.gperf"
+#line 758 "mime.gperf"
       {"aac", "audio/x-aac"},
-#line 59 "mime-lookup.gperf"
+#line 59 "mime.gperf"
       {"dot", "application/msword"},
-#line 799 "mime-lookup.gperf"
+#line 799 "mime.gperf"
       {"tif", "image/tiff"},
-#line 20 "mime-lookup.gperf"
+#line 20 "mime.gperf"
       {"xdssc", "application/dssc+xml"},
-#line 487 "mime-lookup.gperf"
+#line 487 "mime.gperf"
       {"sdc", "application/vnd.stardivision.calc"},
-#line 766 "mime-lookup.gperf"
+#line 766 "mime.gperf"
       {"wax", "audio/x-ms-wax"},
-#line 55 "mime-lookup.gperf"
+#line 55 "mime.gperf"
       {"m21", "application/mp21"},
-#line 386 "mime-lookup.gperf"
+#line 386 "mime.gperf"
       {"docm", "application/vnd.ms-word.document.macroenabled.12"},
-#line 819 "mime-lookup.gperf"
+#line 819 "mime.gperf"
       {"xif", "image/vnd.xiff"},
-#line 480 "mime-lookup.gperf"
+#line 480 "mime.gperf"
       {"twds", "application/vnd.simtech-mindmapper"},
-#line 121 "mime-lookup.gperf"
+#line 121 "mime.gperf"
       {"sdp", "application/sdp"},
-#line 774 "mime-lookup.gperf"
+#line 774 "mime.gperf"
       {"cif", "chemical/x-cif"},
-#line 714 "mime-lookup.gperf"
+#line 714 "mime.gperf"
       {"xop", "application/xop+xml"},
-#line 434 "mime-lookup.gperf"
+#line 434 "mime.gperf"
       {"potx", "application/vnd.openxmlformats-officedocument.presentationml.template"},
-#line 929 "mime-lookup.gperf"
+#line 929 "mime.gperf"
       {"vcs", "text/x-vcalendar"},
-#line 168 "mime-lookup.gperf"
+#line 168 "mime.gperf"
       {"aep", "application/vnd.audiograph"},
-#line 585 "mime-lookup.gperf"
+#line 585 "mime.gperf"
       {"chat", "application/x-chat"},
-#line 773 "mime-lookup.gperf"
+#line 773 "mime.gperf"
       {"cdx", "chemical/x-cdx"},
-#line 250 "mime-lookup.gperf"
+#line 250 "mime.gperf"
       {"fzs", "application/vnd.fuzzysheet"},
-#line 149 "mime-lookup.gperf"
+#line 149 "mime.gperf"
       {"fcdt", "application/vnd.adobe.formscentral.fcdt"},
-#line 974 "mime-lookup.gperf"
+#line 974 "mime.gperf"
       {"m4v", "video/x-m4v"},
-#line 58 "mime-lookup.gperf"
+#line 58 "mime.gperf"
       {"doc", "application/msword"},
-#line 438 "mime-lookup.gperf"
+#line 438 "mime.gperf"
       {"dotx", "application/vnd.openxmlformats-officedocument.wordprocessingml.template"},
-#line 16 "mime-lookup.gperf"
+#line 16 "mime.gperf"
       {"cu", "application/cu-seeme"},
-#line 215 "mime-lookup.gperf"
+#line 215 "mime.gperf"
       {"ait", "application/vnd.dvb.ait"},
-#line 152 "mime-lookup.gperf"
+#line 152 "mime.gperf"
       {"xdp", "application/vnd.adobe.xdp+xml"},
-#line 840 "mime-lookup.gperf"
+#line 840 "mime.gperf"
       {"xbm", "image/x-xbitmap"},
-#line 489 "mime-lookup.gperf"
+#line 489 "mime.gperf"
       {"sdd", "application/vnd.stardivision.impress"},
-#line 703 "mime-lookup.gperf"
+#line 703 "mime.gperf"
       {"z6", "application/x-zmachine"},
-#line 835 "mime-lookup.gperf"
+#line 835 "mime.gperf"
       {"pbm", "image/x-portable-bitmap"},
-#line 882 "mime-lookup.gperf"
+#line 882 "mime.gperf"
       {"sgm", "text/sgml"},
-#line 975 "mime-lookup.gperf"
+#line 975 "mime.gperf"
       {"mkv", "video/x-matroska"},
-#line 705 "mime-lookup.gperf"
+#line 705 "mime.gperf"
       {"z8", "application/x-zmachine"},
-#line 466 "mime-lookup.gperf"
+#line 466 "mime.gperf"
       {"cod", "application/vnd.rim.cod"},
-#line 437 "mime-lookup.gperf"
+#line 437 "mime.gperf"
       {"docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
-#line 602 "mime-lookup.gperf"
+#line 602 "mime.gperf"
       {"wad", "application/x-doom"},
-#line 580 "mime-lookup.gperf"
+#line 580 "mime.gperf"
       {"cbt", "application/x-cbr"},
-#line 274 "mime-lookup.gperf"
+#line 274 "mime.gperf"
       {"les", "application/vnd.hhe.lesson-player"},
-#line 702 "mime-lookup.gperf"
+#line 702 "mime.gperf"
       {"z5", "application/x-zmachine"},
-#line 763 "mime-lookup.gperf"
+#line 763 "mime.gperf"
       {"flac", "audio/x-flac"},
-#line 612 "mime-lookup.gperf"
+#line 612 "mime.gperf"
       {"pcf", "application/x-font-pcf"},
-#line 479 "mime-lookup.gperf"
+#line 479 "mime.gperf"
       {"twd", "application/vnd.simtech-mindmapper"},
-#line 948 "mime-lookup.gperf"
+#line 948 "mime.gperf"
       {"m2v", "video/mpeg"},
-#line 798 "mime-lookup.gperf"
+#line 798 "mime.gperf"
       {"tiff", "image/tiff"},
-#line 621 "mime-lookup.gperf"
+#line 621 "mime.gperf"
       {"ulx", "application/x-glulx"},
-#line 582 "mime-lookup.gperf"
+#line 582 "mime.gperf"
       {"cb7", "application/x-cbr"},
-#line 528 "mime-lookup.gperf"
+#line 528 "mime.gperf"
       {"vcx", "application/vnd.vcx"},
-#line 671 "mime-lookup.gperf"
+#line 671 "mime.gperf"
       {"sh", "application/x-sh"},
-#line 966 "mime-lookup.gperf"
+#line 966 "mime.gperf"
       {"pyv", "video/vnd.ms-playready.media.pyv"},
-#line 810 "mime-lookup.gperf"
+#line 810 "mime.gperf"
       {"fbs", "image/vnd.fastbidsheet"},
-#line 785 "mime-lookup.gperf"
+#line 785 "mime.gperf"
       {"cgm", "image/cgm"},
-#line 842 "mime-lookup.gperf"
+#line 842 "mime.gperf"
       {"xwd", "image/x-xwindowdump"},
-#line 88 "mime-lookup.gperf"
+#line 88 "mime.gperf"
       {"p10", "application/pkcs10"},
-#line 390 "mime-lookup.gperf"
+#line 390 "mime.gperf"
       {"wcm", "application/vnd.ms-works"},
-#line 854 "mime-lookup.gperf"
+#line 854 "mime.gperf"
       {"mts", "model/vnd.mts"},
-#line 836 "mime-lookup.gperf"
+#line 836 "mime.gperf"
       {"pgm", "image/x-portable-graymap"},
-#line 52 "mime-lookup.gperf"
+#line 52 "mime.gperf"
       {"meta4", "application/metalink4+xml"},
-#line 93 "mime-lookup.gperf"
+#line 93 "mime.gperf"
       {"ac", "application/pkix-attr-cert"},
-#line 704 "mime-lookup.gperf"
+#line 704 "mime.gperf"
       {"z7", "application/x-zmachine"},
-#line 470 "mime-lookup.gperf"
+#line 470 "mime.gperf"
       {"st", "application/vnd.sailingtracker.track"},
-#line 673 "mime-lookup.gperf"
+#line 673 "mime.gperf"
       {"swf", "application/x-shockwave-flash"},
-#line 342 "mime-lookup.gperf"
+#line 342 "mime.gperf"
       {"mwf", "application/vnd.mfer"},
-#line 247 "mime-lookup.gperf"
+#line 247 "mime.gperf"
       {"ddd", "application/vnd.fujixerox.ddd"},
-#line 971 "mime-lookup.gperf"
+#line 971 "mime.gperf"
       {"f4v", "video/x-f4v"},
-#line 973 "mime-lookup.gperf"
+#line 973 "mime.gperf"
       {"flv", "video/x-flv"},
-#line 340 "mime-lookup.gperf"
+#line 340 "mime.gperf"
       {"mc1", "application/vnd.medcalcdata"},
-#line 743 "mime-lookup.gperf"
+#line 743 "mime.gperf"
       {"s3m", "audio/s3m"},
-#line 558 "mime-lookup.gperf"
+#line 558 "mime.gperf"
       {"hlp", "application/winhlp"},
-#line 568 "mime-lookup.gperf"
+#line 568 "mime.gperf"
       {"vox", "application/x-authorware-bin"},
-#line 732 "mime-lookup.gperf"
+#line 732 "mime.gperf"
       {"m4a", "audio/mp4"},
-#line 707 "mime-lookup.gperf"
+#line 707 "mime.gperf"
       {"xdf", "application/xcap-diff+xml"},
-#line 662 "mime-lookup.gperf"
+#line 662 "mime.gperf"
       {"cdf", "application/x-netcdf"},
-#line 826 "mime-lookup.gperf"
+#line 826 "mime.gperf"
       {"fh4", "image/x-freehand"},
-#line 541 "mime-lookup.gperf"
+#line 541 "mime.gperf"
       {"wqd", "application/vnd.wqd"},
-#line 158 "mime-lookup.gperf"
+#line 158 "mime.gperf"
       {"acc", "application/vnd.americandynamics.acc"},
-#line 439 "mime-lookup.gperf"
+#line 439 "mime.gperf"
       {"mgp", "application/vnd.osgeo.mapguide.package"},
-#line 83 "mime-lookup.gperf"
+#line 83 "mime.gperf"
       {"pdf", "application/pdf"},
-#line 709 "mime-lookup.gperf"
+#line 709 "mime.gperf"
       {"xhtml", "application/xhtml+xml"},
-#line 583 "mime-lookup.gperf"
+#line 583 "mime.gperf"
       {"vcd", "application/x-cdlink"},
-#line 169 "mime-lookup.gperf"
+#line 169 "mime.gperf"
       {"mpm", "application/vnd.blueice.multipass"},
-#line 245 "mime-lookup.gperf"
+#line 245 "mime.gperf"
       {"fg5", "application/vnd.fujitsu.oasysgp"},
-#line 472 "mime-lookup.gperf"
+#line 472 "mime.gperf"
       {"sema", "application/vnd.sema"},
-#line 764 "mime-lookup.gperf"
+#line 764 "mime.gperf"
       {"mka", "audio/x-matroska"},
-#line 156 "mime-lookup.gperf"
+#line 156 "mime.gperf"
       {"azs", "application/vnd.airzip.filesecure.azs"},
-#line 361 "mime-lookup.gperf"
+#line 361 "mime.gperf"
       {"xla", "application/vnd.ms-excel"},
-#line 749 "mime-lookup.gperf"
+#line 749 "mime.gperf"
       {"dts", "audio/vnd.dts"},
-#line 175 "mime-lookup.gperf"
+#line 175 "mime.gperf"
       {"cla", "application/vnd.claymore"},
-#line 249 "mime-lookup.gperf"
+#line 249 "mime.gperf"
       {"xbd", "application/vnd.fujixerox.docuworks.binder"},
-#line 385 "mime-lookup.gperf"
+#line 385 "mime.gperf"
       {"mpt", "application/vnd.ms-project"},
-#line 497 "mime-lookup.gperf"
+#line 497 "mime.gperf"
       {"stc", "application/vnd.sun.xml.calc.template"},
-#line 141 "mime-lookup.gperf"
+#line 141 "mime.gperf"
       {"tcap", "application/vnd.3gpp2.tcap"},
-#line 393 "mime-lookup.gperf"
+#line 393 "mime.gperf"
       {"xps", "application/vnd.ms-xpsdocument"},
-#line 738 "mime-lookup.gperf"
+#line 738 "mime.gperf"
       {"m2a", "audio/mpeg"},
-#line 851 "mime-lookup.gperf"
+#line 851 "mime.gperf"
       {"dwf", "model/vnd.dwf"},
-#line 519 "mime-lookup.gperf"
+#line 519 "mime.gperf"
       {"tpt", "application/vnd.trid.tpt"},
-#line 451 "mime-lookup.gperf"
+#line 451 "mime.gperf"
       {"pbd", "application/vnd.powerbuilder6"},
-#line 876 "mime-lookup.gperf"
+#line 876 "mime.gperf"
       {"list", "text/plain"},
-#line 761 "mime-lookup.gperf"
+#line 761 "mime.gperf"
       {"aifc", "audio/x-aiff"},
-#line 824 "mime-lookup.gperf"
+#line 824 "mime.gperf"
       {"fh", "image/x-freehand"},
-#line 841 "mime-lookup.gperf"
+#line 841 "mime.gperf"
       {"xpm", "image/x-xpixmap"},
-#line 779 "mime-lookup.gperf"
+#line 779 "mime.gperf"
       {"ttc", "font/collection"},
-#line 84 "mime-lookup.gperf"
+#line 84 "mime.gperf"
       {"pgp", "application/pgp-encrypted"},
-#line 40 "mime-lookup.gperf"
+#line 40 "mime.gperf"
       {"hqx", "application/mac-binhex40"},
-#line 377 "mime-lookup.gperf"
+#line 377 "mime.gperf"
       {"pps", "application/vnd.ms-powerpoint"},
-#line 592 "mime-lookup.gperf"
+#line 592 "mime.gperf"
       {"dgc", "application/x-dgc-compressed"},
-#line 229 "mime-lookup.gperf"
+#line 229 "mime.gperf"
       {"fdf", "application/vnd.fdf"},
-#line 752 "mime-lookup.gperf"
+#line 752 "mime.gperf"
       {"pya", "audio/vnd.ms-playready.media.pya"},
-#line 837 "mime-lookup.gperf"
+#line 837 "mime.gperf"
       {"ppm", "image/x-portable-pixmap"},
-#line 382 "mime-lookup.gperf"
+#line 382 "mime.gperf"
       {"ppsm", "application/vnd.ms-powerpoint.slideshow.macroenabled.12"},
-#line 759 "mime-lookup.gperf"
+#line 759 "mime.gperf"
       {"aif", "audio/x-aiff"},
-#line 930 "mime-lookup.gperf"
+#line 930 "mime.gperf"
       {"vcf", "text/x-vcard"},
-#line 285 "mime-lookup.gperf"
+#line 285 "mime.gperf"
       {"list3820", "application/vnd.ibm.modcap"},
-#line 41 "mime-lookup.gperf"
+#line 41 "mime.gperf"
       {"cpt", "application/mac-compactpro"},
-#line 515 "mime-lookup.gperf"
+#line 515 "mime.gperf"
       {"pcap", "application/vnd.tcpdump.pcap"},
-#line 742 "mime-lookup.gperf"
+#line 742 "mime.gperf"
       {"spx", "audio/ogg"},
-#line 380 "mime-lookup.gperf"
+#line 380 "mime.gperf"
       {"pptm", "application/vnd.ms-powerpoint.presentation.macroenabled.12"},
-#line 364 "mime-lookup.gperf"
+#line 364 "mime.gperf"
       {"xlw", "application/vnd.ms-excel"},
-#line 376 "mime-lookup.gperf"
+#line 376 "mime.gperf"
       {"ppt", "application/vnd.ms-powerpoint"},
-#line 701 "mime-lookup.gperf"
+#line 701 "mime.gperf"
       {"z4", "application/x-zmachine"},
-#line 667 "mime-lookup.gperf"
+#line 667 "mime.gperf"
       {"spc", "application/x-pkcs7-certificates"},
-#line 355 "mime-lookup.gperf"
+#line 355 "mime.gperf"
       {"mpc", "application/vnd.mophun.certificate"},
-#line 445 "mime-lookup.gperf"
+#line 445 "mime.gperf"
       {"paw", "application/vnd.pawaafile"},
-#line 726 "mime-lookup.gperf"
+#line 726 "mime.gperf"
       {"au", "audio/basic"},
-#line 499 "mime-lookup.gperf"
+#line 499 "mime.gperf"
       {"std", "application/vnd.sun.xml.draw.template"},
-#line 120 "mime-lookup.gperf"
+#line 120 "mime.gperf"
       {"spp", "application/scvp-vp-response"},
-#line 725 "mime-lookup.gperf"
+#line 725 "mime.gperf"
       {"adp", "audio/adpcm"},
-#line 384 "mime-lookup.gperf"
+#line 384 "mime.gperf"
       {"mpp", "application/vnd.ms-project"},
-#line 295 "mime-lookup.gperf"
+#line 295 "mime.gperf"
       {"xpx", "application/vnd.intercon.formnet"},
-#line 303 "mime-lookup.gperf"
+#line 303 "mime.gperf"
       {"jam", "application/vnd.jam"},
-#line 951 "mime-lookup.gperf"
+#line 951 "mime.gperf"
       {"mov", "video/quicktime"},
-#line 822 "mime-lookup.gperf"
+#line 822 "mime.gperf"
       {"ras", "image/x-cmu-raster"},
-#line 67 "mime-lookup.gperf"
+#line 67 "mime.gperf"
       {"distz", "application/octet-stream"},
-#line 192 "mime-lookup.gperf"
+#line 192 "mime.gperf"
       {"wbs", "application/vnd.criticaltools.wbs+xml"},
-#line 440 "mime-lookup.gperf"
+#line 440 "mime.gperf"
       {"dp", "application/vnd.osgi.dp"},
-#line 768 "mime-lookup.gperf"
+#line 768 "mime.gperf"
       {"ram", "audio/x-pn-realaudio"},
-#line 433 "mime-lookup.gperf"
+#line 433 "mime.gperf"
       {"ppsx", "application/vnd.openxmlformats-officedocument.presentationml.slideshow"},
-#line 443 "mime-lookup.gperf"
+#line 443 "mime.gperf"
       {"pqa", "application/vnd.palm"},
-#line 278 "mime-lookup.gperf"
+#line 278 "mime.gperf"
       {"jlt", "application/vnd.hp-jlyt"},
-#line 889 "mime-lookup.gperf"
+#line 889 "mime.gperf"
       {"ms", "text/troff"},
-#line 816 "mime-lookup.gperf"
+#line 816 "mime.gperf"
       {"wdp", "image/vnd.ms-photo"},
-#line 724 "mime-lookup.gperf"
+#line 724 "mime.gperf"
       {"zip", "application/zip"},
-#line 888 "mime-lookup.gperf"
+#line 888 "mime.gperf"
       {"me", "text/troff"},
-#line 234 "mime-lookup.gperf"
+#line 234 "mime.gperf"
       {"ftc", "application/vnd.fluxtime.clip"},
-#line 976 "mime-lookup.gperf"
+#line 976 "mime.gperf"
       {"mk3d", "video/x-matroska"},
-#line 605 "mime-lookup.gperf"
+#line 605 "mime.gperf"
       {"res", "application/x-dtbresource+xml"},
-#line 431 "mime-lookup.gperf"
+#line 431 "mime.gperf"
       {"pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation"},
-#line 312 "mime-lookup.gperf"
+#line 312 "mime.gperf"
       {"flw", "application/vnd.kde.kivio"},
-#line 913 "mime-lookup.gperf"
+#line 913 "mime.gperf"
       {"cpp", "text/x-c"},
-#line 600 "mime-lookup.gperf"
+#line 600 "mime.gperf"
       {"fgd", "application/x-director"},
-#line 17 "mime-lookup.gperf"
+#line 17 "mime.gperf"
       {"davmount", "application/davmount+xml"},
-#line 771 "mime-lookup.gperf"
+#line 771 "mime.gperf"
       {"wav", "audio/x-wav"},
-#line 542 "mime-lookup.gperf"
+#line 542 "mime.gperf"
       {"stf", "application/vnd.wt.stf"},
-#line 862 "mime-lookup.gperf"
+#line 862 "mime.gperf"
       {"x3d", "model/x3d+xml"},
-#line 10 "mime-lookup.gperf"
+#line 10 "mime.gperf"
       {"ccxml", "application/ccxml+xml"},
-#line 647 "mime-lookup.gperf"
+#line 647 "mime.gperf"
       {"bat", "application/x-msdownload"},
-#line 760 "mime-lookup.gperf"
+#line 760 "mime.gperf"
       {"aiff", "audio/x-aiff"},
-#line 867 "mime-lookup.gperf"
+#line 867 "mime.gperf"
       {"css", "text/css"},
-#line 781 "mime-lookup.gperf"
+#line 781 "mime.gperf"
       {"ttf", "font/ttf"},
-#line 511 "mime-lookup.gperf"
+#line 511 "mime.gperf"
       {"xsm", "application/vnd.syncml+xml"},
-#line 713 "mime-lookup.gperf"
+#line 713 "mime.gperf"
       {"dtd", "application/xml-dtd"},
-#line 101 "mime-lookup.gperf"
+#line 101 "mime.gperf"
       {"ps", "application/postscript"},
-#line 811 "mime-lookup.gperf"
+#line 811 "mime.gperf"
       {"fpx", "image/vnd.fpx"},
-#line 57 "mime-lookup.gperf"
+#line 57 "mime.gperf"
       {"mp4s", "application/mp4"},
-#line 284 "mime-lookup.gperf"
+#line 284 "mime.gperf"
       {"listafp", "application/vnd.ibm.modcap"},
-#line 71 "mime-lookup.gperf"
+#line 71 "mime.gperf"
       {"elc", "application/octet-stream"},
-#line 719 "mime-lookup.gperf"
+#line 719 "mime.gperf"
       {"xhvml", "application/xv+xml"},
-#line 969 "mime-lookup.gperf"
+#line 969 "mime.gperf"
       {"viv", "video/vnd.vivo"},
-#line 596 "mime-lookup.gperf"
+#line 596 "mime.gperf"
       {"cst", "application/x-director"},
-#line 814 "mime-lookup.gperf"
+#line 814 "mime.gperf"
       {"rlc", "image/vnd.fujixerox.edmics-rlc"},
-#line 194 "mime-lookup.gperf"
+#line 194 "mime.gperf"
       {"ppd", "application/vnd.cups-ppd"},
-#line 557 "mime-lookup.gperf"
+#line 557 "mime.gperf"
       {"wgt", "application/widget"},
-#line 551 "mime-lookup.gperf"
+#line 551 "mime.gperf"
       {"spf", "application/vnd.yamaha.smaf-phrase"},
-#line 834 "mime-lookup.gperf"
+#line 834 "mime.gperf"
       {"pnm", "image/x-portable-anymap"},
-#line 651 "mime-lookup.gperf"
+#line 651 "mime.gperf"
       {"m14", "application/x-msmediaview"},
-#line 721 "mime-lookup.gperf"
+#line 721 "mime.gperf"
       {"xvm", "application/xv+xml"},
-#line 708 "mime-lookup.gperf"
+#line 708 "mime.gperf"
       {"xenc", "application/xenc+xml"},
-#line 222 "mime-lookup.gperf"
+#line 222 "mime.gperf"
       {"qam", "application/vnd.epson.quickanime"},
-#line 561 "mime-lookup.gperf"
+#line 561 "mime.gperf"
       {"7z", "application/x-7z-compressed"},
-#line 928 "mime-lookup.gperf"
+#line 928 "mime.gperf"
       {"uu", "text/x-uuencode"},
-#line 197 "mime-lookup.gperf"
+#line 197 "mime.gperf"
       {"dart", "application/vnd.dart"},
-#line 821 "mime-lookup.gperf"
+#line 821 "mime.gperf"
       {"3ds", "image/x-3ds"},
-#line 155 "mime-lookup.gperf"
+#line 155 "mime.gperf"
       {"azf", "application/vnd.airzip.filesecure.azf"},
-#line 697 "mime-lookup.gperf"
+#line 697 "mime.gperf"
       {"xz", "application/x-xz"},
-#line 818 "mime-lookup.gperf"
+#line 818 "mime.gperf"
       {"wbmp", "image/vnd.wap.wbmp"},
-#line 965 "mime-lookup.gperf"
+#line 965 "mime.gperf"
       {"m4u", "video/vnd.mpegurl"},
-#line 639 "mime-lookup.gperf"
+#line 639 "mime.gperf"
       {"xbap", "application/x-ms-xbap"},
-#line 670 "mime-lookup.gperf"
+#line 670 "mime.gperf"
       {"ris", "application/x-research-info-systems"},
-#line 447 "mime-lookup.gperf"
+#line 447 "mime.gperf"
       {"ei6", "application/vnd.pg.osasli"},
-#line 171 "mime-lookup.gperf"
+#line 171 "mime.gperf"
       {"rep", "application/vnd.businessobjects"},
-#line 682 "mime-lookup.gperf"
+#line 682 "mime.gperf"
       {"gam", "application/x-tads"},
-#line 172 "mime-lookup.gperf"
+#line 172 "mime.gperf"
       {"cdxml", "application/vnd.chemdraw+xml"},
-#line 310 "mime-lookup.gperf"
+#line 310 "mime.gperf"
       {"chrt", "application/vnd.kde.kchart"},
-#line 933 "mime-lookup.gperf"
+#line 933 "mime.gperf"
       {"h261", "video/h261"},
-#line 947 "mime-lookup.gperf"
+#line 947 "mime.gperf"
       {"m1v", "video/mpeg"},
-#line 216 "mime-lookup.gperf"
+#line 216 "mime.gperf"
       {"svc", "application/vnd.dvb.service"},
-#line 905 "mime-lookup.gperf"
+#line 905 "mime.gperf"
       {"jad", "text/vnd.sun.j2me.app-descriptor"},
-#line 488 "mime-lookup.gperf"
+#line 488 "mime.gperf"
       {"sda", "application/vnd.stardivision.draw"},
-#line 812 "mime-lookup.gperf"
+#line 812 "mime.gperf"
       {"fst", "image/vnd.fst"},
-#line 108 "mime-lookup.gperf"
+#line 108 "mime.gperf"
       {"rld", "application/resource-lists-diff+xml"},
-#line 601 "mime-lookup.gperf"
+#line 601 "mime.gperf"
       {"swa", "application/x-director"},
-#line 181 "mime-lookup.gperf"
+#line 181 "mime.gperf"
       {"c4u", "application/vnd.clonk.c4group"},
-#line 184 "mime-lookup.gperf"
+#line 184 "mime.gperf"
       {"csp", "application/vnd.commonspace"},
-#line 337 "mime-lookup.gperf"
+#line 337 "mime.gperf"
       {"lwp", "application/vnd.lotus-wordpro"},
-#line 914 "mime-lookup.gperf"
+#line 914 "mime.gperf"
       {"h", "text/x-c"},
-#line 163 "mime-lookup.gperf"
+#line 163 "mime.gperf"
       {"atx", "application/vnd.antix.game-component"},
-#line 388 "mime-lookup.gperf"
+#line 388 "mime.gperf"
       {"wps", "application/vnd.ms-works"},
-#line 231 "mime-lookup.gperf"
+#line 231 "mime.gperf"
       {"seed", "application/vnd.fdsn.seed"},
-#line 879 "mime-lookup.gperf"
+#line 879 "mime.gperf"
       {"dsc", "text/prs.lines.tag"},
-#line 19 "mime-lookup.gperf"
+#line 19 "mime.gperf"
       {"dssc", "application/dssc+der"},
-#line 146 "mime-lookup.gperf"
+#line 146 "mime.gperf"
       {"atc", "application/vnd.acucorp"},
-#line 137 "mime-lookup.gperf"
+#line 137 "mime.gperf"
       {"tsd", "application/timestamped-data"},
-#line 661 "mime-lookup.gperf"
+#line 661 "mime.gperf"
       {"nc", "application/x-netcdf"},
-#line 6 "mime-lookup.gperf"
+#line 6 "mime.gperf"
       {"aw", "application/applixware"},
-#line 935 "mime-lookup.gperf"
+#line 935 "mime.gperf"
       {"h264", "video/h264"},
-#line 865 "mime-lookup.gperf"
+#line 865 "mime.gperf"
       {"ics", "text/calendar"},
-#line 963 "mime-lookup.gperf"
+#line 963 "mime.gperf"
       {"fvt", "video/vnd.fvt"},
-#line 727 "mime-lookup.gperf"
+#line 727 "mime.gperf"
       {"snd", "audio/basic"},
-#line 242 "mime-lookup.gperf"
+#line 242 "mime.gperf"
       {"oas", "application/vnd.fujitsu.oasys"},
-#line 495 "mime-lookup.gperf"
+#line 495 "mime.gperf"
       {"sm", "application/vnd.stepmania.stepchart"},
-#line 289 "mime-lookup.gperf"
+#line 289 "mime.gperf"
       {"icm", "application/vnd.iccprofile"},
-#line 782 "mime-lookup.gperf"
+#line 782 "mime.gperf"
       {"woff", "font/woff"},
-#line 491 "mime-lookup.gperf"
+#line 491 "mime.gperf"
       {"sdw", "application/vnd.stardivision.writer"},
-#line 462 "mime-lookup.gperf"
+#line 462 "mime.gperf"
       {"bed", "application/vnd.realvnc.bed"},
-#line 241 "mime-lookup.gperf"
+#line 241 "mime.gperf"
       {"fsc", "application/vnd.fsc.weblaunch"},
-#line 508 "mime-lookup.gperf"
+#line 508 "mime.gperf"
       {"svd", "application/vnd.svd"},
-#line 379 "mime-lookup.gperf"
+#line 379 "mime.gperf"
       {"ppam", "application/vnd.ms-powerpoint.addin.macroenabled.12"},
-#line 264 "mime-lookup.gperf"
+#line 264 "mime.gperf"
       {"gac", "application/vnd.groove-account"},
-#line 848 "mime-lookup.gperf"
+#line 848 "mime.gperf"
       {"mesh", "model/mesh"},
-#line 531 "mime-lookup.gperf"
+#line 531 "mime.gperf"
       {"vss", "application/vnd.visio"},
-#line 263 "mime-lookup.gperf"
+#line 263 "mime.gperf"
       {"gqs", "application/vnd.grafeq"},
-#line 603 "mime-lookup.gperf"
+#line 603 "mime.gperf"
       {"ncx", "application/x-dtbncx+xml"},
-#line 800 "mime-lookup.gperf"
+#line 800 "mime.gperf"
       {"psd", "image/vnd.adobe.photoshop"},
-#line 356 "mime-lookup.gperf"
+#line 356 "mime.gperf"
       {"xul", "application/vnd.mozilla.xul+xml"},
-#line 305 "mime-lookup.gperf"
+#line 305 "mime.gperf"
       {"jisp", "application/vnd.jisp"},
-#line 224 "mime-lookup.gperf"
+#line 224 "mime.gperf"
       {"ssf", "application/vnd.epson.ssf"},
-#line 254 "mime-lookup.gperf"
+#line 254 "mime.gperf"
       {"gex", "application/vnd.geometry-explorer"},
-#line 239 "mime-lookup.gperf"
+#line 239 "mime.gperf"
       {"fnc", "application/vnd.frogans.fnc"},
-#line 221 "mime-lookup.gperf"
+#line 221 "mime.gperf"
       {"msf", "application/vnd.epson.msf"},
-#line 772 "mime-lookup.gperf"
+#line 772 "mime.gperf"
       {"xm", "audio/xm"},
-#line 788 "mime-lookup.gperf"
+#line 788 "mime.gperf"
       {"ief", "image/ief"},
-#line 756 "mime-lookup.gperf"
+#line 756 "mime.gperf"
       {"rip", "audio/vnd.rip"},
-#line 248 "mime-lookup.gperf"
+#line 248 "mime.gperf"
       {"xdw", "application/vnd.fujixerox.docuworks"},
-#line 706 "mime-lookup.gperf"
+#line 706 "mime.gperf"
       {"xaml", "application/xaml+xml"},
-#line 915 "mime-lookup.gperf"
+#line 915 "mime.gperf"
       {"hh", "text/x-c"},
-#line 147 "mime-lookup.gperf"
+#line 147 "mime.gperf"
       {"acutc", "application/vnd.acucorp"},
-#line 530 "mime-lookup.gperf"
+#line 530 "mime.gperf"
       {"vst", "application/vnd.visio"},
-#line 699 "mime-lookup.gperf"
+#line 699 "mime.gperf"
       {"z2", "application/x-zmachine"},
-#line 613 "mime-lookup.gperf"
+#line 613 "mime.gperf"
       {"snf", "application/x-font-snf"},
-#line 625 "mime-lookup.gperf"
+#line 625 "mime.gperf"
       {"hdf", "application/x-hdf"},
-#line 941 "mime-lookup.gperf"
+#line 941 "mime.gperf"
       {"mp4", "video/mp4"},
-#line 102 "mime-lookup.gperf"
+#line 102 "mime.gperf"
       {"cww", "application/prs.cww"},
-#line 870 "mime-lookup.gperf"
+#line 870 "mime.gperf"
       {"htm", "text/html"},
-#line 266 "mime-lookup.gperf"
+#line 266 "mime.gperf"
       {"gim", "application/vnd.groove-identity-message"},
-#line 769 "mime-lookup.gperf"
+#line 769 "mime.gperf"
       {"ra", "audio/x-pn-realaudio"},
-#line 165 "mime-lookup.gperf"
+#line 165 "mime.gperf"
       {"m3u8", "application/vnd.apple.mpegurl"},
-#line 369 "mime-lookup.gperf"
+#line 369 "mime.gperf"
       {"eot", "application/vnd.ms-fontobject"},
-#line 62 "mime-lookup.gperf"
+#line 62 "mime.gperf"
       {"dms", "application/octet-stream"},
-#line 645 "mime-lookup.gperf"
+#line 645 "mime.gperf"
       {"dll", "application/x-msdownload"},
-#line 288 "mime-lookup.gperf"
+#line 288 "mime.gperf"
       {"icc", "application/vnd.iccprofile"},
-#line 611 "mime-lookup.gperf"
+#line 611 "mime.gperf"
       {"psf", "application/x-font-linux-psf"},
-#line 408 "mime-lookup.gperf"
+#line 408 "mime.gperf"
       {"edm", "application/vnd.novadigm.edm"},
-#line 182 "mime-lookup.gperf"
+#line 182 "mime.gperf"
       {"c11amc", "application/vnd.cluetrust.cartomobile-config"},
-#line 909 "mime-lookup.gperf"
+#line 909 "mime.gperf"
       {"asm", "text/x-asm"},
-#line 579 "mime-lookup.gperf"
+#line 579 "mime.gperf"
       {"cba", "application/x-cbr"},
-#line 778 "mime-lookup.gperf"
+#line 778 "mime.gperf"
       {"xyz", "chemical/x-xyz"},
-#line 675 "mime-lookup.gperf"
+#line 675 "mime.gperf"
       {"sql", "application/x-sql"},
-#line 599 "mime-lookup.gperf"
+#line 599 "mime.gperf"
       {"w3d", "application/x-director"},
-#line 329 "mime-lookup.gperf"
+#line 329 "mime.gperf"
       {"lbd", "application/vnd.llamagraphics.life-balance.desktop"},
-#line 277 "mime-lookup.gperf"
+#line 277 "mime.gperf"
       {"hps", "application/vnd.hp-hps"},
-#line 235 "mime-lookup.gperf"
+#line 235 "mime.gperf"
       {"fm", "application/vnd.framemaker"},
-#line 400 "mime-lookup.gperf"
+#line 400 "mime.gperf"
       {"nitf", "application/vnd.nitf"},
-#line 512 "mime-lookup.gperf"
+#line 512 "mime.gperf"
       {"bdm", "application/vnd.syncml.dm+wbxml"},
-#line 839 "mime-lookup.gperf"
+#line 839 "mime.gperf"
       {"tga", "image/x-tga"},
-#line 823 "mime-lookup.gperf"
+#line 823 "mime.gperf"
       {"cmx", "image/x-cmx"},
-#line 806 "mime-lookup.gperf"
+#line 806 "mime.gperf"
       {"djv", "image/vnd.djvu"},
-#line 717 "mime-lookup.gperf"
+#line 717 "mime.gperf"
       {"xspf", "application/xspf+xml"},
-#line 186 "mime-lookup.gperf"
+#line 186 "mime.gperf"
       {"cmc", "application/vnd.cosmocaller"},
-#line 744 "mime-lookup.gperf"
+#line 744 "mime.gperf"
       {"sil", "audio/silk"},
-#line 540 "mime-lookup.gperf"
+#line 540 "mime.gperf"
       {"wpd", "application/vnd.wordperfect"},
-#line 698 "mime-lookup.gperf"
+#line 698 "mime.gperf"
       {"z1", "application/x-zmachine"},
-#line 477 "mime-lookup.gperf"
+#line 477 "mime.gperf"
       {"iif", "application/vnd.shana.informed.interchange"},
-#line 552 "mime-lookup.gperf"
+#line 552 "mime.gperf"
       {"cmp", "application/vnd.yellowriver-custom-menu"},
-#line 105 "mime-lookup.gperf"
+#line 105 "mime.gperf"
       {"rif", "application/reginfo+xml"},
-#line 452 "mime-lookup.gperf"
+#line 452 "mime.gperf"
       {"box", "application/vnd.previewsystems.box"},
-#line 409 "mime-lookup.gperf"
+#line 409 "mime.gperf"
       {"edx", "application/vnd.novadigm.edx"},
-#line 970 "mime-lookup.gperf"
+#line 970 "mime.gperf"
       {"webm", "video/webm"},
-#line 173 "mime-lookup.gperf"
+#line 173 "mime.gperf"
       {"mmd", "application/vnd.chipnuts.karaoke-mmd"},
-#line 980 "mime-lookup.gperf"
+#line 980 "mime.gperf"
       {"asx", "video/x-ms-asf"},
-#line 232 "mime-lookup.gperf"
+#line 232 "mime.gperf"
       {"dataless", "application/vnd.fdsn.seed"},
-#line 631 "mime-lookup.gperf"
+#line 631 "mime.gperf"
       {"lha", "application/x-lzh-compressed"},
-#line 681 "mime-lookup.gperf"
+#line 681 "mime.gperf"
       {"t3", "application/x-t3vm-image"},
-#line 85 "mime-lookup.gperf"
+#line 85 "mime.gperf"
       {"asc", "application/pgp-signature"},
-#line 357 "mime-lookup.gperf"
+#line 357 "mime.gperf"
       {"cil", "application/vnd.ms-artgalry"},
-#line 12 "mime-lookup.gperf"
+#line 12 "mime.gperf"
       {"cdmic", "application/cdmi-container"},
-#line 680 "mime-lookup.gperf"
+#line 680 "mime.gperf"
       {"sv4crc", "application/x-sv4crc"},
-#line 529 "mime-lookup.gperf"
+#line 529 "mime.gperf"
       {"vsd", "application/vnd.visio"},
-#line 931 "mime-lookup.gperf"
+#line 931 "mime.gperf"
       {"3gp", "video/3gpp"},
-#line 517 "mime-lookup.gperf"
+#line 517 "mime.gperf"
       {"dmp", "application/vnd.tcpdump.pcap"},
-#line 860 "mime-lookup.gperf"
+#line 860 "mime.gperf"
       {"x3dv", "model/x3d+vrml"},
-#line 739 "mime-lookup.gperf"
+#line 739 "mime.gperf"
       {"m3a", "audio/mpeg"},
-#line 99 "mime-lookup.gperf"
+#line 99 "mime.gperf"
       {"ai", "application/postscript"},
-#line 190 "mime-lookup.gperf"
+#line 190 "mime.gperf"
       {"clkt", "application/vnd.crick.clicker.template"},
-#line 265 "mime-lookup.gperf"
+#line 265 "mime.gperf"
       {"ghf", "application/vnd.groove-help"},
-#line 684 "mime-lookup.gperf"
+#line 684 "mime.gperf"
       {"tcl", "application/x-tcl"},
-#line 47 "mime-lookup.gperf"
+#line 47 "mime.gperf"
       {"mb", "application/mathematica"},
-#line 13 "mime-lookup.gperf"
+#line 13 "mime.gperf"
       {"cdmid", "application/cdmi-domain"},
-#line 490 "mime-lookup.gperf"
+#line 490 "mime.gperf"
       {"smf", "application/vnd.stardivision.math"},
-#line 750 "mime-lookup.gperf"
+#line 750 "mime.gperf"
       {"dtshd", "audio/vnd.dts.hd"},
-#line 481 "mime-lookup.gperf"
+#line 481 "mime.gperf"
       {"mmf", "application/vnd.smaf"},
-#line 505 "mime-lookup.gperf"
+#line 505 "mime.gperf"
       {"stw", "application/vnd.sun.xml.writer.template"},
-#line 459 "mime-lookup.gperf"
+#line 459 "mime.gperf"
       {"qwt", "application/vnd.quark.quarkxpress"},
-#line 985 "mime-lookup.gperf"
+#line 985 "mime.gperf"
       {"wvx", "video/x-ms-wvx"},
-#line 107 "mime-lookup.gperf"
+#line 107 "mime.gperf"
       {"rl", "application/resource-lists+xml"},
-#line 845 "mime-lookup.gperf"
+#line 845 "mime.gperf"
       {"igs", "model/iges"},
-#line 534 "mime-lookup.gperf"
+#line 534 "mime.gperf"
       {"vsf", "application/vnd.vsf"},
-#line 262 "mime-lookup.gperf"
+#line 262 "mime.gperf"
       {"gqf", "application/vnd.grafeq"},
-#line 539 "mime-lookup.gperf"
+#line 539 "mime.gperf"
       {"nbp", "application/vnd.wolfram.player"},
-#line 883 "mime-lookup.gperf"
+#line 883 "mime.gperf"
       {"tsv", "text/tab-separated-values"},
-#line 65 "mime-lookup.gperf"
+#line 65 "mime.gperf"
       {"so", "application/octet-stream"},
-#line 293 "mime-lookup.gperf"
+#line 293 "mime.gperf"
       {"igm", "application/vnd.insors.igm"},
-#line 279 "mime-lookup.gperf"
+#line 279 "mime.gperf"
       {"pcl", "application/vnd.hp-pcl"},
-#line 958 "mime-lookup.gperf"
+#line 958 "mime.gperf"
       {"uvs", "video/vnd.dece.sd"},
-#line 187 "mime-lookup.gperf"
+#line 187 "mime.gperf"
       {"clkx", "application/vnd.crick.clicker"},
-#line 820 "mime-lookup.gperf"
+#line 820 "mime.gperf"
       {"webp", "image/webp"},
-#line 954 "mime-lookup.gperf"
+#line 954 "mime.gperf"
       {"uvm", "video/vnd.dece.mobile"},
-#line 874 "mime-lookup.gperf"
+#line 874 "mime.gperf"
       {"conf", "text/plain"},
-#line 464 "mime-lookup.gperf"
+#line 464 "mime.gperf"
       {"musicxml", "application/vnd.recordare.musicxml+xml"},
-#line 868 "mime-lookup.gperf"
+#line 868 "mime.gperf"
       {"csv", "text/csv"},
-#line 39 "mime-lookup.gperf"
+#line 39 "mime.gperf"
       {"lostxml", "application/lost+xml"},
-#line 787 "mime-lookup.gperf"
+#line 787 "mime.gperf"
       {"gif", "image/gif"},
-#line 422 "mime-lookup.gperf"
+#line 422 "mime.gperf"
       {"ods", "application/vnd.oasis.opendocument.spreadsheet"},
-#line 240 "mime-lookup.gperf"
+#line 240 "mime.gperf"
       {"ltf", "application/vnd.frogans.ltf"},
-#line 203 "mime-lookup.gperf"
+#line 203 "mime.gperf"
       {"uvt", "application/vnd.dece.ttml+xml"},
-#line 546 "mime-lookup.gperf"
+#line 546 "mime.gperf"
       {"hvs", "application/vnd.yamaha.hv-script"},
-#line 189 "mime-lookup.gperf"
+#line 189 "mime.gperf"
       {"clkp", "application/vnd.crick.clicker.palette"},
-#line 428 "mime-lookup.gperf"
+#line 428 "mime.gperf"
       {"xo", "application/vnd.olpc-sugar"},
-#line 629 "mime-lookup.gperf"
+#line 629 "mime.gperf"
       {"latex", "application/x-latex"},
-#line 425 "mime-lookup.gperf"
+#line 425 "mime.gperf"
       {"odm", "application/vnd.oasis.opendocument.text-master"},
-#line 942 "mime-lookup.gperf"
+#line 942 "mime.gperf"
       {"mp4v", "video/mp4"},
-#line 280 "mime-lookup.gperf"
+#line 280 "mime.gperf"
       {"pclxl", "application/vnd.hp-pclxl"},
-#line 535 "mime-lookup.gperf"
+#line 535 "mime.gperf"
       {"wbxml", "application/vnd.wap.wbxml"},
-#line 157 "mime-lookup.gperf"
+#line 157 "mime.gperf"
       {"azw", "application/vnd.amazon.ebook"},
-#line 982 "mime-lookup.gperf"
+#line 982 "mime.gperf"
       {"wm", "video/x-ms-wm"},
-#line 979 "mime-lookup.gperf"
+#line 979 "mime.gperf"
       {"asf", "video/x-ms-asf"},
-#line 104 "mime-lookup.gperf"
+#line 104 "mime.gperf"
       {"rdf", "application/rdf+xml"},
-#line 50 "mime-lookup.gperf"
+#line 50 "mime.gperf"
       {"mscml", "application/mediaservercontrol+xml"},
-#line 424 "mime-lookup.gperf"
+#line 424 "mime.gperf"
       {"odt", "application/vnd.oasis.opendocument.text"},
-#line 294 "mime-lookup.gperf"
+#line 294 "mime.gperf"
       {"xpw", "application/vnd.intercon.formnet"},
-#line 345 "mime-lookup.gperf"
+#line 345 "mime.gperf"
       {"igx", "application/vnd.micrografx.igx"},
-#line 783 "mime-lookup.gperf"
+#line 783 "mime.gperf"
       {"woff2", "font/woff2"},
-#line 716 "mime-lookup.gperf"
+#line 716 "mime.gperf"
       {"xslt", "application/xslt+xml"},
-#line 609 "mime-lookup.gperf"
+#line 609 "mime.gperf"
       {"bdf", "application/x-font-bdf"},
-#line 205 "mime-lookup.gperf"
+#line 205 "mime.gperf"
       {"uvx", "application/vnd.dece.unspecified"},
-#line 429 "mime-lookup.gperf"
+#line 429 "mime.gperf"
       {"dd2", "application/vnd.oma.dd2+xml"},
-#line 775 "mime-lookup.gperf"
+#line 775 "mime.gperf"
       {"cmdf", "chemical/x-cmdf"},
-#line 100 "mime-lookup.gperf"
+#line 100 "mime.gperf"
       {"eps", "application/postscript"},
-#line 937 "mime-lookup.gperf"
+#line 937 "mime.gperf"
       {"jpm", "video/jpm"},
-#line 458 "mime-lookup.gperf"
+#line 458 "mime.gperf"
       {"qwd", "application/vnd.quark.quarkxpress"},
-#line 331 "mime-lookup.gperf"
+#line 331 "mime.gperf"
       {"123", "application/vnd.lotus-1-2-3"},
-#line 407 "mime-lookup.gperf"
+#line 407 "mime.gperf"
       {"rpss", "application/vnd.nokia.radio-presets"},
-#line 956 "mime-lookup.gperf"
+#line 956 "mime.gperf"
       {"uvp", "video/vnd.dece.pd"},
-#line 411 "mime-lookup.gperf"
+#line 411 "mime.gperf"
       {"odc", "application/vnd.oasis.opendocument.chart"},
-#line 926 "mime-lookup.gperf"
+#line 926 "mime.gperf"
       {"etx", "text/x-setext"},
-#line 984 "mime-lookup.gperf"
+#line 984 "mime.gperf"
       {"wmx", "video/x-ms-wmx"},
-#line 562 "mime-lookup.gperf"
+#line 562 "mime.gperf"
       {"abw", "application/x-abiword"},
-#line 887 "mime-lookup.gperf"
+#line 887 "mime.gperf"
       {"man", "text/troff"},
-#line 880 "mime-lookup.gperf"
+#line 880 "mime.gperf"
       {"rtx", "text/richtext"},
-#line 817 "mime-lookup.gperf"
+#line 817 "mime.gperf"
       {"npx", "image/vnd.net-fpx"},
-#line 886 "mime-lookup.gperf"
+#line 886 "mime.gperf"
       {"roff", "text/troff"},
-#line 96 "mime-lookup.gperf"
+#line 96 "mime.gperf"
       {"pkipath", "application/pkix-pkipath"},
-#line 406 "mime-lookup.gperf"
+#line 406 "mime.gperf"
       {"rpst", "application/vnd.nokia.radio-preset"},
-#line 145 "mime-lookup.gperf"
+#line 145 "mime.gperf"
       {"acu", "application/vnd.acucobol"},
-#line 420 "mime-lookup.gperf"
+#line 420 "mime.gperf"
       {"odp", "application/vnd.oasis.opendocument.presentation"},
-#line 116 "mime-lookup.gperf"
+#line 116 "mime.gperf"
       {"sbml", "application/sbml+xml"},
-#line 547 "mime-lookup.gperf"
+#line 547 "mime.gperf"
       {"hvp", "application/vnd.yamaha.hv-voice"},
-#line 176 "mime-lookup.gperf"
+#line 176 "mime.gperf"
       {"rp9", "application/vnd.cloanto.rp9"},
-#line 253 "mime-lookup.gperf"
+#line 253 "mime.gperf"
       {"ggt", "application/vnd.geogebra.tool"},
-#line 751 "mime-lookup.gperf"
+#line 751 "mime.gperf"
       {"lvp", "audio/vnd.lucent.voice"},
-#line 11 "mime-lookup.gperf"
+#line 11 "mime.gperf"
       {"cdmia", "application/cdmi-capability"},
-#line 476 "mime-lookup.gperf"
+#line 476 "mime.gperf"
       {"itp", "application/vnd.shana.informed.formtemplate"},
-#line 950 "mime-lookup.gperf"
+#line 950 "mime.gperf"
       {"qt", "video/quicktime"},
-#line 201 "mime-lookup.gperf"
+#line 201 "mime.gperf"
       {"uvd", "application/vnd.dece.data"},
-#line 733 "mime-lookup.gperf"
+#line 733 "mime.gperf"
       {"mp4a", "audio/mp4"},
-#line 397 "mime-lookup.gperf"
+#line 397 "mime.gperf"
       {"taglet", "application/vnd.mynfc"},
-#line 988 "mime-lookup.gperf"
+#line 988 "mime.gperf"
       {"smv", "video/x-smv"},
-#line 664 "mime-lookup.gperf"
+#line 664 "mime.gperf"
       {"p12", "application/x-pkcs12"},
-#line 415 "mime-lookup.gperf"
+#line 415 "mime.gperf"
       {"odft", "application/vnd.oasis.opendocument.formula-template"},
-#line 483 "mime-lookup.gperf"
+#line 483 "mime.gperf"
       {"sdkm", "application/vnd.solent.sdkm+xml"},
-#line 271 "mime-lookup.gperf"
+#line 271 "mime.gperf"
       {"hal", "application/vnd.hal+xml"},
-#line 861 "mime-lookup.gperf"
+#line 861 "mime.gperf"
       {"x3dvz", "model/x3d+vrml"},
-#line 56 "mime-lookup.gperf"
+#line 56 "mime.gperf"
       {"mp21", "application/mp21"},
-#line 268 "mime-lookup.gperf"
+#line 268 "mime.gperf"
       {"gtm", "application/vnd.groove-tool-message"},
-#line 493 "mime-lookup.gperf"
+#line 493 "mime.gperf"
       {"sgl", "application/vnd.stardivision.writer-global"},
-#line 545 "mime-lookup.gperf"
+#line 545 "mime.gperf"
       {"hvd", "application/vnd.yamaha.hv-dic"},
-#line 881 "mime-lookup.gperf"
+#line 881 "mime.gperf"
       {"sgml", "text/sgml"},
-#line 454 "mime-lookup.gperf"
+#line 454 "mime.gperf"
       {"qps", "application/vnd.publishare-delta-tree"},
-#line 765 "mime-lookup.gperf"
+#line 765 "mime.gperf"
       {"m3u", "audio/x-mpegurl"},
-#line 210 "mime-lookup.gperf"
+#line 210 "mime.gperf"
       {"dna", "application/vnd.dna"},
-#line 637 "mime-lookup.gperf"
+#line 637 "mime.gperf"
       {"wmd", "application/x-ms-wmd"},
-#line 48 "mime-lookup.gperf"
+#line 48 "mime.gperf"
       {"mathml", "application/mathml+xml"},
-#line 402 "mime-lookup.gperf"
+#line 402 "mime.gperf"
       {"nns", "application/vnd.noblenet-sealer"},
-#line 318 "mime-lookup.gperf"
+#line 318 "mime.gperf"
       {"kwt", "application/vnd.kde.kword"},
-#line 272 "mime-lookup.gperf"
+#line 272 "mime.gperf"
       {"zmm", "application/vnd.handheld-entertainment+xml"},
-#line 959 "mime-lookup.gperf"
+#line 959 "mime.gperf"
       {"uvvs", "video/vnd.dece.sd"},
-#line 581 "mime-lookup.gperf"
+#line 581 "mime.gperf"
       {"cbz", "application/x-cbr"},
-#line 49 "mime-lookup.gperf"
+#line 49 "mime.gperf"
       {"mbox", "application/mbox"},
-#line 399 "mime-lookup.gperf"
+#line 399 "mime.gperf"
       {"ntf", "application/vnd.nitf"},
-#line 199 "mime-lookup.gperf"
+#line 199 "mime.gperf"
       {"uvf", "application/vnd.dece.data"},
-#line 955 "mime-lookup.gperf"
+#line 955 "mime.gperf"
       {"uvvm", "video/vnd.dece.mobile"},
-#line 36 "mime-lookup.gperf"
+#line 36 "mime.gperf"
       {"js", "application/javascript"},
-#line 154 "mime-lookup.gperf"
+#line 154 "mime.gperf"
       {"ahead", "application/vnd.ahead.space"},
-#line 939 "mime-lookup.gperf"
+#line 939 "mime.gperf"
       {"mj2", "video/mj2"},
-#line 453 "mime-lookup.gperf"
+#line 453 "mime.gperf"
       {"mgz", "application/vnd.proteus.magazine"},
-#line 328 "mime-lookup.gperf"
+#line 328 "mime.gperf"
       {"lasxml", "application/vnd.las.las+xml"},
-#line 64 "mime-lookup.gperf"
+#line 64 "mime.gperf"
       {"mar", "application/octet-stream"},
-#line 471 "mime-lookup.gperf"
+#line 471 "mime.gperf"
       {"see", "application/vnd.seemail"},
-#line 109 "mime-lookup.gperf"
+#line 109 "mime.gperf"
       {"rs", "application/rls-services+xml"},
-#line 114 "mime-lookup.gperf"
+#line 114 "mime.gperf"
       {"rss", "application/rss+xml"},
-#line 555 "mime-lookup.gperf"
+#line 555 "mime.gperf"
       {"zaz", "application/vnd.zzazz.deck+xml"},
-#line 204 "mime-lookup.gperf"
+#line 204 "mime.gperf"
       {"uvvt", "application/vnd.dece.ttml+xml"},
-#line 683 "mime-lookup.gperf"
+#line 683 "mime.gperf"
       {"tar", "application/x-tar"},
-#line 423 "mime-lookup.gperf"
+#line 423 "mime.gperf"
       {"ots", "application/vnd.oasis.opendocument.spreadsheet-template"},
-#line 414 "mime-lookup.gperf"
+#line 414 "mime.gperf"
       {"odf", "application/vnd.oasis.opendocument.formula"},
-#line 375 "mime-lookup.gperf"
+#line 375 "mime.gperf"
       {"stl", "application/vnd.ms-pki.stl"},
-#line 34 "mime-lookup.gperf"
+#line 34 "mime.gperf"
       {"ser", "application/java-serialized-object"},
-#line 807 "mime-lookup.gperf"
+#line 807 "mime.gperf"
       {"sub", "image/vnd.dvb.subtitle"},
-#line 899 "mime-lookup.gperf"
+#line 899 "mime.gperf"
       {"sub", "text/vnd.dvb.subtitle"},
-#line 134 "mime-lookup.gperf"
+#line 134 "mime.gperf"
       {"tei", "application/tei+xml"},
-#line 455 "mime-lookup.gperf"
+#line 455 "mime.gperf"
       {"ptid", "application/vnd.pvi.ptid1"},
-#line 652 "mime-lookup.gperf"
+#line 652 "mime.gperf"
       {"wmf", "application/x-msmetafile"},
-#line 890 "mime-lookup.gperf"
+#line 890 "mime.gperf"
       {"ttl", "text/turtle"},
-#line 75 "mime-lookup.gperf"
+#line 75 "mime.gperf"
       {"ogx", "application/ogg"},
-#line 543 "mime-lookup.gperf"
+#line 543 "mime.gperf"
       {"xar", "application/vnd.xara"},
-#line 115 "mime-lookup.gperf"
+#line 115 "mime.gperf"
       {"rtf", "application/rtf"},
-#line 195 "mime-lookup.gperf"
+#line 195 "mime.gperf"
       {"car", "application/vnd.curl.car"},
-#line 426 "mime-lookup.gperf"
+#line 426 "mime.gperf"
       {"ott", "application/vnd.oasis.opendocument.text-template"},
-#line 587 "mime-lookup.gperf"
+#line 587 "mime.gperf"
       {"nsc", "application/x-conference"},
-#line 735 "mime-lookup.gperf"
+#line 735 "mime.gperf"
       {"mp2", "audio/mpeg"},
-#line 21 "mime-lookup.gperf"
+#line 21 "mime.gperf"
       {"ecma", "application/ecmascript"},
-#line 566 "mime-lookup.gperf"
+#line 566 "mime.gperf"
       {"x32", "application/x-authorware-bin"},
-#line 940 "mime-lookup.gperf"
+#line 940 "mime.gperf"
       {"mjp2", "video/mj2"},
-#line 921 "mime-lookup.gperf"
+#line 921 "mime.gperf"
       {"java", "text/x-java-source"},
-#line 650 "mime-lookup.gperf"
+#line 650 "mime.gperf"
       {"m13", "application/x-msmediaview"},
-#line 641 "mime-lookup.gperf"
+#line 641 "mime.gperf"
       {"obd", "application/x-msbinder"},
-#line 850 "mime-lookup.gperf"
+#line 850 "mime.gperf"
       {"dae", "model/vnd.collada+xml"},
-#line 206 "mime-lookup.gperf"
+#line 206 "mime.gperf"
       {"uvvx", "application/vnd.dece.unspecified"},
-#line 82 "mime-lookup.gperf"
+#line 82 "mime.gperf"
       {"xer", "application/patch-ops-error+xml"},
-#line 398 "mime-lookup.gperf"
+#line 398 "mime.gperf"
       {"nlu", "application/vnd.neurolanguage.nlu"},
-#line 94 "mime-lookup.gperf"
+#line 94 "mime.gperf"
       {"cer", "application/pkix-cert"},
-#line 688 "mime-lookup.gperf"
+#line 688 "mime.gperf"
       {"texi", "application/x-texinfo"},
-#line 5 "mime-lookup.gperf"
+#line 5 "mime.gperf"
       {"ez", "application/andrew-inset"},
-#line 97 "mime-lookup.gperf"
+#line 97 "mime.gperf"
       {"pki", "application/pkixcmp"},
-#line 619 "mime-lookup.gperf"
+#line 619 "mime.gperf"
       {"spl", "application/x-futuresplash"},
-#line 404 "mime-lookup.gperf"
+#line 404 "mime.gperf"
       {"ngdat", "application/vnd.nokia.n-gage.data"},
-#line 894 "mime-lookup.gperf"
+#line 894 "mime.gperf"
       {"vcard", "text/vcard"},
-#line 366 "mime-lookup.gperf"
+#line 366 "mime.gperf"
       {"xlsb", "application/vnd.ms-excel.sheet.binary.macroenabled.12"},
-#line 27 "mime-lookup.gperf"
+#line 27 "mime.gperf"
       {"gpx", "application/gpx+xml"},
-#line 657 "mime-lookup.gperf"
+#line 657 "mime.gperf"
       {"pub", "application/x-mspublisher"},
-#line 668 "mime-lookup.gperf"
+#line 668 "mime.gperf"
       {"p7r", "application/x-pkcs7-certreqresp"},
-#line 135 "mime-lookup.gperf"
+#line 135 "mime.gperf"
       {"teicorpus", "application/tei+xml"},
-#line 358 "mime-lookup.gperf"
+#line 358 "mime.gperf"
       {"cab", "application/vnd.ms-cab-compressed"},
-#line 269 "mime-lookup.gperf"
+#line 269 "mime.gperf"
       {"tpl", "application/vnd.groove-tool-template"},
-#line 957 "mime-lookup.gperf"
+#line 957 "mime.gperf"
       {"uvvp", "video/vnd.dece.pd"},
-#line 138 "mime-lookup.gperf"
+#line 138 "mime.gperf"
       {"plb", "application/vnd.3gpp.pic-bw-large"},
-#line 209 "mime-lookup.gperf"
+#line 209 "mime.gperf"
       {"fe_launch", "application/vnd.denovo.fcselayout-link"},
-#line 257 "mime-lookup.gperf"
+#line 257 "mime.gperf"
       {"g2w", "application/vnd.geoplan"},
-#line 972 "mime-lookup.gperf"
+#line 972 "mime.gperf"
       {"fli", "video/x-fli"},
-#line 484 "mime-lookup.gperf"
+#line 484 "mime.gperf"
       {"sdkd", "application/vnd.solent.sdkm+xml"},
-#line 904 "mime-lookup.gperf"
+#line 904 "mime.gperf"
       {"spot", "text/vnd.in3d.spot"},
-#line 575 "mime-lookup.gperf"
+#line 575 "mime.gperf"
       {"bz", "application/x-bzip"},
-#line 692 "mime-lookup.gperf"
+#line 692 "mime.gperf"
       {"der", "application/x-x509-ca-cert"},
-#line 412 "mime-lookup.gperf"
+#line 412 "mime.gperf"
       {"otc", "application/vnd.oasis.opendocument.chart-template"},
-#line 317 "mime-lookup.gperf"
+#line 317 "mime.gperf"
       {"kwd", "application/vnd.kde.kword"},
-#line 112 "mime-lookup.gperf"
+#line 112 "mime.gperf"
       {"roa", "application/rpki-roa"},
-#line 715 "mime-lookup.gperf"
+#line 715 "mime.gperf"
       {"xpl", "application/xproc+xml"},
-#line 632 "mime-lookup.gperf"
+#line 632 "mime.gperf"
       {"mie", "application/x-mie"},
-#line 106 "mime-lookup.gperf"
+#line 106 "mime.gperf"
       {"rnc", "application/relax-ng-compact-syntax"},
-#line 844 "mime-lookup.gperf"
+#line 844 "mime.gperf"
       {"mime", "message/rfc822"},
-#line 167 "mime-lookup.gperf"
+#line 167 "mime.gperf"
       {"iota", "application/vnd.astraea-software.iota"},
-#line 421 "mime-lookup.gperf"
+#line 421 "mime.gperf"
       {"otp", "application/vnd.oasis.opendocument.presentation-template"},
-#line 666 "mime-lookup.gperf"
+#line 666 "mime.gperf"
       {"p7b", "application/x-pkcs7-certificates"},
-#line 700 "mime-lookup.gperf"
+#line 700 "mime.gperf"
       {"z3", "application/x-zmachine"},
-#line 401 "mime-lookup.gperf"
+#line 401 "mime.gperf"
       {"nnd", "application/vnd.noblenet-directory"},
-#line 532 "mime-lookup.gperf"
+#line 532 "mime.gperf"
       {"vsw", "application/vnd.visio"},
-#line 202 "mime-lookup.gperf"
+#line 202 "mime.gperf"
       {"uvvd", "application/vnd.dece.data"},
-#line 590 "mime-lookup.gperf"
+#line 590 "mime.gperf"
       {"deb", "application/x-debian-package"},
-#line 934 "mime-lookup.gperf"
+#line 934 "mime.gperf"
       {"h263", "video/h263"},
-#line 855 "mime-lookup.gperf"
+#line 855 "mime.gperf"
       {"vtu", "model/vnd.vtu"},
-#line 291 "mime-lookup.gperf"
+#line 291 "mime.gperf"
       {"ivp", "application/vnd.immervision-ivp"},
-#line 659 "mime-lookup.gperf"
+#line 659 "mime.gperf"
       {"trm", "application/x-msterminal"},
-#line 161 "mime-lookup.gperf"
+#line 161 "mime.gperf"
       {"cii", "application/vnd.anser-web-certificate-issue-initiation"},
-#line 736 "mime-lookup.gperf"
+#line 736 "mime.gperf"
       {"mp2a", "audio/mpeg"},
-#line 678 "mime-lookup.gperf"
+#line 678 "mime.gperf"
       {"srt", "application/x-subrip"},
-#line 113 "mime-lookup.gperf"
+#line 113 "mime.gperf"
       {"rsd", "application/rsd+xml"},
-#line 334 "mime-lookup.gperf"
+#line 334 "mime.gperf"
       {"nsf", "application/vnd.lotus-notes"},
-#line 527 "mime-lookup.gperf"
+#line 527 "mime.gperf"
       {"uoml", "application/vnd.uoml+xml"},
-#line 306 "mime-lookup.gperf"
+#line 306 "mime.gperf"
       {"joda", "application/vnd.joost.joda-archive"},
-#line 620 "mime-lookup.gperf"
+#line 620 "mime.gperf"
       {"gca", "application/x-gca-compressed"},
-#line 449 "mime-lookup.gperf"
+#line 449 "mime.gperf"
       {"wg", "application/vnd.pmi.widget"},
-#line 127 "mime-lookup.gperf"
+#line 127 "mime.gperf"
       {"rq", "application/sparql-query"},
-#line 371 "mime-lookup.gperf"
+#line 371 "mime.gperf"
       {"ims", "application/vnd.ms-ims"},
-#line 960 "mime-lookup.gperf"
+#line 960 "mime.gperf"
       {"uvv", "video/vnd.dece.video"},
-#line 304 "mime-lookup.gperf"
+#line 304 "mime.gperf"
       {"rms", "application/vnd.jcp.javame.midlet-rms"},
-#line 467 "mime-lookup.gperf"
+#line 467 "mime.gperf"
       {"rm", "application/vnd.rn-realmedia"},
-#line 863 "mime-lookup.gperf"
+#line 863 "mime.gperf"
       {"x3dz", "model/x3d+xml"},
-#line 847 "mime-lookup.gperf"
+#line 847 "mime.gperf"
       {"msh", "model/mesh"},
-#line 200 "mime-lookup.gperf"
+#line 200 "mime.gperf"
       {"uvvf", "application/vnd.dece.data"},
-#line 729 "mime-lookup.gperf"
+#line 729 "mime.gperf"
       {"midi", "audio/midi"},
-#line 757 "mime-lookup.gperf"
+#line 757 "mime.gperf"
       {"weba", "audio/webm"},
-#line 593 "mime-lookup.gperf"
+#line 593 "mime.gperf"
       {"dir", "application/x-director"},
-#line 693 "mime-lookup.gperf"
+#line 693 "mime.gperf"
       {"crt", "application/x-x509-ca-cert"},
-#line 351 "mime-lookup.gperf"
+#line 351 "mime.gperf"
       {"msl", "application/vnd.mobius.msl"},
-#line 133 "mime-lookup.gperf"
+#line 133 "mime.gperf"
       {"ssml", "application/ssml+xml"},
-#line 128 "mime-lookup.gperf"
+#line 128 "mime.gperf"
       {"srx", "application/sparql-results+xml"},
-#line 737 "mime-lookup.gperf"
+#line 737 "mime.gperf"
       {"mp3", "audio/mpeg"},
-#line 220 "mime-lookup.gperf"
+#line 220 "mime.gperf"
       {"esf", "application/vnd.epson.esf"},
-#line 691 "mime-lookup.gperf"
+#line 691 "mime.gperf"
       {"src", "application/x-wais-source"},
-#line 895 "mime-lookup.gperf"
+#line 895 "mime.gperf"
       {"curl", "text/vnd.curl"},
-#line 792 "mime-lookup.gperf"
+#line 792 "mime.gperf"
       {"ktx", "image/ktx"},
-#line 43 "mime-lookup.gperf"
+#line 43 "mime.gperf"
       {"mrc", "application/marc"},
-#line 983 "mime-lookup.gperf"
+#line 983 "mime.gperf"
       {"wmv", "video/x-ms-wmv"},
-#line 780 "mime-lookup.gperf"
+#line 780 "mime.gperf"
       {"otf", "font/otf"},
-#line 315 "mime-lookup.gperf"
+#line 315 "mime.gperf"
       {"kpt", "application/vnd.kde.kpresenter"},
-#line 805 "mime-lookup.gperf"
+#line 805 "mime.gperf"
       {"djvu", "image/vnd.djvu"},
-#line 589 "mime-lookup.gperf"
+#line 589 "mime.gperf"
       {"csh", "application/x-csh"},
-#line 142 "mime-lookup.gperf"
+#line 142 "mime.gperf"
       {"pwn", "application/vnd.3m.post-it-notes"},
-#line 712 "mime-lookup.gperf"
+#line 712 "mime.gperf"
       {"xsl", "application/xml"},
-#line 630 "mime-lookup.gperf"
+#line 630 "mime.gperf"
       {"lzh", "application/x-lzh-compressed"},
-#line 246 "mime-lookup.gperf"
+#line 246 "mime.gperf"
       {"bh2", "application/vnd.fujitsu.oasysprs"},
-#line 907 "mime-lookup.gperf"
+#line 907 "mime.gperf"
       {"wmls", "text/vnd.wap.wmlscript"},
-#line 218 "mime-lookup.gperf"
+#line 218 "mime.gperf"
       {"mag", "application/vnd.ecowin.chart"},
-#line 777 "mime-lookup.gperf"
+#line 777 "mime.gperf"
       {"csml", "chemical/x-csml"},
-#line 44 "mime-lookup.gperf"
+#line 44 "mime.gperf"
       {"mrcx", "application/marcxml+xml"},
-#line 486 "mime-lookup.gperf"
+#line 486 "mime.gperf"
       {"sfs", "application/vnd.spotfire.sfs"},
-#line 594 "mime-lookup.gperf"
+#line 594 "mime.gperf"
       {"dcr", "application/x-director"},
-#line 815 "mime-lookup.gperf"
+#line 815 "mime.gperf"
       {"mdi", "image/vnd.ms-modi"},
-#line 633 "mime-lookup.gperf"
+#line 633 "mime.gperf"
       {"prc", "application/x-mobipocket-ebook"},
-#line 864 "mime-lookup.gperf"
+#line 864 "mime.gperf"
       {"appcache", "text/cache-manifest"},
-#line 166 "mime-lookup.gperf"
+#line 166 "mime.gperf"
       {"swi", "application/vnd.aristanetworks.swi"},
-#line 343 "mime-lookup.gperf"
+#line 343 "mime.gperf"
       {"mfm", "application/vnd.mfmp"},
-#line 74 "mime-lookup.gperf"
+#line 74 "mime.gperf"
       {"opf", "application/oebps-package+xml"},
-#line 132 "mime-lookup.gperf"
+#line 132 "mime.gperf"
       {"ssdl", "application/ssdl+xml"},
-#line 177 "mime-lookup.gperf"
+#line 177 "mime.gperf"
       {"c4g", "application/vnd.clonk.c4group"},
-#line 191 "mime-lookup.gperf"
+#line 191 "mime.gperf"
       {"clkw", "application/vnd.crick.clicker.wordbank"},
-#line 720 "mime-lookup.gperf"
+#line 720 "mime.gperf"
       {"xvml", "application/xv+xml"},
-#line 7 "mime-lookup.gperf"
+#line 7 "mime.gperf"
       {"atom", "application/atom+xml"},
-#line 686 "mime-lookup.gperf"
+#line 686 "mime.gperf"
       {"tfm", "application/x-tex-tfm"},
-#line 144 "mime-lookup.gperf"
+#line 144 "mime.gperf"
       {"imp", "application/vnd.accpac.simply.imp"},
-#line 871 "mime-lookup.gperf"
+#line 871 "mime.gperf"
       {"n3", "text/n3"},
-#line 537 "mime-lookup.gperf"
+#line 537 "mime.gperf"
       {"wmlsc", "application/vnd.wap.wmlscriptc"},
-#line 770 "mime-lookup.gperf"
+#line 770 "mime.gperf"
       {"rmp", "audio/x-pn-realaudio-plugin"},
-#line 111 "mime-lookup.gperf"
+#line 111 "mime.gperf"
       {"mft", "application/rpki-manifest"},
-#line 565 "mime-lookup.gperf"
+#line 565 "mime.gperf"
       {"aab", "application/x-authorware-bin"},
-#line 745 "mime-lookup.gperf"
+#line 745 "mime.gperf"
       {"uva", "audio/vnd.dece.audio"},
-#line 584 "mime-lookup.gperf"
+#line 584 "mime.gperf"
       {"cfs", "application/x-cfs-compressed"},
-#line 903 "mime-lookup.gperf"
+#line 903 "mime.gperf"
       {"3dml", "text/vnd.in3d.3dml"},
-#line 320 "mime-lookup.gperf"
+#line 320 "mime.gperf"
       {"kia", "application/vnd.kidspiration"},
-#line 784 "mime-lookup.gperf"
+#line 784 "mime.gperf"
       {"bmp", "image/bmp"},
-#line 214 "mime-lookup.gperf"
+#line 214 "mime.gperf"
       {"kpxx", "application/vnd.ds-keypoint"},
-#line 640 "mime-lookup.gperf"
+#line 640 "mime.gperf"
       {"mdb", "application/x-msaccess"},
-#line 672 "mime-lookup.gperf"
+#line 672 "mime.gperf"
       {"shar", "application/x-shar"},
-#line 68 "mime-lookup.gperf"
+#line 68 "mime.gperf"
       {"pkg", "application/octet-stream"},
-#line 616 "mime-lookup.gperf"
+#line 616 "mime.gperf"
       {"pfm", "application/x-font-type1"},
-#line 73 "mime-lookup.gperf"
+#line 73 "mime.gperf"
       {"oda", "application/oda"},
-#line 642 "mime-lookup.gperf"
+#line 642 "mime.gperf"
       {"crd", "application/x-mscardfile"},
-#line 536 "mime-lookup.gperf"
+#line 536 "mime.gperf"
       {"wmlc", "application/vnd.wap.wmlc"},
-#line 482 "mime-lookup.gperf"
+#line 482 "mime.gperf"
       {"teacher", "application/vnd.smart.teacher"},
-#line 46 "mime-lookup.gperf"
+#line 46 "mime.gperf"
       {"nb", "application/mathematica"},
-#line 610 "mime-lookup.gperf"
+#line 610 "mime.gperf"
       {"gsf", "application/x-font-ghostscript"},
-#line 767 "mime-lookup.gperf"
+#line 767 "mime.gperf"
       {"wma", "audio/x-ms-wma"},
-#line 898 "mime-lookup.gperf"
+#line 898 "mime.gperf"
       {"scurl", "text/vnd.curl.scurl"},
-#line 918 "mime-lookup.gperf"
+#line 918 "mime.gperf"
       {"for", "text/x-fortran"},
-#line 897 "mime-lookup.gperf"
+#line 897 "mime.gperf"
       {"mcurl", "text/vnd.curl.mcurl"},
-#line 243 "mime-lookup.gperf"
+#line 243 "mime.gperf"
       {"oa2", "application/vnd.fujitsu.oasys2"},
-#line 392 "mime-lookup.gperf"
+#line 392 "mime.gperf"
       {"wpl", "application/vnd.ms-wpl"},
-#line 949 "mime-lookup.gperf"
+#line 949 "mime.gperf"
       {"ogv", "video/ogg"},
-#line 442 "mime-lookup.gperf"
+#line 442 "mime.gperf"
       {"pdb", "application/vnd.palm"},
-#line 86 "mime-lookup.gperf"
+#line 86 "mime.gperf"
       {"sig", "application/pgp-signature"},
-#line 687 "mime-lookup.gperf"
+#line 687 "mime.gperf"
       {"texinfo", "application/x-texinfo"},
-#line 117 "mime-lookup.gperf"
+#line 117 "mime.gperf"
       {"scq", "application/scvp-cv-request"},
-#line 902 "mime-lookup.gperf"
+#line 902 "mime.gperf"
       {"gv", "text/vnd.graphviz"},
-#line 943 "mime-lookup.gperf"
+#line 943 "mime.gperf"
       {"mpg4", "video/mp4"},
-#line 586 "mime-lookup.gperf"
+#line 586 "mime.gperf"
       {"pgn", "application/x-chess-pgn"},
-#line 259 "mime-lookup.gperf"
+#line 259 "mime.gperf"
       {"gmx", "application/vnd.gmx"},
-#line 148 "mime-lookup.gperf"
+#line 148 "mime.gperf"
       {"air", "application/vnd.adobe.air-application-installer-package+zip"},
-#line 961 "mime-lookup.gperf"
+#line 961 "mime.gperf"
       {"uvvv", "video/vnd.dece.video"},
-#line 514 "mime-lookup.gperf"
+#line 514 "mime.gperf"
       {"tao", "application/vnd.tao.intent-module-archive"},
-#line 654 "mime-lookup.gperf"
+#line 654 "mime.gperf"
       {"emf", "application/x-msmetafile"},
-#line 665 "mime-lookup.gperf"
+#line 665 "mime.gperf"
       {"pfx", "application/x-pkcs12"},
-#line 196 "mime-lookup.gperf"
+#line 196 "mime.gperf"
       {"pcurl", "application/vnd.curl.pcurl"},
-#line 87 "mime-lookup.gperf"
+#line 87 "mime.gperf"
       {"prf", "application/pics-rules"},
-#line 567 "mime-lookup.gperf"
+#line 567 "mime.gperf"
       {"u32", "application/x-authorware-bin"},
-#line 548 "mime-lookup.gperf"
+#line 548 "mime.gperf"
       {"osf", "application/vnd.yamaha.openscoreformat"},
-#line 15 "mime-lookup.gperf"
+#line 15 "mime.gperf"
       {"cdmiq", "application/cdmi-queue"},
-#line 846 "mime-lookup.gperf"
+#line 846 "mime.gperf"
       {"iges", "model/iges"},
-#line 578 "mime-lookup.gperf"
+#line 578 "mime.gperf"
       {"cbr", "application/x-cbr"},
-#line 795 "mime-lookup.gperf"
+#line 795 "mime.gperf"
       {"sgi", "image/sgi"},
-#line 183 "mime-lookup.gperf"
+#line 183 "mime.gperf"
       {"c11amz", "application/vnd.cluetrust.cartomobile-config-pkg"},
-#line 711 "mime-lookup.gperf"
+#line 711 "mime.gperf"
       {"xml", "application/xml"},
-#line 896 "mime-lookup.gperf"
+#line 896 "mime.gperf"
       {"dcurl", "text/vnd.curl.dcurl"},
-#line 776 "mime-lookup.gperf"
+#line 776 "mime.gperf"
       {"cml", "chemical/x-cml"},
-#line 932 "mime-lookup.gperf"
+#line 932 "mime.gperf"
       {"3g2", "video/3gpp2"},
-#line 747 "mime-lookup.gperf"
+#line 747 "mime.gperf"
       {"eol", "audio/vnd.digital-winds"},
-#line 859 "mime-lookup.gperf"
+#line 859 "mime.gperf"
       {"x3dbz", "model/x3d+binary"},
-#line 563 "mime-lookup.gperf"
+#line 563 "mime.gperf"
       {"ace", "application/x-ace-compressed"},
-#line 193 "mime-lookup.gperf"
+#line 193 "mime.gperf"
       {"pml", "application/vnd.ctc-posml"},
-#line 316 "mime-lookup.gperf"
+#line 316 "mime.gperf"
       {"ksp", "application/vnd.kde.kspread"},
-#line 354 "mime-lookup.gperf"
+#line 354 "mime.gperf"
       {"mpn", "application/vnd.mophun.application"},
-#line 987 "mime-lookup.gperf"
+#line 987 "mime.gperf"
       {"movie", "video/x-sgi-movie"},
-#line 524 "mime-lookup.gperf"
+#line 524 "mime.gperf"
       {"utz", "application/vnd.uiq.theme"},
-#line 869 "mime-lookup.gperf"
+#line 869 "mime.gperf"
       {"html", "text/html"},
-#line 492 "mime-lookup.gperf"
+#line 492 "mime.gperf"
       {"vor", "application/vnd.stardivision.writer"},
-#line 276 "mime-lookup.gperf"
+#line 276 "mime.gperf"
       {"hpid", "application/vnd.hp-hpid"},
-#line 227 "mime-lookup.gperf"
+#line 227 "mime.gperf"
       {"ez2", "application/vnd.ezpix-album"},
-#line 322 "mime-lookup.gperf"
+#line 322 "mime.gperf"
       {"knp", "application/vnd.kinar"},
-#line 786 "mime-lookup.gperf"
+#line 786 "mime.gperf"
       {"g3", "image/g3fax"},
-#line 281 "mime-lookup.gperf"
+#line 281 "mime.gperf"
       {"sfd-hdstx", "application/vnd.hydrostatix.sof-data"},
-#line 501 "mime-lookup.gperf"
+#line 501 "mime.gperf"
       {"sti", "application/vnd.sun.xml.impress.template"},
-#line 694 "mime-lookup.gperf"
+#line 694 "mime.gperf"
       {"fig", "application/x-xfig"},
-#line 576 "mime-lookup.gperf"
+#line 576 "mime.gperf"
       {"bz2", "application/x-bzip2"},
-#line 344 "mime-lookup.gperf"
+#line 344 "mime.gperf"
       {"flo", "application/vnd.micrografx.flo"},
-#line 740 "mime-lookup.gperf"
+#line 740 "mime.gperf"
       {"oga", "audio/ogg"},
-#line 618 "mime-lookup.gperf"
+#line 618 "mime.gperf"
       {"arc", "application/x-freearc"},
-#line 446 "mime-lookup.gperf"
+#line 446 "mime.gperf"
       {"str", "application/vnd.pg.format"},
-#line 981 "mime-lookup.gperf"
+#line 981 "mime.gperf"
       {"vob", "video/x-ms-vob"},
-#line 577 "mime-lookup.gperf"
+#line 577 "mime.gperf"
       {"boz", "application/x-bzip2"},
-#line 198 "mime-lookup.gperf"
+#line 198 "mime.gperf"
       {"rdz", "application/vnd.data-vision.rdz"},
-#line 746 "mime-lookup.gperf"
+#line 746 "mime.gperf"
       {"uvva", "audio/vnd.dece.audio"},
-#line 185 "mime-lookup.gperf"
+#line 185 "mime.gperf"
       {"cdbcmsg", "application/vnd.contact.cmsg"},
-#line 14 "mime-lookup.gperf"
+#line 14 "mime.gperf"
       {"cdmio", "application/cdmi-object"},
-#line 244 "mime-lookup.gperf"
+#line 244 "mime.gperf"
       {"oa3", "application/vnd.fujitsu.oasys3"},
-#line 946 "mime-lookup.gperf"
+#line 946 "mime.gperf"
       {"mpe", "video/mpeg"},
-#line 441 "mime-lookup.gperf"
+#line 441 "mime.gperf"
       {"esa", "application/vnd.osgi.subsystem"},
-#line 853 "mime-lookup.gperf"
+#line 853 "mime.gperf"
       {"gtw", "model/vnd.gtw"},
-#line 734 "mime-lookup.gperf"
+#line 734 "mime.gperf"
       {"mpga", "audio/mpeg"},
-#line 9 "mime-lookup.gperf"
+#line 9 "mime.gperf"
       {"atomsvc", "application/atomsvc+xml"},
-#line 617 "mime-lookup.gperf"
+#line 617 "mime.gperf"
       {"afm", "application/x-font-type1"},
-#line 628 "mime-lookup.gperf"
+#line 628 "mime.gperf"
       {"jnlp", "application/x-java-jnlp-file"},
-#line 258 "mime-lookup.gperf"
+#line 258 "mime.gperf"
       {"g3w", "application/vnd.geospace"},
-#line 967 "mime-lookup.gperf"
+#line 967 "mime.gperf"
       {"uvu", "video/vnd.uvvu.mp4"},
-#line 403 "mime-lookup.gperf"
+#line 403 "mime.gperf"
       {"nnw", "application/vnd.noblenet-web"},
-#line 8 "mime-lookup.gperf"
+#line 8 "mime.gperf"
       {"atomcat", "application/atomcat+xml"},
-#line 608 "mime-lookup.gperf"
+#line 608 "mime.gperf"
       {"eva", "application/x-eva"},
-#line 696 "mime-lookup.gperf"
+#line 696 "mime.gperf"
       {"xpi", "application/x-xpinstall"},
-#line 553 "mime-lookup.gperf"
+#line 553 "mime.gperf"
       {"zir", "application/vnd.zul"},
-#line 372 "mime-lookup.gperf"
+#line 372 "mime.gperf"
       {"lrm", "application/vnd.ms-lrm"},
-#line 559 "mime-lookup.gperf"
+#line 559 "mime.gperf"
       {"wsdl", "application/wsdl+xml"},
-#line 301 "mime-lookup.gperf"
+#line 301 "mime.gperf"
       {"xpr", "application/vnd.is-xpr"},
-#line 520 "mime-lookup.gperf"
+#line 520 "mime.gperf"
       {"mxs", "application/vnd.triscape.mxs"},
-#line 162 "mime-lookup.gperf"
+#line 162 "mime.gperf"
       {"fti", "application/vnd.anser-web-funds-transfer-initiation"},
-#line 502 "mime-lookup.gperf"
+#line 502 "mime.gperf"
       {"sxm", "application/vnd.sun.xml.math"},
-#line 852 "mime-lookup.gperf"
+#line 852 "mime.gperf"
       {"gdl", "model/vnd.gdl"},
-#line 153 "mime-lookup.gperf"
+#line 153 "mime.gperf"
       {"xfdf", "application/vnd.adobe.xfdf"},
-#line 604 "mime-lookup.gperf"
+#line 604 "mime.gperf"
       {"dtb", "application/x-dtbook+xml"},
-#line 391 "mime-lookup.gperf"
+#line 391 "mime.gperf"
       {"wdb", "application/vnd.ms-works"},
-#line 808 "mime-lookup.gperf"
+#line 808 "mime.gperf"
       {"dwg", "image/vnd.dwg"},
-#line 228 "mime-lookup.gperf"
+#line 228 "mime.gperf"
       {"ez3", "application/vnd.ezpix-package"},
-#line 290 "mime-lookup.gperf"
+#line 290 "mime.gperf"
       {"igl", "application/vnd.igloader"},
-#line 952 "mime-lookup.gperf"
+#line 952 "mime.gperf"
       {"uvh", "video/vnd.dece.hd"},
-#line 872 "mime-lookup.gperf"
+#line 872 "mime.gperf"
       {"txt", "text/plain"},
-#line 635 "mime-lookup.gperf"
+#line 635 "mime.gperf"
       {"application", "application/x-ms-application"},
-#line 51 "mime-lookup.gperf"
+#line 51 "mime.gperf"
       {"metalink", "application/metalink+xml"},
-#line 878 "mime-lookup.gperf"
+#line 878 "mime.gperf"
       {"in", "text/plain"},
-#line 283 "mime-lookup.gperf"
+#line 283 "mime.gperf"
       {"afp", "application/vnd.ibm.modcap"},
-#line 270 "mime-lookup.gperf"
+#line 270 "mime.gperf"
       {"vcg", "application/vnd.groove-vcard"},
-#line 33 "mime-lookup.gperf"
+#line 33 "mime.gperf"
       {"jar", "application/java-archive"},
-#line 755 "mime-lookup.gperf"
+#line 755 "mime.gperf"
       {"ecelp9600", "audio/vnd.nuera.ecelp9600"},
-#line 598 "mime-lookup.gperf"
+#line 598 "mime.gperf"
       {"cxt", "application/x-director"},
-#line 327 "mime-lookup.gperf"
+#line 327 "mime.gperf"
       {"sse", "application/vnd.kodak-descriptor"},
-#line 754 "mime-lookup.gperf"
+#line 754 "mime.gperf"
       {"ecelp7470", "audio/vnd.nuera.ecelp7470"},
-#line 938 "mime-lookup.gperf"
+#line 938 "mime.gperf"
       {"jpgm", "video/jpm"},
-#line 669 "mime-lookup.gperf"
+#line 669 "mime.gperf"
       {"rar", "application/x-rar-compressed"},
-#line 496 "mime-lookup.gperf"
+#line 496 "mime.gperf"
       {"sxc", "application/vnd.sun.xml.calc"},
-#line 648 "mime-lookup.gperf"
+#line 648 "mime.gperf"
       {"msi", "application/x-msdownload"},
-#line 207 "mime-lookup.gperf"
+#line 207 "mime.gperf"
       {"uvz", "application/vnd.dece.zip"},
-#line 858 "mime-lookup.gperf"
+#line 858 "mime.gperf"
       {"x3db", "model/x3d+binary"},
-#line 927 "mime-lookup.gperf"
+#line 927 "mime.gperf"
       {"sfv", "text/x-sfv"},
-#line 906 "mime-lookup.gperf"
+#line 906 "mime.gperf"
       {"wml", "text/vnd.wap.wml"},
-#line 521 "mime-lookup.gperf"
+#line 521 "mime.gperf"
       {"tra", "application/vnd.trueapp"},
-#line 32 "mime-lookup.gperf"
+#line 32 "mime.gperf"
       {"ipfix", "application/ipfix"},
-#line 690 "mime-lookup.gperf"
+#line 690 "mime.gperf"
       {"ustar", "application/x-ustar"},
-#line 494 "mime-lookup.gperf"
+#line 494 "mime.gperf"
       {"smzip", "application/vnd.stepmania.package"},
-#line 213 "mime-lookup.gperf"
+#line 213 "mime.gperf"
       {"dfac", "application/vnd.dreamfactory"},
-#line 912 "mime-lookup.gperf"
+#line 912 "mime.gperf"
       {"cxx", "text/x-c"},
-#line 61 "mime-lookup.gperf"
+#line 61 "mime.gperf"
       {"bin", "application/octet-stream"},
-#line 638 "mime-lookup.gperf"
+#line 638 "mime.gperf"
       {"wmz", "application/x-ms-wmz"},
-#line 653 "mime-lookup.gperf"
+#line 653 "mime.gperf"
       {"wmz", "application/x-msmetafile"},
-#line 22 "mime-lookup.gperf"
+#line 22 "mime.gperf"
       {"emma", "application/emma+xml"},
-#line 794 "mime-lookup.gperf"
+#line 794 "mime.gperf"
       {"btif", "image/prs.btif"},
-#line 573 "mime-lookup.gperf"
+#line 573 "mime.gperf"
       {"blb", "application/x-blorb"},
-#line 119 "mime-lookup.gperf"
+#line 119 "mime.gperf"
       {"spq", "application/scvp-vp-request"},
-#line 498 "mime-lookup.gperf"
+#line 498 "mime.gperf"
       {"sxd", "application/vnd.sun.xml.draw"},
-#line 230 "mime-lookup.gperf"
+#line 230 "mime.gperf"
       {"mseed", "application/vnd.fdsn.mseed"},
-#line 748 "mime-lookup.gperf"
+#line 748 "mime.gperf"
       {"dra", "audio/vnd.dra"},
-#line 251 "mime-lookup.gperf"
+#line 251 "mime.gperf"
       {"txd", "application/vnd.genomatix.tuxedo"},
-#line 649 "mime-lookup.gperf"
+#line 649 "mime.gperf"
       {"mvb", "application/x-msmediaview"},
-#line 485 "mime-lookup.gperf"
+#line 485 "mime.gperf"
       {"dxp", "application/vnd.spotfire.dxp"},
-#line 968 "mime-lookup.gperf"
+#line 968 "mime.gperf"
       {"uvvu", "video/vnd.uvvu.mp4"},
-#line 139 "mime-lookup.gperf"
+#line 139 "mime.gperf"
       {"psb", "application/vnd.3gpp.pic-bw-small"},
-#line 63 "mime-lookup.gperf"
+#line 63 "mime.gperf"
       {"lrf", "application/octet-stream"},
-#line 606 "mime-lookup.gperf"
+#line 606 "mime.gperf"
       {"dvi", "application/x-dvi"},
-#line 330 "mime-lookup.gperf"
+#line 330 "mime.gperf"
       {"lbe", "application/vnd.llamagraphics.life-balance.exchange+xml"},
-#line 945 "mime-lookup.gperf"
+#line 945 "mime.gperf"
       {"mpg", "video/mpeg"},
-#line 150 "mime-lookup.gperf"
+#line 150 "mime.gperf"
       {"fxp", "application/vnd.adobe.fxp"},
-#line 60 "mime-lookup.gperf"
+#line 60 "mime.gperf"
       {"mxf", "application/mxf"},
-#line 554 "mime-lookup.gperf"
+#line 554 "mime.gperf"
       {"zirz", "application/vnd.zul"},
-#line 286 "mime-lookup.gperf"
+#line 286 "mime.gperf"
       {"irm", "application/vnd.ibm.rights-management"},
-#line 332 "mime-lookup.gperf"
+#line 332 "mime.gperf"
       {"apr", "application/vnd.lotus-approach"},
-#line 140 "mime-lookup.gperf"
+#line 140 "mime.gperf"
       {"pvb", "application/vnd.3gpp.pic-bw-var"},
-#line 353 "mime-lookup.gperf"
+#line 353 "mime.gperf"
       {"txf", "application/vnd.mobius.txf"},
-#line 226 "mime-lookup.gperf"
+#line 226 "mime.gperf"
       {"et3", "application/vnd.eszigno3+xml"},
-#line 885 "mime-lookup.gperf"
+#line 885 "mime.gperf"
       {"tr", "text/troff"},
-#line 522 "mime-lookup.gperf"
+#line 522 "mime.gperf"
       {"ufd", "application/vnd.ufdl"},
-#line 753 "mime-lookup.gperf"
+#line 753 "mime.gperf"
       {"ecelp4800", "audio/vnd.nuera.ecelp4800"},
-#line 444 "mime-lookup.gperf"
+#line 444 "mime.gperf"
       {"oprc", "application/vnd.palm"},
-#line 538 "mime-lookup.gperf"
+#line 538 "mime.gperf"
       {"wtb", "application/vnd.webturbo"},
-#line 292 "mime-lookup.gperf"
+#line 292 "mime.gperf"
       {"ivu", "application/vnd.immervision-ivu"},
-#line 953 "mime-lookup.gperf"
+#line 953 "mime.gperf"
       {"uvvh", "video/vnd.dece.hd"},
-#line 989 "mime-lookup.gperf"
+#line 989 "mime.gperf"
       {"ice", "x-conference/x-cooltalk"},
-#line 962 "mime-lookup.gperf"
+#line 962 "mime.gperf"
       {"dvb", "video/vnd.dvb.file"},
-#line 273 "mime-lookup.gperf"
+#line 273 "mime.gperf"
       {"hbci", "application/vnd.hbci"},
-#line 469 "mime-lookup.gperf"
+#line 469 "mime.gperf"
       {"link66", "application/vnd.route66.link66+xml"},
-#line 125 "mime-lookup.gperf"
+#line 125 "mime.gperf"
       {"smi", "application/smil+xml"},
-#line 233 "mime-lookup.gperf"
+#line 233 "mime.gperf"
       {"gph", "application/vnd.flographit"},
-#line 614 "mime-lookup.gperf"
+#line 614 "mime.gperf"
       {"pfa", "application/x-font-type1"},
-#line 813 "mime-lookup.gperf"
+#line 813 "mime.gperf"
       {"mmr", "image/vnd.fujixerox.edmics-mmr"},
-#line 427 "mime-lookup.gperf"
+#line 427 "mime.gperf"
       {"oth", "application/vnd.oasis.opendocument.text-web"},
-#line 212 "mime-lookup.gperf"
+#line 212 "mime.gperf"
       {"dpg", "application/vnd.dpgraph"},
-#line 103 "mime-lookup.gperf"
+#line 103 "mime.gperf"
       {"pskcxml", "application/pskc+xml"},
-#line 809 "mime-lookup.gperf"
+#line 809 "mime.gperf"
       {"dxf", "image/vnd.dxf"},
-#line 208 "mime-lookup.gperf"
+#line 208 "mime.gperf"
       {"uvvz", "application/vnd.dece.zip"},
-#line 572 "mime-lookup.gperf"
+#line 572 "mime.gperf"
       {"torrent", "application/x-bittorrent"},
-#line 300 "mime-lookup.gperf"
+#line 300 "mime.gperf"
       {"irp", "application/vnd.irepository.package+xml"},
-#line 626 "mime-lookup.gperf"
+#line 626 "mime.gperf"
       {"install", "application/x-install-instructions"},
-#line 131 "mime-lookup.gperf"
+#line 131 "mime.gperf"
       {"sru", "application/sru+xml"},
-#line 877 "mime-lookup.gperf"
+#line 877 "mime.gperf"
       {"log", "text/plain"},
-#line 634 "mime-lookup.gperf"
+#line 634 "mime.gperf"
       {"mobi", "application/x-mobipocket-ebook"},
-#line 923 "mime-lookup.gperf"
+#line 923 "mime.gperf"
       {"opml", "text/x-opml"},
-#line 475 "mime-lookup.gperf"
+#line 475 "mime.gperf"
       {"ifm", "application/vnd.shana.informed.formdata"},
-#line 849 "mime-lookup.gperf"
+#line 849 "mime.gperf"
       {"silo", "model/mesh"},
-#line 978 "mime-lookup.gperf"
+#line 978 "mime.gperf"
       {"mng", "video/x-mng"},
-#line 663 "mime-lookup.gperf"
+#line 663 "mime.gperf"
       {"nzb", "application/x-nzb"},
-#line 123 "mime-lookup.gperf"
+#line 123 "mime.gperf"
       {"setreg", "application/set-registration-initiation"},
-#line 296 "mime-lookup.gperf"
+#line 296 "mime.gperf"
       {"i2g", "application/vnd.intergeo"},
-#line 893 "mime-lookup.gperf"
+#line 893 "mime.gperf"
       {"urls", "text/uri-list"},
-#line 796 "mime-lookup.gperf"
+#line 796 "mime.gperf"
       {"svg", "image/svg+xml"},
-#line 986 "mime-lookup.gperf"
+#line 986 "mime.gperf"
       {"avi", "video/x-msvideo"},
-#line 77 "mime-lookup.gperf"
+#line 77 "mime.gperf"
       {"onetoc", "application/onenote"},
-#line 237 "mime-lookup.gperf"
+#line 237 "mime.gperf"
       {"maker", "application/vnd.framemaker"},
-#line 730 "mime-lookup.gperf"
+#line 730 "mime.gperf"
       {"kar", "audio/midi"},
-#line 793 "mime-lookup.gperf"
+#line 793 "mime.gperf"
       {"png", "image/png"},
-#line 225 "mime-lookup.gperf"
+#line 225 "mime.gperf"
       {"es3", "application/vnd.eszigno3+xml"},
-#line 219 "mime-lookup.gperf"
+#line 219 "mime.gperf"
       {"nml", "application/vnd.enliven"},
-#line 79 "mime-lookup.gperf"
+#line 79 "mime.gperf"
       {"onetmp", "application/onenote"},
-#line 299 "mime-lookup.gperf"
+#line 299 "mime.gperf"
       {"rcprofile", "application/vnd.ipunplugged.rcprofile"},
-#line 349 "mime-lookup.gperf"
+#line 349 "mime.gperf"
       {"mbk", "application/vnd.mobius.mbk"},
-#line 95 "mime-lookup.gperf"
+#line 95 "mime.gperf"
       {"crl", "application/pkix-crl"},
-#line 843 "mime-lookup.gperf"
+#line 843 "mime.gperf"
       {"eml", "message/rfc822"},
-#line 307 "mime-lookup.gperf"
+#line 307 "mime.gperf"
       {"ktz", "application/vnd.kahootz"},
-#line 126 "mime-lookup.gperf"
+#line 126 "mime.gperf"
       {"smil", "application/smil+xml"},
-#line 936 "mime-lookup.gperf"
+#line 936 "mime.gperf"
       {"jpgv", "video/jpeg"},
-#line 797 "mime-lookup.gperf"
+#line 797 "mime.gperf"
       {"svgz", "image/svg+xml"},
-#line 655 "mime-lookup.gperf"
+#line 655 "mime.gperf"
       {"emz", "application/x-msmetafile"},
-#line 801 "mime-lookup.gperf"
+#line 801 "mime.gperf"
       {"uvi", "image/vnd.dece.graphic"},
-#line 298 "mime-lookup.gperf"
+#line 298 "mime.gperf"
       {"qfx", "application/vnd.intu.qfx"},
-#line 18 "mime-lookup.gperf"
+#line 18 "mime.gperf"
       {"dbk", "application/docbook+xml"},
-#line 159 "mime-lookup.gperf"
+#line 159 "mime.gperf"
       {"ami", "application/vnd.amiga.ami"},
-#line 571 "mime-lookup.gperf"
+#line 571 "mime.gperf"
       {"bcpio", "application/x-bcpio"},
-#line 418 "mime-lookup.gperf"
+#line 418 "mime.gperf"
       {"odi", "application/vnd.oasis.opendocument.image"},
-#line 313 "mime-lookup.gperf"
+#line 313 "mime.gperf"
       {"kon", "application/vnd.kde.kontour"},
-#line 679 "mime-lookup.gperf"
+#line 679 "mime.gperf"
       {"sv4cpio", "application/x-sv4cpio"},
-#line 838 "mime-lookup.gperf"
+#line 838 "mime.gperf"
       {"rgb", "image/x-rgb"},
-#line 29 "mime-lookup.gperf"
+#line 29 "mime.gperf"
       {"stk", "application/hyperstudio"},
-#line 110 "mime-lookup.gperf"
+#line 110 "mime.gperf"
       {"gbr", "application/rpki-ghostbusters"},
-#line 503 "mime-lookup.gperf"
+#line 503 "mime.gperf"
       {"sxw", "application/vnd.sun.xml.writer"},
-#line 236 "mime-lookup.gperf"
+#line 236 "mime.gperf"
       {"frame", "application/vnd.framemaker"},
-#line 26 "mime-lookup.gperf"
+#line 26 "mime.gperf"
       {"gml", "application/gml+xml"},
-#line 413 "mime-lookup.gperf"
+#line 413 "mime.gperf"
       {"odb", "application/vnd.oasis.opendocument.database"},
-#line 791 "mime-lookup.gperf"
+#line 791 "mime.gperf"
       {"jpe", "image/jpeg"},
-#line 564 "mime-lookup.gperf"
+#line 564 "mime.gperf"
       {"dmg", "application/x-apple-diskimage"},
-#line 892 "mime-lookup.gperf"
+#line 892 "mime.gperf"
       {"uris", "text/uri-list"},
-#line 217 "mime-lookup.gperf"
+#line 217 "mime.gperf"
       {"geo", "application/vnd.dynageo"},
-#line 623 "mime-lookup.gperf"
+#line 623 "mime.gperf"
       {"gramps", "application/x-gramps-xml"},
-#line 129 "mime-lookup.gperf"
+#line 129 "mime.gperf"
       {"gram", "application/srgs"},
-#line 689 "mime-lookup.gperf"
+#line 689 "mime.gperf"
       {"obj", "application/x-tgif"},
-#line 857 "mime-lookup.gperf"
+#line 857 "mime.gperf"
       {"vrml", "model/vrml"},
-#line 525 "mime-lookup.gperf"
+#line 525 "mime.gperf"
       {"umj", "application/vnd.umajin"},
-#line 829 "mime-lookup.gperf"
+#line 829 "mime.gperf"
       {"ico", "image/x-icon"},
-#line 544 "mime-lookup.gperf"
+#line 544 "mime.gperf"
       {"xfdl", "application/vnd.xfdl"},
-#line 518 "mime-lookup.gperf"
+#line 518 "mime.gperf"
       {"tmo", "application/vnd.tmobile-livetv"},
-#line 252 "mime-lookup.gperf"
+#line 252 "mime.gperf"
       {"ggb", "application/vnd.geogebra.file"},
-#line 622 "mime-lookup.gperf"
+#line 622 "mime.gperf"
       {"gnumeric", "application/x-gnumeric"},
-#line 410 "mime-lookup.gperf"
+#line 410 "mime.gperf"
       {"ext", "application/vnd.novadigm.ext"},
-#line 275 "mime-lookup.gperf"
+#line 275 "mime.gperf"
       {"hpgl", "application/vnd.hp-hpgl"},
-#line 856 "mime-lookup.gperf"
+#line 856 "mime.gperf"
       {"wrl", "model/vrml"},
-#line 802 "mime-lookup.gperf"
+#line 802 "mime.gperf"
       {"uvvi", "image/vnd.dece.graphic"},
-#line 143 "mime-lookup.gperf"
+#line 143 "mime.gperf"
       {"aso", "application/vnd.accpac.simply.aso"},
-#line 267 "mime-lookup.gperf"
+#line 267 "mime.gperf"
       {"grv", "application/vnd.groove-injector"},
-#line 419 "mime-lookup.gperf"
+#line 419 "mime.gperf"
       {"oti", "application/vnd.oasis.opendocument.image-template"},
-#line 803 "mime-lookup.gperf"
+#line 803 "mime.gperf"
       {"uvg", "image/vnd.dece.graphic"},
-#line 78 "mime-lookup.gperf"
+#line 78 "mime.gperf"
       {"onetoc2", "application/onenote"},
-#line 76 "mime-lookup.gperf"
+#line 76 "mime.gperf"
       {"omdoc", "application/omdoc+xml"},
-#line 457 "mime-lookup.gperf"
+#line 457 "mime.gperf"
       {"qxt", "application/vnd.quark.quarkxpress"},
-#line 591 "mime-lookup.gperf"
+#line 591 "mime.gperf"
       {"udeb", "application/x-debian-package"},
-#line 964 "mime-lookup.gperf"
+#line 964 "mime.gperf"
       {"mxu", "video/vnd.mpegurl"},
-#line 260 "mime-lookup.gperf"
+#line 260 "mime.gperf"
       {"kml", "application/vnd.google-earth.kml+xml"},
-#line 416 "mime-lookup.gperf"
+#line 416 "mime.gperf"
       {"odg", "application/vnd.oasis.opendocument.graphics"},
-#line 256 "mime-lookup.gperf"
+#line 256 "mime.gperf"
       {"gxt", "application/vnd.geonext"},
-#line 130 "mime-lookup.gperf"
+#line 130 "mime.gperf"
       {"grxml", "application/srgs+xml"},
-#line 261 "mime-lookup.gperf"
+#line 261 "mime.gperf"
       {"kmz", "application/vnd.google-earth.kmz"},
-#line 526 "mime-lookup.gperf"
+#line 526 "mime.gperf"
       {"unityweb", "application/vnd.unity"},
-#line 338 "mime-lookup.gperf"
+#line 338 "mime.gperf"
       {"portpkg", "application/vnd.macports.portpkg"},
-#line 790 "mime-lookup.gperf"
+#line 790 "mime.gperf"
       {"jpg", "image/jpeg"},
-#line 463 "mime-lookup.gperf"
+#line 463 "mime.gperf"
       {"mxl", "application/vnd.recordare.musicxml"},
-#line 944 "mime-lookup.gperf"
+#line 944 "mime.gperf"
       {"mpeg", "video/mpeg"},
-#line 718 "mime-lookup.gperf"
+#line 718 "mime.gperf"
       {"mxml", "application/xv+xml"},
-#line 31 "mime-lookup.gperf"
+#line 31 "mime.gperf"
       {"inkml", "application/inkml+xml"},
-#line 160 "mime-lookup.gperf"
+#line 160 "mime.gperf"
       {"apk", "application/vnd.android.package-archive"},
-#line 430 "mime-lookup.gperf"
+#line 430 "mime.gperf"
       {"oxt", "application/vnd.openofficeorg.extension"},
-#line 308 "mime-lookup.gperf"
+#line 308 "mime.gperf"
       {"ktr", "application/vnd.kahootz"},
-#line 81 "mime-lookup.gperf"
+#line 81 "mime.gperf"
       {"oxps", "application/oxps"},
-#line 456 "mime-lookup.gperf"
+#line 456 "mime.gperf"
       {"qxd", "application/vnd.quark.quarkxpress"},
-#line 333 "mime-lookup.gperf"
+#line 333 "mime.gperf"
       {"pre", "application/vnd.lotus-freelance"},
-#line 731 "mime-lookup.gperf"
+#line 731 "mime.gperf"
       {"rmi", "audio/midi"},
-#line 297 "mime-lookup.gperf"
+#line 297 "mime.gperf"
       {"qbo", "application/vnd.intu.qbo"},
-#line 394 "mime-lookup.gperf"
+#line 394 "mime.gperf"
       {"mseq", "application/vnd.mseq"},
-#line 170 "mime-lookup.gperf"
+#line 170 "mime.gperf"
       {"bmi", "application/vnd.bmi"},
-#line 314 "mime-lookup.gperf"
+#line 314 "mime.gperf"
       {"kpr", "application/vnd.kde.kpresenter"},
-#line 741 "mime-lookup.gperf"
+#line 741 "mime.gperf"
       {"ogg", "audio/ogg"},
-#line 624 "mime-lookup.gperf"
+#line 624 "mime.gperf"
       {"gtar", "application/x-gtar"},
-#line 804 "mime-lookup.gperf"
+#line 804 "mime.gperf"
       {"uvvg", "image/vnd.dece.graphic"},
-#line 574 "mime-lookup.gperf"
+#line 574 "mime.gperf"
       {"blorb", "application/x-blorb"},
-#line 28 "mime-lookup.gperf"
+#line 28 "mime.gperf"
       {"gxf", "application/gxf"},
-#line 417 "mime-lookup.gperf"
+#line 417 "mime.gperf"
       {"otg", "application/vnd.oasis.opendocument.graphics-template"},
-#line 523 "mime-lookup.gperf"
+#line 523 "mime.gperf"
       {"ufdl", "application/vnd.ufdl"},
-#line 136 "mime-lookup.gperf"
+#line 136 "mime.gperf"
       {"tfi", "application/thraud+xml"},
-#line 151 "mime-lookup.gperf"
+#line 151 "mime.gperf"
       {"fxpl", "application/vnd.adobe.fxp"},
-#line 588 "mime-lookup.gperf"
+#line 588 "mime.gperf"
       {"cpio", "application/x-cpio"},
-#line 23 "mime-lookup.gperf"
+#line 23 "mime.gperf"
       {"epub", "application/epub+zip"},
-#line 723 "mime-lookup.gperf"
+#line 723 "mime.gperf"
       {"yin", "application/yin+xml"},
-#line 405 "mime-lookup.gperf"
+#line 405 "mime.gperf"
       {"n-gage", "application/vnd.nokia.n-gage.symbian.install"},
-#line 25 "mime-lookup.gperf"
+#line 25 "mime.gperf"
       {"pfr", "application/font-tdpfr"},
-#line 556 "mime-lookup.gperf"
+#line 556 "mime.gperf"
       {"vxml", "application/voicexml+xml"},
-#line 321 "mime-lookup.gperf"
+#line 321 "mime.gperf"
       {"kne", "application/vnd.kinar"},
-#line 188 "mime-lookup.gperf"
+#line 188 "mime.gperf"
       {"clkk", "application/vnd.crick.clicker.keyboard"},
-#line 615 "mime-lookup.gperf"
+#line 615 "mime.gperf"
       {"pfb", "application/x-font-type1"},
-#line 627 "mime-lookup.gperf"
+#line 627 "mime.gperf"
       {"iso", "application/x-iso9660-image"},
-#line 660 "mime-lookup.gperf"
+#line 660 "mime.gperf"
       {"wri", "application/x-mswrite"},
-#line 468 "mime-lookup.gperf"
+#line 468 "mime.gperf"
       {"rmvb", "application/vnd.rn-realmedia-vbr"},
-#line 636 "mime-lookup.gperf"
+#line 636 "mime.gperf"
       {"lnk", "application/x-ms-shortcut"},
-#line 164 "mime-lookup.gperf"
+#line 164 "mime.gperf"
       {"mpkg", "application/vnd.apple.installer+xml"},
-#line 448 "mime-lookup.gperf"
+#line 448 "mime.gperf"
       {"efif", "application/vnd.picsel"},
-#line 891 "mime-lookup.gperf"
+#line 891 "mime.gperf"
       {"uri", "text/uri-list"},
-#line 478 "mime-lookup.gperf"
+#line 478 "mime.gperf"
       {"ipk", "application/vnd.shana.informed.package"},
-#line 69 "mime-lookup.gperf"
+#line 69 "mime.gperf"
       {"bpk", "application/octet-stream"},
-#line 319 "mime-lookup.gperf"
+#line 319 "mime.gperf"
       {"htke", "application/vnd.kenameaapp"},
-#line 500 "mime-lookup.gperf"
+#line 500 "mime.gperf"
       {"sxi", "application/vnd.sun.xml.impress"},
-#line 549 "mime-lookup.gperf"
+#line 549 "mime.gperf"
       {"osfpvg", "application/vnd.yamaha.openscoreformat.osfpvg+xml"},
-#line 595 "mime-lookup.gperf"
+#line 595 "mime.gperf"
       {"dxr", "application/x-director"},
-#line 122 "mime-lookup.gperf"
+#line 122 "mime.gperf"
       {"setpay", "application/set-payment-initiation"},
-#line 350 "mime-lookup.gperf"
+#line 350 "mime.gperf"
       {"mqy", "application/vnd.mobius.mqy"},
-#line 900 "mime-lookup.gperf"
+#line 900 "mime.gperf"
       {"fly", "text/vnd.fly"},
-#line 30 "mime-lookup.gperf"
+#line 30 "mime.gperf"
       {"ink", "application/inkml+xml"},
-#line 37 "mime-lookup.gperf"
+#line 37 "mime.gperf"
       {"json", "application/json"},
-#line 789 "mime-lookup.gperf"
+#line 789 "mime.gperf"
       {"jpeg", "image/jpeg"},
-#line 504 "mime-lookup.gperf"
+#line 504 "mime.gperf"
       {"sxg", "application/vnd.sun.xml.writer.global"},
-#line 460 "mime-lookup.gperf"
+#line 460 "mime.gperf"
       {"qxl", "application/vnd.quark.quarkxpress"},
-#line 174 "mime-lookup.gperf"
+#line 174 "mime.gperf"
       {"cdy", "application/vnd.cinderella"},
-#line 255 "mime-lookup.gperf"
+#line 255 "mime.gperf"
       {"gre", "application/vnd.geometry-explorer"},
-#line 309 "mime-lookup.gperf"
+#line 309 "mime.gperf"
       {"karbon", "application/vnd.kde.karbon"},
-#line 341 "mime-lookup.gperf"
+#line 341 "mime.gperf"
       {"cdkey", "application/vnd.mediastation.cdkey"},
-#line 866 "mime-lookup.gperf"
+#line 866 "mime.gperf"
       {"ifb", "text/calendar"},
-#line 38 "mime-lookup.gperf"
+#line 38 "mime.gperf"
       {"jsonml", "application/jsonml+json"},
-#line 238 "mime-lookup.gperf"
+#line 238 "mime.gperf"
       {"book", "application/vnd.framemaker"},
-#line 282 "mime-lookup.gperf"
+#line 282 "mime.gperf"
       {"mpy", "application/vnd.ibm.minipay"},
-#line 722 "mime-lookup.gperf"
+#line 722 "mime.gperf"
       {"yang", "application/yang"},
-#line 72 "mime-lookup.gperf"
+#line 72 "mime.gperf"
       {"deploy", "application/octet-stream"},
-#line 80 "mime-lookup.gperf"
+#line 80 "mime.gperf"
       {"onepkg", "application/onenote"},
-#line 644 "mime-lookup.gperf"
+#line 644 "mime.gperf"
       {"exe", "application/x-msdownload"},
-#line 24 "mime-lookup.gperf"
+#line 24 "mime.gperf"
       {"exi", "application/exi"},
-#line 335 "mime-lookup.gperf"
+#line 335 "mime.gperf"
       {"org", "application/vnd.lotus-organizer"},
-#line 396 "mime-lookup.gperf"
+#line 396 "mime.gperf"
       {"msty", "application/vnd.muvee.style"},
-#line 922 "mime-lookup.gperf"
+#line 922 "mime.gperf"
       {"nfo", "text/x-nfo"},
-#line 656 "mime-lookup.gperf"
+#line 656 "mime.gperf"
       {"mny", "application/x-msmoney"},
-#line 461 "mime-lookup.gperf"
+#line 461 "mime.gperf"
       {"qxb", "application/vnd.quark.quarkxpress"},
-#line 560 "mime-lookup.gperf"
+#line 560 "mime.gperf"
       {"wspolicy", "application/wspolicy+xml"},
-#line 311 "mime-lookup.gperf"
+#line 311 "mime.gperf"
       {"kfo", "application/vnd.kde.kformula"},
-#line 607 "mime-lookup.gperf"
+#line 607 "mime.gperf"
       {"evy", "application/x-envoy"},
-#line 465 "mime-lookup.gperf"
+#line 465 "mime.gperf"
       {"cryptonote", "application/vnd.rig.cryptonote"}
     };
 
@@ -2778,28 +2779,28 @@ in_word_set (register const char *str, register size_t len)
 
   if (len <= MAX_WORD_LENGTH && len >= MIN_WORD_LENGTH)
     {
-      register unsigned int key = hash (str, len);
+      unsigned int key = hash (str, len);
 
       if (key <= MAX_HASH_VALUE)
         {
-          register int index = lookup[key];
+          int index = lookup[key];
 
           if (index >= 0)
             {
-              register const char *s = wordlist[index].name;
+              const char *s = wordlist[index].name;
 
               if (*str == *s && !strcmp (str + 1, s + 1))
                 return &wordlist[index];
             }
           else if (index < -TOTAL_KEYWORDS)
             {
-              register int offset = - 1 - TOTAL_KEYWORDS - index;
-              register const struct file *wordptr = &wordlist[TOTAL_KEYWORDS + lookup[offset]];
-              register const struct file *wordendptr = wordptr + -lookup[offset + 1];
+              int offset = - 1 - TOTAL_KEYWORDS - index;
+              const struct file *wordptr = &wordlist[TOTAL_KEYWORDS + lookup[offset]];
+              const struct file *wordendptr = wordptr + -lookup[offset + 1];
 
               while (wordptr < wordendptr)
                 {
-                  register const char *s = wordptr->name;
+                  const char *s = wordptr->name;
 
                   if (*str == *s && !strcmp (str + 1, s + 1))
                     return wordptr;
@@ -2810,5 +2811,5 @@ in_word_set (register const char *str, register size_t len)
     }
   return 0;
 }
-#line 990 "mime-lookup.gperf"
+#line 990 "mime.gperf"
 
