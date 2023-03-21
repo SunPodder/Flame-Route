@@ -1,6 +1,7 @@
-
+#ifndef METHOD_H
+#define METHOD_H
 #pragma once
-typedef enum {
+typedef enum HTTPMethod {
     GET,
     POST,
     PUT,
@@ -11,4 +12,5 @@ typedef enum {
     TRACE,
     CONNECT
 } HTTPMethod;
+#endif // METHOD_H
 
