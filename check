@@ -5,7 +5,7 @@ if ! [[ $(command -v include-what-you-use && command -v cppcheck) ]]; then
     exit
 fi
 
-for file in $(find ./src -name *.c | grep -v mime); do
+for file in $(find ./src -name *.cpp | grep -v mime); do
     include-what-you-use $file
     cppcheck $file
 done
