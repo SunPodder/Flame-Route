@@ -1,1 +1,1 @@
-add_library(UTILS utils.c string-map.c route-map.c)
+add_library(UTILS utils.cpp)
