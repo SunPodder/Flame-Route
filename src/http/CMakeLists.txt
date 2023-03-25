@@ -1,1 +1,4 @@
-add_library(HTTP server.cpp request.cpp response.cpp)
+add_library(HTTP STATIC server.cpp request.cpp response.cpp ../utils/utils.cpp)
+
+add_dependencies(HTTP MIME)
+

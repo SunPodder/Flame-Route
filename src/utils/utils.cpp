@@ -1,3 +1,7 @@
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <sys/sendfile.h>
+#include <fcntl.h>
 #include <http/server.hpp>
 #include <http/response.hpp>
 #include <http/request.hpp>
@@ -5,12 +9,12 @@
 #include <utils/utils.hpp>
 #include <string>
 #include <unistd.h>
-#include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
-#include <sys/sendfile.h>
 #include <unistd.h>
+
+
 
 std::string FLAME_VERSION = "0.0.5";
 

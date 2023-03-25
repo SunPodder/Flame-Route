@@ -19,12 +19,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_subdirectory(src)
 add_subdirectory(src/http)
 add_subdirectory(src/mime)
-add_subdirectory(src/utils)
 
 
 File(WRITE ${CMAKE_CURRENT_BINARY_DIR}/flame.cpp "")
 add_library(FlameRoute STATIC flame.cpp)
-target_link_libraries(FlameRoute HTTP MIME UTILS)
+target_link_libraries(FlameRoute HTTP MIME)
 
 add_subdirectory(examples)
 
@@ -33,12 +32,9 @@ find_package(OpenSSL REQUIRED)
 
 install(TARGETS flame-route DESTINATION bin)
 
-message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
-set(FLAME_ROUTE_INCLUDE_DIR ${CMAKE_INSTALL_PREFIX}/include/FlameRoute)
-set(FLAME_ROUTE_LIBRARY_DIR ${CMAKE_INSTALL_PREFIX}/lib)
-
+set(INCLUDE_DIR include/FlameRoute)
 
 File(GLOB HTTP_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/src/http/*.hpp)
-install(FILES ${HTTP_HEADERS} DESTINATION ${FLAME_ROUTE_INCLUDE_DIR}/http)
+install(FILES ${HTTP_HEADERS} DESTINATION ${INCLUDE_DIR}/http)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libFlameRoute.a DESTINATION ${FLAME_ROUTE_LIBRARY_DIR})
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libFlameRoute.a DESTINATION lib)

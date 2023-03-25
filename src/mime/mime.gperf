@@ -1,6 +1,5 @@
 struct file { char* name; char* mime; }
 
-
 %%
 ez, "application/andrew-inset"
 aw, "application/applixware"
