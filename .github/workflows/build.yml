@@ -1,0 +1,61 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'examples/**'
+      - 'CMakeLists.txt'
+      - '.github/workflows/build.yml'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'examples/**'
+      - 'CMakeLists.txt'
+      - '.github/workflows/build.yml'
+
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: 15
+          platform: x64
+
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v1.13
+        with:
+          cmake-version: '3.26.0'
+    
+      - name: Build
+        run: |
+          mkdir build
+          mkdir build/flame-route
+          cd build
+          CXX=clang++ CC=clang cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=flame-route ..
+          make -j2
+
+      - name: Test
+        run: |
+          bash test/test.sh || exit 1
+    
+      - name: Generate Artifact
+        run: |
+          cd build
+          make install
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: flame-route
+          path: build/flame-route
+
