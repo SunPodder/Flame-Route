@@ -2,7 +2,7 @@
 - [x] Turn http into a project independant library
 - [x] better way for determining content types
 - [x] GET 1.1
-- [ ] Logger
+- [x] Logger
 - [ ] POST
 - [x] routing
 - [x] static files
