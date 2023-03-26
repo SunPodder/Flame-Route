@@ -8,19 +8,26 @@
 
 
 void Home(const HTTPRequest &request, HTTPResponse &response){
-    User user = get_user(request.cookie);
-    response.body = render_page("home", {.user=User});
+    User user = get_user(request.cookies);
+    if(user)
+        response.body = render_page("home", {.user=User});
+    else
+        response.redirect("/login");
 }
 
-void Auth(const HTTPRequest &request, HTTPResponse &response){
+void Login(const HTTPRequest &request, HTTPResponse &response){
     std::string email = request.body["email"];
     std::string password = request.body["password"];
-
-    if(check_credentials(email, password)){
-        response.cookie = generate_cookie(email);
-        response.body = "Access granted!";
+    if(request.method == POST){
+        if(check_credentials(email, password)){
+            response.cookie = generate_cookie(email);
+            User user = get_user(request.cookies)
+            response.body = render_page("home");
+        }else{
+            response.body = render_page("login", {.status="Failed"});
+        }
     }else{
-        response.body = "Access denied!";
+        response.body = render_page("login")
     }
 }
 
@@ -31,8 +38,8 @@ int main(){
     server->set_http_middleware(csrf_middleware);
 
     server->register_route("/", {GET}, Home);
-    server->register_route("/auth", {GET, POST}, Auth);
+    server->register_route("/login", {GET, POST}, Login);
 
-    server->ignite_server("127.0.0.1", 8080);
+    server->ignite("127.0.0.1", 8080);
     return 0;
 }
