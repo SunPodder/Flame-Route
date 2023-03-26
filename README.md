@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Build Status](https://github.com/SunPodder/Flame-Route/actions/workflows/build.yml/badge.svg)](https://github.com/SunPodder/Flame-Route/actions)
+[![Build Status](https://github.com/SunPodder/Flame-Route/actions/workflows/test.yml/badge.svg)](https://github.com/SunPodder/Flame-Route/actions)
 [![CMake](https://img.shields.io/badge/CMake-3.0-blue.svg)](https://cmake.org/)
 [![License: GPL](https://img.shields.io/badge/License-GPL-yellow.svg)](https://opensource.org/licenses/GPL-3.0)
 

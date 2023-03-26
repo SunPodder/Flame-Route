@@ -1,4 +1,4 @@
-name: Build and Test
+name: Tests
 
 on:
   push:
@@ -8,18 +8,18 @@ on:
       - 'src/**'
       - 'examples/**'
       - 'CMakeLists.txt'
-      - '.github/workflows/build.yml'
+      - '.github/workflows/test.yml'
   pull_request:
     paths:
       - 'src/**'
       - 'examples/**'
       - 'CMakeLists.txt'
-      - '.github/workflows/build.yml'
+      - '.github/workflows/test.yml'
 
   workflow_dispatch:
 
 jobs:
-  main:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
