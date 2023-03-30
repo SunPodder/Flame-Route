@@ -1,5 +1,6 @@
 #include <utils/route-map.hpp>
 #include <utils/string-map.hpp>
+#include <logger/logger.hpp>
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -12,7 +13,7 @@
 #include <mime/mime.hpp>
 #include <http/request.hpp>
 #include <pthread.h>
-#include <utils/utils.hpp>
+#include <http/utils.hpp>
 
 /*
  * TODO:
@@ -29,7 +30,7 @@ FlameServer::FlameServer() {
 }
 
 
-int FlameServer::ignite(std::string ip_addr, int port) {
+int FlameServer::ignite(std::string ip_addr, int port, void (*callback)()) {
     // create socket
     int server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_fd == 0) {
@@ -60,7 +61,11 @@ int FlameServer::ignite(std::string ip_addr, int port) {
         exit(EXIT_FAILURE);
     }
 
-    std::cout << "Server started on " << ip_addr << ":" << port << std::endl;
+    if (callback != nullptr) {
+        callback();
+    }else{
+        Logger::Success("Server started on " + ip_addr + ":" + std::to_string(port));
+    }
 
     while (true) {
         // accept client
@@ -84,7 +89,7 @@ int FlameServer::ignite(std::string ip_addr, int port) {
 
 Route::Route(){};
 
-void FlameServer::register_route(std::string path, const HTTPMethod (&method)[9],
+void FlameServer::route(std::string path, const HTTPMethod (&method)[9],
         void (*callback)(const HTTPRequest &request, HTTPResponse &response)) {
     Route *route = new Route();
     route->path = path;
@@ -93,9 +98,15 @@ void FlameServer::register_route(std::string path, const HTTPMethod (&method)[9]
     }
     route->callback = callback;
     this->routes.insert({ path, *route });
+    this->_route_count++;
 }
 
-void FlameServer::register_static_route(std::string path, std::string file_path) {
+void FlameServer::static_route(std::string path, std::string file_path) {
     this->static_routes.insert({ path, file_path });
+    this->_static_route_count++;
 }
 
+std::string FlameServer::__str__() {
+    std::string str = "<FlameServer - " + std::to_string(this->_route_count) + " routes, " + std::to_string(this->_static_route_count) + " static routes>";
+    
+}

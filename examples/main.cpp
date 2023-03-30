@@ -10,9 +10,9 @@ void home(const HTTPRequest &request, HTTPResponse &response){
 int main(){
     FlameServer *server = new FlameServer();
 
-    server->register_static_route("/static", "./");
+    server->static_route("/static", "./");
 
-    server->register_route("/", {GET}, home);
+    server->route("/", {GET}, home);
 
     server->ignite("127.0.0.1", 8080);
 

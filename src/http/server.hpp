@@ -13,11 +13,16 @@ class FlameServer{
     public:
         RouteMap routes;
         StringMap static_routes;
-        int ignite(std::string address, int port);
-        void register_route(std::string path, const HTTPMethod (&methods)[9],
+        int ignite(std::string address, int port, void (*callback)() = nullptr);
+        void route(std::string path, const HTTPMethod (&methods)[9],
                 void (*callback)(const HTTPRequest &request, HTTPResponse &response));
-        void register_static_route(std::string path, std::string file_path);
+        void static_route(std::string path, std::string file_path);
+        std::string __str__();
         FlameServer();
+
+    private:
+        int _route_count = 0;
+        int _static_route_count = 0;
 };
 #endif // FLAME_HTTP_H
 
