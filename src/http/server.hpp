@@ -17,6 +17,7 @@ class FlameServer{
         void route(std::string path, const HTTPMethod (&methods)[9],
                 void (*callback)(const HTTPRequest &request, HTTPResponse &response));
         void static_route(std::string path, std::string file_path);
+        void static_route(std::string path);
         std::string __str__();
         FlameServer();
 

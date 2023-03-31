@@ -19,7 +19,13 @@ class Logger {
         template <typename T>
         inline constexpr static bool has_str_v = has_str<T>::value;
 
-
+        /*
+         * check if the type has a __str__ method
+         * if it does, call it and return the result
+         * if it doesn't, check if it's a string or a char*
+         * if it is, return it
+         * if it isn't, convert it to a string and return it
+         */
         template<typename T>
         static std::string __get_str(T t){
             std::string msg;
@@ -38,6 +44,9 @@ class Logger {
         }
 
 
+        /*
+         * print the message with the given color
+         */
         static inline void __print(std::string msg, std::string color){
             std::time_t now = time(0);
             std::string dt = ctime(&now);
@@ -47,6 +56,12 @@ class Logger {
         
 
     public:
+      /*
+       * @param t: the first argument
+       * @param args: the rest of the arguments
+       * concatenate all the arguments into a string
+       * and print it
+       */
         template<typename T, typename... Args>
         static void Log(T t, Args... args){
             std::string msg = "";

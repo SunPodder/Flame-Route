@@ -29,7 +29,12 @@
 FlameServer::FlameServer() {
 }
 
-
+/*
+ * Run the server
+ * @param ip_addr: IP address to bind to
+ * @param port: Port to bind to
+ * @param callback: Callback function to run om server ignition
+ */
 int FlameServer::ignite(std::string ip_addr, int port, void (*callback)()) {
     // create socket
     int server_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -91,6 +96,12 @@ int FlameServer::ignite(std::string ip_addr, int port, void (*callback)()) {
 
 Route::Route(){};
 
+/*
+ * Define a route
+ * @param path: Path of the route
+ * @param method: HTTP methods the route accepts
+ * @param callback: Callback function to run when the route is accessed
+ */
 void FlameServer::route(std::string path, const HTTPMethod (&method)[9],
         void (*callback)(const HTTPRequest &request, HTTPResponse &response)) {
     Route *route = new Route();
@@ -103,6 +114,20 @@ void FlameServer::route(std::string path, const HTTPMethod (&method)[9],
     this->_route_count++;
 }
 
+/*
+ * Define a static route
+ * @param path: Path of the route
+ */
+void FlameServer::static_route(std::string path){
+    this->static_routes.insert({ path, path });
+    this->_static_route_count++;
+}
+
+/*
+ * Define a static route
+ * @param path: Path of the route
+ * @param file_path: Path of the files to serve
+ */
 void FlameServer::static_route(std::string path, std::string file_path) {
     this->static_routes.insert({ path, file_path });
     this->_static_route_count++;
@@ -110,5 +135,6 @@ void FlameServer::static_route(std::string path, std::string file_path) {
 
 std::string FlameServer::__str__() {
     std::string str = "<FlameServer - " + std::to_string(this->_route_count) + " routes, " + std::to_string(this->_static_route_count) + " static routes>";
-    
+   
+    return str;
 }
