@@ -6,7 +6,7 @@
 - [ ] POST
 - [x] routing
 - [x] static files
-- [ ] templates
+- [x] templates
 - [ ] dynamic routes
 - [ ] executable to build project producing a dist/public folder
 - [ ] SSL

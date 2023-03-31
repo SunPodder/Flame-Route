@@ -2,9 +2,13 @@
 #include <http/request.hpp>
 #include <http/response.hpp>
 #include <http/server.hpp>
+#include <templates/jinja.hpp>
+#include <json/json.hpp>
+
+Template::Jinja jinja = Template::Jinja("./templates");
 
 void home(const HTTPRequest &request, HTTPResponse &response){
-    response.body = "<h1>Welcome to Home</h1>";
+    response.body = jinja.render("index.html", {{"name", "Flame"}});
 }
 
 int main(){
