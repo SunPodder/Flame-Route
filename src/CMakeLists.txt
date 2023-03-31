@@ -9,7 +9,7 @@ install(TARGETS flame-route DESTINATION bin)
 #
 add_subdirectory(http)
 add_subdirectory(mime)
-
+add_subdirectory(json)
 
 # Create final library to distribute
 File(WRITE ${CMAKE_CURRENT_BINARY_DIR}/flame.cpp "")
