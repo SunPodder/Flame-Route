@@ -206,7 +206,12 @@ std::string read_request(int socket){
 Route* find_route(FlameServer& server, HTTPRequest& request){
     RouteMap::iterator it = server.routes.find(request.path);
    if (it != server.routes.end()) {
-       return &it->second;
+       Route *r = &it->second;
+       for (int i = 0; i < 9; i++) {
+           if (r->methods[i] == request.method) {
+               return r;
+           }
+       }
     }
     return nullptr;
 }

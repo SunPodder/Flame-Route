@@ -6,24 +6,26 @@
 #include <vector>
 #include <sstream>
 
-HTTPMethod get_method(const char *method) {
-    if (strcmp(method, "GET") == 0) {
+HTTPMethod get_method(std::string method){
+    for (auto & c: method) c = toupper(c);
+
+    if (method == "GET") {
         return GET;
-    } else if (strcmp(method, "POST") == 0) {
+    } else if (method == "POST") {
         return POST;
-    } else if (strcmp(method, "PUT") == 0) {
+    } else if (method == "PUT") {
         return PUT;
-    } else if (strcmp(method, "DELETE") == 0) {
+    } else if (method == "DELETE") {
         return DELETE;
-    } else if (strcmp(method, "HEAD") == 0) {
+    } else if (method == "HEAD") {
         return HEAD;
-    } else if (strcmp(method, "OPTIONS") == 0) {
+    } else if (method == "OPTIONS") {
         return OPTIONS;
-    } else if (strcmp(method, "CONNECT") == 0) {
+    } else if (method == "CONNECT") {
         return CONNECT;
-    } else if (strcmp(method, "TRACE") == 0) {
+    } else if (method == "TRACE") {
         return TRACE;
-    } else if (strcmp(method, "PATCH") == 0) {
+    } else if (method == "PATCH") {
         return PATCH;
     } else {
         return GET;
@@ -54,7 +56,7 @@ void HTTPRequest::parse_request(const std::string& request_string) {
     }
 
     // Extract the request method and path
-    this->method = ::get_method(request_line_parts[0].c_str());
+    this->method = ::get_method(request_line_parts[0]);
     this->path = request_line_parts[1];
 
     // Parse the headers

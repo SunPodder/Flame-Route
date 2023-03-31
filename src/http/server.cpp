@@ -80,7 +80,9 @@ int FlameServer::ignite(std::string ip_addr, int port, void (*callback)()) {
         struct thread_args args(*this, client_fd);
         if (::pthread_create(&thread, NULL, (void *(*)(void*))handle_connection, &args) != 0) {
             std::cerr << "Failed to create thread" << std::endl;
-            ::send500(*(new HTTPResponse(client_fd)));
+            HTTPResponse *r = new HTTPResponse(client_fd);
+            ::send500(*r);
+            delete r;
             close(client_fd);
             continue;
         }
