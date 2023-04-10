@@ -3,15 +3,16 @@
 - [x] better way for determining content types
 - [x] GET 1.1
 - [x] Logger
-- [ ] POST
+- [ ] Implement a C++ socket wrapper, it will be used by the http library and for implementing WebSockets.
+- [ ] POST parser
 - [x] routing
 - [x] static files
 - [x] templates
 - [ ] dynamic routes
 - [ ] executable to build project producing a dist/public folder
 - [ ] SSL
-- [ ] PUT
-- [ ] DELETE
+- [ ] PUT parser
+- [ ] DELETE parser
 - [ ] compression
 - [ ] documentation
 - [ ] modularize code so it's easier to make extensions and plugins
