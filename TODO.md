@@ -1,18 +1,26 @@
 # TODO
 - [x] Turn http into a project independant library
 - [x] better way for determining content types
-- [x] GET 1.1
+- [ ] GET 1.1
+  - [ ] Parse query params
 - [x] Logger
+  - [ ] put a loggable method in every framework component
 - [ ] Implement a C++ socket wrapper, it will be used by the http library and for implementing WebSockets.
-- [ ] POST parser
+- [ ] POST
+  - [ ] Parse body
+    - [ ] json
+    - [ ] multipart/form-data
+    - [ ] www-form-url-encoded
+    - [ ] raw
+  - [ ] parse query params if any
 - [x] routing
 - [x] static files
 - [x] templates
 - [ ] dynamic routes
 - [ ] executable to build project producing a dist/public folder
 - [ ] SSL
-- [ ] PUT parser
-- [ ] DELETE parser
+- [ ] PUT
+- [ ] DELETE
 - [ ] compression
 - [ ] documentation
 - [ ] modularize code so it's easier to make extensions and plugins
