@@ -1,3 +1,5 @@
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused -Werror")
+
 add_library(HTTP STATIC server.cpp request.cpp response.cpp utils.cpp)
 
 add_dependencies(HTTP MIME)

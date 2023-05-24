@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <utils/route-map.hpp>
 #include <utils/string-map.hpp>
 #include <logger/logger.hpp>
@@ -106,7 +107,7 @@ void FlameServer::route(std::string path, const HTTPMethod (&method)[9],
         void (*callback)(const HTTPRequest &request, HTTPResponse &response)) {
     Route *route = new Route();
     route->path = path;
-    for (int i = 0; i < sizeof(method) / sizeof(HTTPMethod); i++) {
+    for (int i = 0; i < (int)(sizeof(method) / sizeof(HTTPMethod)); i++) {
         route->methods[i] = method[i];
     }
     route->callback = callback;

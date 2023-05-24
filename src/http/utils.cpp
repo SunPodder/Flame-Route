@@ -1,4 +1,5 @@
 #include "http/method.hpp"
+#include <cstddef>
 #include <sys/stat.h>
 #include <sys/socket.h>
 #include <sys/sendfile.h>
@@ -92,7 +93,7 @@ void sendHeaders(const HTTPResponse &response){
         + "Content-Type: " + response.mimeType + "\r\n"
         + "Date: " + date + "\r\n";
 
-    int bytesSent = 0;
+    size_t bytesSent = 0;
     while (bytesSent < raw.length()) {
         int result = send(response.to, raw.c_str() + bytesSent, raw.length() - bytesSent, 0);
         if (result == -1) {
@@ -155,7 +156,7 @@ void sendResponse(const HTTPResponse &response){
     sendHeaders(response);
     send(response.to, "\n", 1, 0);
     
-    int sentBytes = 0;
+    size_t sentBytes = 0;
     while (sentBytes < response.body.length()) {
         int result = send(response.to, response.body.c_str() + sentBytes, response.body.length() - sentBytes, 0);
         if (result == -1) {
