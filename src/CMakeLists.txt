@@ -24,8 +24,5 @@ set(INCLUDE_DIR include/FlameRoute)
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/logger/logger.hpp DESTINATION ${INCLUDE_DIR}/logger)
 
-File(GLOB JSON_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/json/*.hpp)
-install(FILES ${JSON_HEADERS} DESTINATION ${INCLUDE_DIR}/json)
-
 # Install lib
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libFlameRoute.a DESTINATION lib)
