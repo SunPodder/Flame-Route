@@ -19,6 +19,7 @@ find_package(OpenSSL REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
+set(FLAME_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/include/FlameRoute" CACHE INTERNAL "Include directory for FlameRoute")
 
 add_subdirectory(src)
 add_subdirectory(examples)
