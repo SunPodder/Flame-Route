@@ -1,3 +1,3 @@
 add_library(SOCKET STATIC socket.cpp)
 
-install(FILES socket.hpp DESTINATION ${INCLUDE_DIR}/socket)
+install(FILES socket.hpp DESTINATION ${FLAME_INCLUDE_DIR}/socket)

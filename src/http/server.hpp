@@ -1,5 +1,6 @@
 #ifndef SERVER_H
 #define SERVER_H
+#include "socket/socket.hpp"
 #include <string>
 #include <utils/string-map.hpp>
 #include <http/route.hpp>
@@ -11,6 +12,7 @@
 
 class FlameServer{
     public:
+		Socket *socket;
         RouteMap routes;
         StringMap static_routes;
         int ignite(std::string address, int port, void (*callback)() = nullptr);
@@ -20,6 +22,7 @@ class FlameServer{
         void static_route(std::string path);
         std::string __str__();
         FlameServer();
+		~FlameServer();
 
     private:
         int _route_count = 0;

@@ -1,4 +1,8 @@
+#include "http/error.hpp"
+#include "http/route.hpp"
+#include "socket/socket.hpp"
 #include <cstddef>
+#include <thread>
 #include <utils/route-map.hpp>
 #include <utils/string-map.hpp>
 #include <logger/logger.hpp>
@@ -18,7 +22,7 @@
 
 /*
  * TODO:
- * send* methods should be called through the Server class
+ * error handler methods should be called through the Server class
  * Builtin methods will be implemented in HTTPResponse.cpp file
  * Users will also be able to implement their own methods
  * So server should determine which method to call
@@ -37,35 +41,10 @@ FlameServer::FlameServer() {
  * @param callback: Callback function to run om server ignition
  */
 int FlameServer::ignite(std::string ip_addr, int port, void (*callback)()) {
-    // create socket
-    int server_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (server_fd == 0) {
-        std::cerr << "Failed to create socket" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
-    int opt = 1;
-    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-        std::cerr << "Failed to set socket options" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
-    struct sockaddr_in address;
-    address.sin_family = AF_INET;
-    address.sin_addr.s_addr = inet_addr(ip_addr.c_str());
-    address.sin_port = htons(port);
-
-    // bind socket
-    if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
-        std::cerr << "Failed to bind socket" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
-    // start listening
-    if (listen(server_fd, 3) < 0) {
-        std::cerr << "Failed to listen on socket" << std::endl;
-        exit(EXIT_FAILURE);
-    }
+	socket = new Socket();
+	(void)socket->open();
+	(void)socket->bind(ip_addr, port);
+	(void)socket->listen(10);
 
     if (callback != nullptr) {
         callback();
@@ -74,28 +53,21 @@ int FlameServer::ignite(std::string ip_addr, int port, void (*callback)()) {
     }
 
     while (true) {
-        // accept client
-        int client_fd = accept(server_fd, NULL, NULL);
-        if (client_fd < 0) {
-            std::cerr << "Failed to accept client" << std::endl;
+        Socket *client = socket->accept();
+		
+        if (client->getFd() < 0) {
+			Logger::Info("Failed to accept client");
+			delete client;
             continue;
         }
-
-        // handle request in a new thread
-        pthread_t thread;
-        struct thread_args args(*this, client_fd);
-        if (::pthread_create(&thread, NULL, (void *(*)(void*))handle_connection, &args) != 0) {
-            std::cerr << "Failed to create thread" << std::endl;
-            HTTPResponse *r = new HTTPResponse(client_fd);
-            ::send500(*r);
-            delete r;
-            close(client_fd);
-            continue;
-        }
+		
+		struct thread_args *args = new struct thread_args(*this, client);	
+		std::thread t(handle_connection, args);
+		t.detach();
     }
 }
 
-Route::Route(){};
+Route::Route(){}
 
 /*
  * Define a route
@@ -139,3 +111,13 @@ std::string FlameServer::__str__() {
    
     return str;
 }
+
+FlameServer::~FlameServer() {
+	this->socket->close();
+	for (auto const& route : this->routes) {
+		delete &route.second;
+	}
+	this->routes.clear();
+	this->static_routes.clear();
+}
+
