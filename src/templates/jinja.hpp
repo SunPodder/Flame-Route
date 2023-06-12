@@ -1,6 +1,6 @@
 #ifndef JINJA_HPP
 #define JINJA_HPP
-#include <string>
+#include <iosfwd>
 #include <templates/inja.hpp>
 #include <json/json.hpp>
 
