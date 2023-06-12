@@ -1,13 +1,11 @@
-#include <cstddef>
-#include <socket/socket.hpp>
-#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <sys/sendfile.h>
 #include <unistd.h>
 #include <sys/socket.h>
-#include <sys/types.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
+#include <socket/socket.hpp>
 
 Socket::Socket() {
 	openned = false;

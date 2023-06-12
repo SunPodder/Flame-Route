@@ -1,11 +1,7 @@
-#pragma once
 #ifndef SOCKET_HPP
 #define SOCKET_HPP
-
+#include <iosfwd>
 #include <string>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <arpa/inet.h>
 
 class Socket {
 public:
