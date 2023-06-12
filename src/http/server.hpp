@@ -1,14 +1,12 @@
 #ifndef SERVER_H
 #define SERVER_H
-#include "socket/socket.hpp"
-#include <string>
-#include <utils/string-map.hpp>
-#include <http/route.hpp>
-#include <http/request.hpp>
-#include <http/response.hpp>
 #include <http/method.hpp>
-#include <utils/route-map.hpp>
 #include <iostream>
+#include <utils/route-map.hpp>
+#include <utils/string-map.hpp> 
+class HTTPRequest;
+class HTTPResponse;
+class Socket;
 
 class FlameServer{
     public:

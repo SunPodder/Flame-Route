@@ -1,34 +1,15 @@
-#include "http/error.hpp"
-#include "http/route.hpp"
-#include "socket/socket.hpp"
-#include <cstddef>
-#include <thread>
-#include <utils/route-map.hpp>
-#include <utils/string-map.hpp>
-#include <logger/logger.hpp>
-#include <iostream>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 #include <http/server.hpp>
-#include <stdlib.h>
-#include <sys/sendfile.h>
-#include <unistd.h>
-#include <http/response.hpp>
-#include <mime/mime.hpp>
-#include <http/request.hpp>
-#include <pthread.h>
 #include <http/utils.hpp>
-
-/*
- * TODO:
- * error handler methods should be called through the Server class
- * Builtin methods will be implemented in HTTPResponse.cpp file
- * Users will also be able to implement their own methods
- * So server should determine which method to call
- * e.g. A 404 response will call send404
- * but if there's a custom 404 method, it should call that
- */
+#include <iostream>
+#include <logger/logger.hpp>
+#include <string>
+#include <thread>
+#include <unordered_map>
+#include <http/method.hpp>
+#include <http/route.hpp>
+#include <socket/socket.hpp>
+class HTTPRequest;
+class HTTPResponse;
 
 
 FlameServer::FlameServer() {

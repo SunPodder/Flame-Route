@@ -1,10 +1,11 @@
 #ifndef INTERNAL_HPP
 #define INTERNAL_HPP
-#include "http/request.hpp"
-#include "socket/socket.hpp"
 #include <http/response.hpp>
-#include <http/server.hpp>
-#include <string>
+#include <iosfwd>
+#include <http/method.hpp>
+#include <http/request.hpp>
+class FlameServer;
+class Socket;
 
 struct thread_args {
     FlameServer &server;

@@ -1,24 +1,21 @@
-#include "socket/socket.hpp"
-#include <http/method.hpp>
-#include <cstddef>
-#include <sys/stat.h>
-#include <sys/socket.h>
-#include <sys/sendfile.h>
 #include <fcntl.h>
-#include <http/server.hpp>
-#include <http/response.hpp>
-#include <http/request.hpp>
-#include <mime/mime.hpp>
-#include <http/utils.hpp>
+#include <time.h>
+#include <unistd.h>
+#include <exception>
 #include <string>
-#include <unistd.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <logger/logger.hpp>
+#include <unordered_map>
+#include <utility>
 #include <http/error.hpp>
-
+#include <http/method.hpp>
+#include <http/request.hpp>
+#include <http/response.hpp>
+#include <http/server.hpp>
+#include <logger/logger.hpp>
+#include <mime/mime.hpp>
+#include <http/route.hpp>
+#include <socket/socket.hpp>
+#include <utils/route-map.hpp>
+#include <http/utils.hpp>
 
 std::string FLAME_VERSION = "0.0.5";
 

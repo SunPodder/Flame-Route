@@ -1,9 +1,10 @@
 #pragma once
 #ifndef ERROR_HPP
 #define ERROR_HPP
-#include "http/method.hpp"
 #include <string>
 #include <exception>
+#include <iosfwd>
+#include <http/method.hpp>
 
 /*
  * Base class for all HTTP exceptions

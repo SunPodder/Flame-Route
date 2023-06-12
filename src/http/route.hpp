@@ -1,9 +1,9 @@
 #ifndef ROUTE_H
 #define ROUTE_H
 #include <http/method.hpp>
-#include <http/response.hpp>
-#include <http/request.hpp>
 #include <iostream>
+class HTTPRequest;
+class HTTPResponse;
 
 class Route {
     public:

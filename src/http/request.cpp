@@ -1,10 +1,9 @@
-#include <string.h>
+#include <ctype.h>
+#include <sstream>
 #include <stdio.h>
-#include <stdlib.h>
+#include <vector>
 #include <http/method.hpp>
 #include <http/request.hpp>
-#include <vector>
-#include <sstream>
 
 HTTPMethod get_method(std::string method){
     for (auto & c: method) c = toupper(c);

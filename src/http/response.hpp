@@ -1,7 +1,6 @@
 #ifndef RESPONSE_H
 #define RESPONSE_H
 #include <iostream>
-#include <string>
 #include <utils/string-map.hpp>
 
 class HTTPResponse{
