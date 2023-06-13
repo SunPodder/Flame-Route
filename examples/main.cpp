@@ -13,8 +13,8 @@ void Home(const HTTPRequest &request, HTTPResponse &response){
 }
 
 void Login(const HTTPRequest &request, HTTPResponse &response){
-	std::string username = request.body->to_string_map()["username"];
-	std::string password = request.body->to_string_map()["password"];
+	std::string username = std::string(request.body->to_string_map()["username"]);
+	std::string password = std::string(request.body->to_string_map()["password"]);
 	if(username == "admin" && password == "admin"){
 		response.body = "Login Success";
 	}else{
