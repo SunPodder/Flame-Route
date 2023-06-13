@@ -1,3 +1,4 @@
+#include <cctype>
 #include <fcntl.h>
 #include <time.h>
 #include <unistd.h>
@@ -245,5 +246,38 @@ std::string getHTTPMethodFromEnum(HTTPMethod method){
 		default:
 			return "UNKNOWN";
 	}
+}
+
+
+HTTPMethod getHTTPMethodFromStr(std::string method){
+	for (auto & c: method) c = toupper(c);
+
+	if (method == "GET") {
+		return GET;
+	} else if (method == "POST") {
+		return POST;
+	} else if (method == "PUT") {
+		return PUT;
+	} else if (method == "DELETE") {
+		return DELETE;
+	} else if (method == "HEAD") {
+		return HEAD;
+	} else if (method == "OPTIONS") {
+		return OPTIONS;
+	} else if (method == "CONNECT") {
+		return CONNECT;
+	} else if (method == "TRACE") {
+		return TRACE;
+	} else if (method == "PATCH") {
+		return PATCH;
+	} else {
+		return GET;
+	}
+}
+
+std::string trim(std::string str){
+	str.erase(0, str.find_first_not_of(' '));       //prefixing spaces
+	str.erase(str.find_last_not_of(' ')+1);         //surfixing spaces
+	return str;
 }
 

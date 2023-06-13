@@ -14,9 +14,12 @@ struct thread_args {
     thread_args(FlameServer& server, Socket *client) : server(server), client(client) {}
 };
 
+std::string trim(std::string str);
 std::string getResponseTime();
 std::string getHTTPStatusFromCode(int code);
 std::string getHTTPMethodFromEnum(HTTPMethod method);
+HTTPMethod getHTTPMethodFromStr(std::string method_str);
+
 
 void sendHeaders(Socket &server_fd, const HTTPResponse &response);
 void sendResponse(Socket &server_fd, HTTPResponse &reponse);
