@@ -10,7 +10,7 @@ class Route {
         std::string path;
         HTTPMethod methods[9];
         void (*callback)(const HTTPRequest &request, HTTPResponse &response);
-        Route();
+        Route(){};
 };
 
 #endif // ROUTE_H

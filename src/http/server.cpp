@@ -15,12 +15,6 @@ class HTTPResponse;
 FlameServer::FlameServer() {
 }
 
-/*
- * Run the server
- * @param ip_addr: IP address to bind to
- * @param port: Port to bind to
- * @param callback: Callback function to run om server ignition
- */
 int FlameServer::ignite(std::string ip_addr, int port, void (*callback)()) {
 	socket = new Socket();
 	(void)socket->open();
@@ -33,6 +27,11 @@ int FlameServer::ignite(std::string ip_addr, int port, void (*callback)()) {
         Logger::Success("Server started on " + ip_addr + ":" + std::to_string(port));
     }
 
+    // keep accepting connections
+    // TODO: limit number of max connections
+    // push connections to a queue if limit is reached
+    // and process them later
+    // might also accept connections in a seperate thread?
     while (true) {
         Socket *client = socket->accept();
 		
@@ -48,14 +47,7 @@ int FlameServer::ignite(std::string ip_addr, int port, void (*callback)()) {
     }
 }
 
-Route::Route(){}
 
-/*
- * Define a route
- * @param path: Path of the route
- * @param method: HTTP methods the route accepts
- * @param callback: Callback function to run when the route is accessed
- */
 void FlameServer::route(std::string path, const HTTPMethod (&method)[9],
         void (*callback)(const HTTPRequest &request, HTTPResponse &response)) {
     Route *route = new Route();
@@ -68,20 +60,12 @@ void FlameServer::route(std::string path, const HTTPMethod (&method)[9],
     this->_route_count++;
 }
 
-/*
- * Define a static route
- * @param path: Path of the route
- */
+
 void FlameServer::static_route(std::string path){
     this->static_routes.insert({ path, path });
     this->_static_route_count++;
 }
 
-/*
- * Define a static route
- * @param path: Path of the route
- * @param file_path: Path of the files to serve
- */
 void FlameServer::static_route(std::string path, std::string file_path) {
     this->static_routes.insert({ path, file_path });
     this->_static_route_count++;
