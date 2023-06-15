@@ -5,4 +5,3 @@
 
 typedef std::unordered_map<std::string, Route> RouteMap;
 #endif
-
