@@ -1,10 +1,10 @@
 #pragma once
 #ifndef ERROR_HPP
 #define ERROR_HPP
-#include <string>
 #include <exception>
-#include <iosfwd>
 #include <http/method.hpp>
+#include <iosfwd>
+#include <string>
 
 /*
  * Base class for all HTTP exceptions
@@ -19,8 +19,11 @@ class HTTPException : public std::exception {
 	std::string uri;
 	int code;
 	std::string message;
-public:
-	HTTPException(HTTPMethod method, std::string uri, int code, std::string message) : method(method), uri(uri), code(code), message(message) {};
+
+  public:
+	HTTPException(HTTPMethod method, std::string uri, int code,
+				  std::string message)
+		: method(method), uri(uri), code(code), message(message){};
 	const char* what() const throw();
 	const char* getURI() const throw();
 	HTTPMethod getMethod() const throw();
@@ -36,8 +39,11 @@ public:
  */
 class BadRequestException : public HTTPException {
 	std::string info;
-public:
-	BadRequestException(HTTPMethod method, std::string uri, std::string info = "") : HTTPException(method, uri, 400, "Bad request"), info(info) {};
+
+  public:
+	BadRequestException(HTTPMethod method, std::string uri,
+						std::string info = "")
+		: HTTPException(method, uri, 400, "Bad request"), info(info){};
 	const char* getInfo() const throw();
 };
 
@@ -48,8 +54,9 @@ public:
  * @param uri: URI requested by the client
  */
 class UnauthorizedException : public HTTPException {
-public:
-	UnauthorizedException(HTTPMethod method, std::string uri) : HTTPException(method, uri, 401, "Unauthorized") {};
+  public:
+	UnauthorizedException(HTTPMethod method, std::string uri)
+		: HTTPException(method, uri, 401, "Unauthorized"){};
 };
 
 /*
@@ -59,8 +66,9 @@ public:
  * @param uri: URI requested by the client
  */
 class ForbiddenException : public HTTPException {
-public:
-	ForbiddenException(HTTPMethod method, std::string uri) : HTTPException(method, uri, 403, "Forbidden") {};
+  public:
+	ForbiddenException(HTTPMethod method, std::string uri)
+		: HTTPException(method, uri, 403, "Forbidden"){};
 };
 
 /*
@@ -70,8 +78,9 @@ public:
  * @param uri: URI requested by the client
  */
 class URINotFoundException : public HTTPException {
-public:
-	URINotFoundException(HTTPMethod method, std::string uri) : HTTPException(method, uri, 404, "URI not found") {};
+  public:
+	URINotFoundException(HTTPMethod method, std::string uri)
+		: HTTPException(method, uri, 404, "URI not found"){};
 };
 
 /*
@@ -81,8 +90,9 @@ public:
  * @param uri: URI requested by the client
  */
 class MethodNotAllowedException : public HTTPException {
-public:
-	MethodNotAllowedException(HTTPMethod method, std::string uri) : HTTPException(method, uri, 405, "Method not allowed") {};
+  public:
+	MethodNotAllowedException(HTTPMethod method, std::string uri)
+		: HTTPException(method, uri, 405, "Method not allowed"){};
 };
 
 /*
@@ -94,8 +104,12 @@ public:
  */
 class InternalServerErrorException : public HTTPException {
 	std::string info;
-public:
-	InternalServerErrorException(HTTPMethod method, std::string uri, std::string info = "") : HTTPException(method, uri, 500, "Internal server error"), info(info) {};
+
+  public:
+	InternalServerErrorException(HTTPMethod method, std::string uri,
+								 std::string info = "")
+		: HTTPException(method, uri, 500, "Internal server error"),
+		  info(info){};
 	const char* getInfo() const throw();
 };
 
@@ -108,8 +122,11 @@ public:
  */
 class NotImplementedException : public HTTPException {
 	std::string info;
-public:
-	NotImplementedException(HTTPMethod method, std::string uri, std::string info = "") : HTTPException(method, uri, 501, "Not implemented"), info(info) {};
+
+  public:
+	NotImplementedException(HTTPMethod method, std::string uri,
+							std::string info = "")
+		: HTTPException(method, uri, 501, "Not implemented"), info(info){};
 	const char* getInfo() const throw();
 };
 
@@ -120,8 +137,9 @@ public:
  * @param uri: URI requested by the client
  */
 class ServiceUnavailableException : public HTTPException {
-public:
-	ServiceUnavailableException(HTTPMethod method, std::string uri) : HTTPException(method, uri, 503, "Service unavailable") {};
+  public:
+	ServiceUnavailableException(HTTPMethod method, std::string uri)
+		: HTTPException(method, uri, 503, "Service unavailable"){};
 };
 
 #endif
