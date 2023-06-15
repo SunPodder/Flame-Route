@@ -1,15 +1,13 @@
-#include <stdexcept>
-#include <string>
-#include <sys/sendfile.h>
-#include <unistd.h>
-#include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <socket/socket.hpp>
+#include <stdexcept>
+#include <string>
+#include <sys/sendfile.h>
+#include <sys/socket.h>
+#include <unistd.h>
 
-Socket::Socket() {
-	openned = false;
-}
+Socket::Socket() { openned = false; }
 
 Socket::Socket(int fd) {
 	this->fd = fd;
@@ -22,10 +20,6 @@ Socket::~Socket() {
 	}
 }
 
-/*
- * @return 0 if success, -1 if error
- * @throws runtime_error if socket is already openned
- */
 int Socket::open() {
 	if (openned) {
 		throw std::runtime_error("Socket is already openned");
@@ -46,17 +40,12 @@ int Socket::close() {
 		return -1;
 	}
 	openned = false;
+	// if socket is closed, we don't need it anymore
+	// but remeber to allocate it on heap
 	delete this;
 	return 0;
 }
 
-/*
- * Server side method to bind socket to address and port
- * @param host - host to connect to
- * @param port - port to connect to
- * @return 0 if success, -1 if error
- * @throws runtime_error if socket is not openned
- */
 int Socket::bind(const std::string& host, int port) {
 	if (!openned) {
 		throw std::runtime_error("Socket is not openned");
@@ -71,11 +60,6 @@ int Socket::bind(const std::string& host, int port) {
 	return 0;
 }
 
-/*
- * @param max_connections - maximum number of connections to queue
- * @return 0 if success, -1 if error
- * @throws runtime_error if socket is not openned
- */
 int Socket::listen(int max_connections) {
 	if (!openned) {
 		throw std::runtime_error("Socket is not openned");
@@ -86,7 +70,7 @@ int Socket::listen(int max_connections) {
 	return 0;
 }
 
-Socket *Socket::accept() {
+Socket* Socket::accept() {
 	if (!openned) {
 		throw std::runtime_error("Socket is not openned");
 	}
@@ -99,12 +83,8 @@ Socket *Socket::accept() {
 	return new Socket(new_fd);
 }
 
-/*
- * Client side method to connect to server
- * @param host - host to connect to
- * @param port - port to connect to
- * @return 0 if success, -1 if error
- */
+// connects to a server
+// opposite to bind
 int Socket::connect(const std::string& host, int port) {
 	if (!openned) {
 		throw std::runtime_error("Socket is not openned");
@@ -119,20 +99,14 @@ int Socket::connect(const std::string& host, int port) {
 	return 0;
 }
 
-/*
- * @param to - socket to send to
- * @param content - content to send
- * @param flags - flags to pass to send (default 0)
- * @return number of sent bytes
- * usually returns content.length(), but may return less if error occured
- */
-int Socket::send(int to, const std::string &content, int flags) {
+int Socket::send(int to, const std::string& content, int flags) const {
 	if (!openned) {
 		return -1;
 	}
 	size_t sentBytes = 0;
 	while (sentBytes < content.length()) {
-		int result = ::send(to, content.c_str() + sentBytes, content.length() - sentBytes, flags);
+		int result = ::send(to, content.c_str() + sentBytes,
+							content.length() - sentBytes, flags);
 		if (result == -1) {
 			break;
 		}
@@ -141,7 +115,7 @@ int Socket::send(int to, const std::string &content, int flags) {
 	return sentBytes;
 }
 
-int Socket::sendfile(int to, int file){
+int Socket::sendfile(int to, int file) const {
 	if (!openned) {
 		return -1;
 	}
@@ -149,9 +123,9 @@ int Socket::sendfile(int to, int file){
 	(void)lseek(file, 0, SEEK_SET);
 	off_t offset = 0;
 	int remain = size;
-	while(remain > 0){
+	while (remain > 0) {
 		int n = ::sendfile(to, file, &offset, remain);
-		if(n == -1){
+		if (n == -1) {
 			break;
 		}
 		remain -= n;
@@ -159,13 +133,7 @@ int Socket::sendfile(int to, int file){
 	return size - remain;
 }
 
-/*
- * @param from - socket to read from
- * @param terminator - string to stop reading at (default "\r\n\r\n")
- * @param flags - flags to pass to recv (default 0)
- * @return string read from socket
- */
-std::string Socket::read(int from, std::string terminator, int flags) {
+std::string Socket::read(int from, std::string terminator, int flags) const {
 	if (!openned) {
 		throw std::runtime_error("Socket is not openned");
 	}
@@ -173,24 +141,23 @@ std::string Socket::read(int from, std::string terminator, int flags) {
 	std::string buffer;
 	int n;
 	char buf[1024];
-	while((n = ::recv(from, buf, 1024, flags)) > 0){
+
+	// read in chunks of 1024 bytes
+	// until terminator is found
+	while ((n = ::recv(from, buf, 1024, flags)) > 0) {
 		buffer.append(buf, n);
-		if(buffer.find(terminator) != std::string::npos){
+		if (buffer.find(terminator) != std::string::npos) {
 			break;
 		}
 	}
 	return buffer;
 }
 
-int Socket::getFd() const {
-	return fd;
-}
+int Socket::getFd() const { return fd; }
 
-bool Socket::isOpen() const {
-	return openned;
-}
+bool Socket::isOpen() const { return openned; }
 
-std::string Socket::getHost() {
+std::string Socket::getHost() const {
 	sockaddr_in addr;
 	socklen_t addr_len = sizeof(addr);
 	if (getsockname(fd, (sockaddr*)&addr, &addr_len) == -1) {
@@ -199,7 +166,6 @@ std::string Socket::getHost() {
 	return inet_ntoa(addr.sin_addr);
 }
 
-std::string Socket::__str__() {
+std::string Socket::__str__() const {
 	return "Socket(" + std::to_string(fd) + ")";
 }
-
