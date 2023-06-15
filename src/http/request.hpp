@@ -1,22 +1,23 @@
 #ifndef REQUEST_H
 #define REQUEST_H
-#include <utils/string-map.hpp>
-#include <json/json.hpp>
 #include <http/method.hpp>
 #include <iostream>
+#include <json/json.hpp>
+#include <utils/string-map.hpp>
 
 class HTTPRequest;
 
-class RequestBody{
-private:
+class RequestBody {
+  private:
 	JSON json;
 	StringMap string_map;
-	HTTPRequest &request;
-	std::string &body;
+	HTTPRequest& request;
+	std::string& body;
 	std::string content_type;
 	void parse_json();
 	void parse_string_map();
-public:
+
+  public:
 	/*
 	 * Request body as string
 	 */
@@ -29,23 +30,22 @@ public:
 	 * Request body as std::unordered_map<std::string, std::string>
 	 */
 	StringMap& to_string_map();
-	RequestBody(std::string &body, HTTPRequest &request);
+	RequestBody(std::string& body, HTTPRequest& request);
 	~RequestBody();
 };
 
-class HTTPRequest{
-public:
+class HTTPRequest {
+  public:
 	std::string path;
 	HTTPMethod method;
 	StringMap query_params;
 	StringMap cookies;
 	StringMap headers;
-	RequestBody *body;
+	RequestBody* body;
 	HTTPRequest(std::string request);
 	~HTTPRequest();
 
-private:
+  private:
 	void parse_request(const std::string& request);
 };
 #endif // REQUEST_H
-
