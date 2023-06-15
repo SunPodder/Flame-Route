@@ -9,7 +9,7 @@
 Template::Jinja jinja = Template::Jinja("./templates");
 
 void Home(const HTTPRequest& request, HTTPResponse& response) {
-	response.body = jinja.render("index.html", {{"name", "Flame"}});
+	response.body = jinja.render("index", {{"name", "Flame"}});
 }
 
 void Login(const HTTPRequest& request, HTTPResponse& response) {
