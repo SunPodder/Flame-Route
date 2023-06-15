@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# get project root
+ROOT=$(git rev-parse --show-toplevel)
+
+echo "Running formatter..."
+$ROOT/fmt.sh
+
