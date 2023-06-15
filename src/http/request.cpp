@@ -1,24 +1,23 @@
-#include <http/error.hpp>
-#include <ctype.h>
-#include <sstream>
-#include <stdio.h>
 #include <algorithm>
-#include <unordered_map>
-#include <json/json.hpp>
-#include <json/json_impl.hpp>
-#include <utils/string-map.hpp>
-#include <string>
-#include <vector>
+#include <ctype.h>
+#include <http/error.hpp>
 #include <http/request.hpp>
 #include <http/utils.hpp>
+#include <json/json.hpp>
+#include <json/json_impl.hpp>
+#include <sstream>
+#include <stdio.h>
+#include <string>
+#include <unordered_map>
+#include <utils/string-map.hpp>
+#include <vector>
 
-std::string http_unescape(std::string &str){
+std::string http_unescape(std::string& str) {
 	// TODO: implement
 	return str;
 }
 
-template <typename T>
-void parse_urlencoded_data(T& map, std::string data){
+template <typename T> void parse_urlencoded_data(T& map, std::string data) {
 	std::istringstream data_stream(data);
 	std::string data_part;
 	while (std::getline(data_stream, data_part, '&')) {
@@ -32,61 +31,61 @@ void parse_urlencoded_data(T& map, std::string data){
 	}
 }
 
-
-RequestBody::RequestBody(std::string &body, HTTPRequest &request): request(request), body(body){
+RequestBody::RequestBody(std::string& body, HTTPRequest& request)
+	: request(request), body(body) {
 	this->json = NULL;
 	this->content_type = request.headers["Content-Type"];
-    // transform content type to lowercase
-	std::transform(this->content_type.begin(), this->content_type.end(), this->content_type.begin(), ::tolower);
+	// transform content type to lowercase
+	std::transform(this->content_type.begin(), this->content_type.end(),
+				   this->content_type.begin(), ::tolower);
 	this->string_map = StringMap();
 }
 
-JSON& RequestBody::to_json(){
-	if (this->json == NULL){
+JSON& RequestBody::to_json() {
+	if (this->json == NULL) {
 		this->parse_json();
 	}
 	return this->json;
 }
 
-StringMap& RequestBody::to_string_map(){
-	if (this->string_map.empty()){
+StringMap& RequestBody::to_string_map() {
+	if (this->string_map.empty()) {
 		this->parse_string_map();
 	}
 	return this->string_map;
 }
 
-std::string& RequestBody::str(){
-	return this->body;
-}
+std::string& RequestBody::str() { return this->body; }
 
-void RequestBody::parse_json(){
+void RequestBody::parse_json() {
 	this->json = JSON();
 
-
-	if (this->content_type == "application/json"){
+	if (this->content_type == "application/json") {
 		this->json = JSON::parse(this->body);
-	}else if (this->content_type == "application/x-www-form-urlencoded"){
+	} else if (this->content_type == "application/x-www-form-urlencoded") {
 		// example: name=John&age=23
 		parse_urlencoded_data(this->json, this->body);
-	}else if(this->content_type == "multipart/form-data"){
+	} else if (this->content_type == "multipart/form-data") {
 		// example: name=John; age=23
 		// TODO: implement
-		throw NotImplementedException(this->request.method, this->request.path, "multipart/form-data not implemented");
-	}else{
-		throw BadRequestException(this->request.method, this->request.path, "Content type not supported");
+		throw NotImplementedException(this->request.method, this->request.path,
+									  "multipart/form-data not implemented");
+	} else {
+		throw BadRequestException(this->request.method, this->request.path,
+								  "Content type not supported");
 	}
 }
 
-void RequestBody::parse_string_map(){
+void RequestBody::parse_string_map() {
 	this->string_map = StringMap();
-	if(this->body.empty()) return;
+	if (this->body.empty())
+		return;
 	std::istringstream body_stream(this->body);
 
 	std::cout << this->content_type << std::endl;
 	std::cout << "application/x-www-form-urlencoded" << std::endl;
 
-
-	if (this->content_type == "application/json"){
+	if (this->content_type == "application/json") {
 		std::string body_part;
 		while (std::getline(body_stream, body_part, ',')) {
 			size_t delimiter_pos = body_part.find(":");
@@ -98,27 +97,23 @@ void RequestBody::parse_string_map(){
 			this->string_map[body_name] = body_value;
 		}
 
-	}else if (this->content_type == "application/x-www-form-urlencoded"){
+	} else if (this->content_type == "application/x-www-form-urlencoded") {
 		// example: name=John&age=23
 		parse_urlencoded_data(this->string_map, this->body);
-	}else if (this->content_type == "multipart/form-data"){
+	} else if (this->content_type == "multipart/form-data") {
 		// example: name=John; age=23
 		// TODO: implement
-		throw NotImplementedException(this->request.method, this->request.path, "multipart/form-data not implemented");
-	}else{
-		throw BadRequestException(this->request.method, this->request.path, "Content type not supported");
+		throw NotImplementedException(this->request.method, this->request.path,
+									  "multipart/form-data not implemented");
+	} else {
+		throw BadRequestException(this->request.method, this->request.path,
+								  "Content type not supported");
 	}
 }
 
-RequestBody::~RequestBody(){
-}
+RequestBody::~RequestBody() {}
 
-
-
-HTTPRequest::HTTPRequest(std::string request) {
-	parse_request(request);
-}
-
+HTTPRequest::HTTPRequest(std::string request) { parse_request(request); }
 
 // Parses an HTTP request from a string
 void HTTPRequest::parse_request(const std::string& request_string) {
@@ -179,8 +174,10 @@ void HTTPRequest::parse_request(const std::string& request_string) {
 			if (delimiter_pos == std::string::npos) {
 				continue;
 			}
-			std::string cookie_name = trim(cookie_part.substr(0, delimiter_pos));
-			std::string cookie_value = trim(cookie_part.substr(delimiter_pos + 1));
+			std::string cookie_name =
+				trim(cookie_part.substr(0, delimiter_pos));
+			std::string cookie_value =
+				trim(cookie_part.substr(delimiter_pos + 1));
 			this->cookies[cookie_name] = cookie_value;
 		}
 	}
@@ -197,7 +194,4 @@ void HTTPRequest::parse_request(const std::string& request_string) {
 	this->body = new RequestBody(body, *this);
 }
 
-HTTPRequest::~HTTPRequest() {
-	delete this->body;
-}
-
+HTTPRequest::~HTTPRequest() { delete this->body; }
