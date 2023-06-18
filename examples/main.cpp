@@ -29,8 +29,8 @@ int main() {
 
 	server->static_route("/static", "./");
 
-	server->route("/", {GET}, Home);
-	server->route("/login", {POST}, Login);
+	server->route("/", GET, Home);
+	server->route("/login", POST, Login);
 
 	server->ignite("127.0.0.1", 8080);
 	delete server;

@@ -27,6 +27,17 @@ class FlameServer {
 	 * Define a HTTP Route
 	 *
 	 * @param path: Path of the route
+	 * @param method: HTTP Method the route accepts
+	 * @param callback: Callback function to run when the route is accessed
+	 */
+	void route(std::string path, const HTTPMethod& method,
+			   void (*callback)(const HTTPRequest& request,
+								HTTPResponse& response));
+
+	/*
+	 * Define a HTTP Route
+	 *
+	 * @param path: Path of the route
 	 * @param method: Array of HTTP methods the route accepts
 	 * @param callback: Callback function to run when the route is accessed
 	 */
