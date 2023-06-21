@@ -1,3 +1,4 @@
+#include "utils/string-map.hpp"
 #include <http/method.hpp>
 #include <http/request.hpp>
 #include <http/response.hpp>
@@ -8,6 +9,8 @@
 #include <templates/jinja.hpp>
 
 using namespace Flame;
+
+StringMap DB_CONFIG = {{"DB_PATH", "./db.sqlite3"}};
 
 Template::Jinja jinja = Template::Jinja("./templates");
 
@@ -44,12 +47,13 @@ void Login(const HTTPRequest& request, HTTPResponse& response) {
 }
 
 int main() {
+	/*
 	FlameServer* server = new FlameServer();
 
 	server->static_route("/static", "./");
 
 	server->route("/", {GET}, Home);
-	server->route("/login", {POST}, Login);
+	server->route("/login", {POST}, Login);*/
 
 	ORM::QuerySet<User>* users =
 		User::all()->filter({"age >= 18", "age <= 40"})->exec();
@@ -57,6 +61,6 @@ int main() {
 	ORM::QuerySet<Post>* posts = Post::all()->exec();
 
 	// server->ignite("127.0.0.1", 8080);
-	delete server;
+	// delete server;
 	return 0;
 }

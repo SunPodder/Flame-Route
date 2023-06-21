@@ -13,9 +13,24 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+if(NOT DB_DRIVER)
+	message(STATUS "DB_DRIVER not set, using sqlite3 as default")
+	SET(DB_DRIVER "sqlite3")
+else()
+	message(STATUS "DB_DRIVER: ${DB_DRIVER}")
+endif()
 
-find_package(Threads REQUIRED)
+if(DB_DRIVER STREQUAL "sqlite3")
+	add_compile_definitions(DB_SQLITE3)
+elseif(DB_DRIVER STREQUAL "mysql")
+	add_compile_definitions(DB_MYSQL)
+elseif(DB_DRIVER STREQUAL "mongodb")
+	add_compile_definitions(DB_MONGODB)
+endif()
+
+
 find_package(OpenSSL REQUIRED)
+find_package(SQLite3 REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 

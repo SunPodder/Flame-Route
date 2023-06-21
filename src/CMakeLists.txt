@@ -20,7 +20,7 @@ add_subdirectory(orm)
 File(WRITE ${CMAKE_CURRENT_BINARY_DIR}/flame.cpp "")
 add_library(FlameRoute STATIC flame.cpp)
 
-target_link_libraries(FlameRoute HTTP MIME TEMPLATES SOCKET ORM)
+target_link_libraries(FlameRoute HTTP MIME TEMPLATES SOCKET ORM SQLite::SQLite3)
 
 # Install lib
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libFlameRoute.a DESTINATION lib)

@@ -1,6 +1,7 @@
 #ifndef QUERY_HPP
 #define QUERY_HPP
 
+#include "orm/database.hpp"
 #include <initializer_list>
 #include <iostream>
 #include <vector>
@@ -40,8 +41,9 @@ template <typename T> class Query {
 	 */
 	QuerySet<T>* exec() {
 		this->query += ";";
-		std::cout << this->query << std::endl;
-		QuerySet<T>* qs = new QuerySet<T>();
+
+		Database* db = Database::getInstance();
+		QuerySet<T>* qs = db->query<T>(this->query);
 
 		// query no longer needed
 		delete this;
