@@ -3,6 +3,14 @@
 # get project root
 ROOT=$(git rev-parse --show-toplevel)
 
+# list all staged files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(cpp|hpp)$')
+
+if [[ -z "$STAGED_FILES" ]]; then exit 0; fi
+
 echo "Running formatter..."
-$ROOT/fmt.sh
+$ROOT/fmt.sh $STAGED_FILES
+
+# re-add files to staging
+git add $STAGED_FILES
 
