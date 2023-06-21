@@ -1,4 +1,4 @@
-# [![Flame-Route](./docs/banner.png)](https://github.com/SunPodder/Flame-Route#readme)
+# [![Flame-Route](./.github/banner.png)](https://github.com/SunPodder/Flame-Route#readme)
 
 <div align="center">
 
