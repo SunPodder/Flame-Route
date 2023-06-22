@@ -31,8 +31,7 @@ class FlameServer {
 	 * @param callback: Callback function to run when the route is accessed
 	 */
 	void route(std::string path, const HTTPMethod& method,
-			   void (*callback)(const HTTPRequest& request,
-								HTTPResponse& response));
+			   void (*callback)(HTTPRequest& request, HTTPResponse& response));
 
 	/*
 	 * Define a HTTP Route
@@ -42,8 +41,7 @@ class FlameServer {
 	 * @param callback: Callback function to run when the route is accessed
 	 */
 	void route(std::string path, const HTTPMethod (&methods)[9],
-			   void (*callback)(const HTTPRequest& request,
-								HTTPResponse& response));
+			   void (*callback)(HTTPRequest& request, HTTPResponse& response));
 
 	/*
 	 * Define a static file route

@@ -10,7 +10,9 @@
 #include <http/utils.hpp>
 #include <logger/logger.hpp>
 #include <mime/mime.hpp>
+#include <regex>
 #include <socket/socket.hpp>
+#include <sstream>
 #include <string>
 #include <time.h>
 #include <unistd.h>
@@ -19,6 +21,16 @@
 #include <utils/route-map.hpp>
 
 std::string FLAME_VERSION = "0.0.5";
+
+std::vector<std::string> split(const std::string& str, char delimiter) {
+	std::vector<std::string> tokens;
+	std::string token;
+	std::istringstream token_stream(str);
+	while (std::getline(token_stream, token, delimiter)) {
+		tokens.push_back(token);
+	}
+	return tokens;
+}
 
 /*
  * Check if a valid static route
@@ -137,14 +149,63 @@ void sendResponse(Socket& server, HTTPResponse& response) {
 	server.send(response.to(), "\r\n\r\n");
 }
 
-const Route* find_route(const FlameServer& server, const HTTPRequest& request) {
+const Route* find_route(const FlameServer& server, HTTPRequest& request) {
 	RouteMap::const_iterator it = server.routes.find(request.path);
+	const Route* r;
 
 	if (it != server.routes.end()) {
+		// exact match found
 		// check if method is allowed
-		const Route* r = &it->second;
-		for (int i = 0; i < 9; i++) {
-			if (r->methods[i] == request.method) {
+		r = &it->second;
+	} else {
+		// check if path accepts a parameter
+		// e.g. /user/:id
+		// if yes, add it to request.params
+		// and return the route
+		for (auto const& [k, v] : server.routes) {
+			if (k.find(":") != std::string::npos) {
+				// url maybe like /user/:id
+				// or /user/:id/more
+				// or /user/:id/:name
+
+				// split url and path by /
+				// and check if they have same length
+				// if yes, they are a match
+				// and the parameter is the part of path
+
+				std::vector<std::string> url_parts = split(k, '/');
+				std::vector<std::string> path_parts = split(request.path, '/');
+				if (url_parts.size() == path_parts.size()) {
+					// check if they are a match
+					bool match = true;
+					for (unsigned long i = 0; i < url_parts.size(); i++) {
+						if (url_parts[i] != path_parts[i]) {
+							// if not, check if it is a parameter
+							if (url_parts[i].find(":") != std::string::npos) {
+								// it is a parameter
+								// add it to request.params
+								// and continue
+								std::string key = url_parts[i].substr(1);
+								request.params[key] = path_parts[i];
+								continue;
+							}
+							// if not, it is not a match
+							match = false;
+							break;
+						}
+					}
+					if (match) {
+						r = &v;
+					}
+				}
+			}
+		}
+	}
+
+	if (r != nullptr) {
+		// check if method is allowed
+		for (auto const& m : r->methods) {
+			if (m == request.method) {
 				return r;
 			}
 		}
