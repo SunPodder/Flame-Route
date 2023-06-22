@@ -16,7 +16,7 @@
 - [x] routing
 - [x] static files
 - [x] templates
-- [ ] dynamic routes
+- [x] dynamic routes
 - [ ] executable to build project producing a dist/public folder
 - [ ] SSL
 - [ ] PUT

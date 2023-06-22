@@ -9,7 +9,7 @@ class HTTPRequest;
 
 class RequestBody {
   private:
-	JSON json;
+	JSON _json;
 	StringMap string_map;
 	HTTPRequest& request;
 	std::string& body;
@@ -25,11 +25,11 @@ class RequestBody {
 	/*
 	 * Request body as JSON
 	 */
-	JSON& to_json();
+	JSON& json();
 	/*
 	 * Request body as std::unordered_map<std::string, std::string>
 	 */
-	StringMap& to_string_map();
+	StringMap& map();
 	RequestBody(std::string& body, HTTPRequest& request);
 	~RequestBody();
 };
@@ -41,6 +41,7 @@ class HTTPRequest {
 	StringMap query_params;
 	StringMap cookies;
 	StringMap headers;
+	StringMap params;
 	RequestBody* body;
 	HTTPRequest(std::string request);
 	~HTTPRequest();

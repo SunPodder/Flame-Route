@@ -47,14 +47,14 @@ int FlameServer::ignite(std::string ip_addr, int port, void (*callback)()) {
 }
 
 void FlameServer::route(std::string path, const HTTPMethod& method,
-						void (*callback)(const HTTPRequest& request,
+						void (*callback)(HTTPRequest& request,
 										 HTTPResponse& response)) {
 	HTTPMethod methods[9] = {method};
 	this->route(path, methods, callback);
 }
 
 void FlameServer::route(std::string path, const HTTPMethod (&method)[9],
-						void (*callback)(const HTTPRequest& request,
+						void (*callback)(HTTPRequest& request,
 										 HTTPResponse& response)) {
 	Route* route = new Route();
 	route->path = path;

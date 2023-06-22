@@ -33,7 +33,7 @@ template <typename T> void parse_urlencoded_data(T& map, std::string data) {
 
 RequestBody::RequestBody(std::string& body, HTTPRequest& request)
 	: request(request), body(body) {
-	this->json = NULL;
+	this->_json = NULL;
 	this->content_type = request.headers["Content-Type"];
 	// transform content type to lowercase
 	std::transform(this->content_type.begin(), this->content_type.end(),
@@ -41,14 +41,14 @@ RequestBody::RequestBody(std::string& body, HTTPRequest& request)
 	this->string_map = StringMap();
 }
 
-JSON& RequestBody::to_json() {
-	if (this->json == NULL) {
+JSON& RequestBody::json() {
+	if (this->_json == NULL) {
 		this->parse_json();
 	}
-	return this->json;
+	return this->_json;
 }
 
-StringMap& RequestBody::to_string_map() {
+StringMap& RequestBody::map() {
 	if (this->string_map.empty()) {
 		this->parse_string_map();
 	}
@@ -58,13 +58,15 @@ StringMap& RequestBody::to_string_map() {
 std::string& RequestBody::str() { return this->body; }
 
 void RequestBody::parse_json() {
-	this->json = JSON();
+	this->_json = JSON();
 
 	if (this->content_type == "application/json") {
-		this->json = JSON::parse(this->body);
+		this->_json = JSON::parse(this->body);
 	} else if (this->content_type == "application/x-www-form-urlencoded") {
 		// example: name=John&age=23
-		parse_urlencoded_data(this->json, this->body);
+		if (this->string_map.empty())
+			parse_urlencoded_data(this->string_map, this->body);
+		this->_json = JSON(this->string_map);
 	} else if (this->content_type == "multipart/form-data") {
 		// example: name=John; age=23
 		// TODO: implement
@@ -81,9 +83,6 @@ void RequestBody::parse_string_map() {
 	if (this->body.empty())
 		return;
 	std::istringstream body_stream(this->body);
-
-	std::cout << this->content_type << std::endl;
-	std::cout << "application/x-www-form-urlencoded" << std::endl;
 
 	if (this->content_type == "application/json") {
 		std::string body_part;
