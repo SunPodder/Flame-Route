@@ -1,14 +1,18 @@
 #!/bin/bash
 
 if ! [[ $(command -v include-what-you-use && command -v cppcheck) ]]; then
-    echo "Dependencies not found!\nExiting..."
+    printf "Dependencies not found!\nExiting...\n"
     exit
 fi
 
 # list all changed .cpp and .hpp files
-changed_files=$(git diff --name-only HEAD~1 | grep -E "\.(cpp|hpp)$")
+if [[ -z "$*" ]]; then
+	changed_files=$(git diff --name-only HEAD~1 | grep -E "\.(cpp|hpp)$")
+else
+	changed_files=($@)
+fi
 
-if [[ -z "$changed_files" ]]; then
+if [[ -z "${changed_files[*]}" ]]; then
 	exit
 else
 	echo "Changed files:"

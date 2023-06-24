@@ -1,5 +1,6 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
+#include "utils/utils.hpp"
 #include <ctime>
 #include <iostream>
 #include <string>
@@ -47,8 +48,7 @@ class Logger {
 	 * print the message with the given color
 	 */
 	static inline void __print(std::string msg, std::string color) {
-		std::time_t now = time(0);
-		std::string dt = ctime(&now);
+		std::string dt = Flame::Utils::getCTime();
 		dt.erase(dt.length() - 1);
 		std::cout << "[" << dt << "] " << color << msg << "\033[0m"
 				  << std::endl;
@@ -71,8 +71,7 @@ class Logger {
 
 	template <typename T, typename... Args>
 	static void Error(T t, Args... args) {
-		std::time_t now = time(0);
-		std::string dt = ctime(&now);
+		std::string dt = Flame::Utils::getCTime();
 		dt.erase(dt.length() - 1);
 
 		std::string msg = "";

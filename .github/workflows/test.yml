@@ -35,7 +35,7 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.13
         with:
           cmake-version: '3.26.0'
-    
+
       - name: Build
         run: |
           mkdir build
@@ -47,7 +47,7 @@ jobs:
       - name: Test
         run: |
           bash test/test.sh || exit 1
-    
+
       - name: Generate Artifact
         run: |
           cd build
