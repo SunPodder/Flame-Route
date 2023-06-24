@@ -3,9 +3,8 @@
 #include "http/response.hpp"
 #include "utils/route-map.hpp"
 #include "utils/shared-queue.hpp"
-#include <asm/fcntl.h>
-#include <bits/seek_constants.h>
 #include <exception>
+#include <fcntl.h>
 #include <http/method.hpp>
 #include <http/route.hpp>
 #include <http/server.hpp>

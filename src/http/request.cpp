@@ -10,6 +10,7 @@
 #include <string>
 #include <unordered_map>
 #include <utils/string-map.hpp>
+#include <utils/utils.hpp>
 #include <vector>
 
 std::string http_unescape(std::string& str) {
@@ -25,8 +26,10 @@ template <typename T> void parse_urlencoded_data(T& map, std::string data) {
 		if (delimiter_pos == std::string::npos) {
 			continue;
 		}
-		std::string data_name = trim(data_part.substr(0, delimiter_pos));
-		std::string data_value = trim(data_part.substr(delimiter_pos + 1));
+		std::string data_name =
+			Flame::Utils::trim(data_part.substr(0, delimiter_pos));
+		std::string data_value =
+			Flame::Utils::trim(data_part.substr(delimiter_pos + 1));
 		map[data_name] = data_value;
 	}
 }
@@ -159,8 +162,10 @@ void HTTPRequest::parse_request(const std::string& request_string) {
 			// Invalid header line
 			continue;
 		}
-		std::string header_name = trim(header_line.substr(0, delimiter_pos));
-		std::string header_value = trim(header_line.substr(delimiter_pos + 1));
+		std::string header_name =
+			Flame::Utils::trim(header_line.substr(0, delimiter_pos));
+		std::string header_value =
+			Flame::Utils::trim(header_line.substr(delimiter_pos + 1));
 		this->headers[header_name] = header_value;
 	}
 
@@ -174,9 +179,9 @@ void HTTPRequest::parse_request(const std::string& request_string) {
 				continue;
 			}
 			std::string cookie_name =
-				trim(cookie_part.substr(0, delimiter_pos));
+				Flame::Utils::trim(cookie_part.substr(0, delimiter_pos));
 			std::string cookie_value =
-				trim(cookie_part.substr(delimiter_pos + 1));
+				Flame::Utils::trim(cookie_part.substr(delimiter_pos + 1));
 			this->cookies[cookie_name] = cookie_value;
 		}
 	}
