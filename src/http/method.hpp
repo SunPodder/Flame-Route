@@ -10,6 +10,7 @@ typedef enum HTTPMethod {
 	OPTIONS,
 	PATCH,
 	TRACE,
-	CONNECT
+	CONNECT,
+	UNKNOWN
 } HTTPMethod;
 #endif // METHOD_H
