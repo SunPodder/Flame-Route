@@ -83,8 +83,8 @@ class FlameServer {
 	const Route* _find_route(HTTPRequest& request);
 	void _handle_static_or_404(const HTTPRequest& request,
 							   HTTPResponse& response);
-	void _send_response(HTTPResponse& response);
-	void _send_headers(const HTTPResponse& response);
+	void _send_response(HTTPRequest& request, HTTPResponse& response);
+	void _send_headers(HTTPResponse& response);
 	void _send_file(const std::string& path, const HTTPRequest& request,
 					HTTPResponse& response);
 };
