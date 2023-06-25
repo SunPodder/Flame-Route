@@ -1,6 +1,6 @@
 #ifndef ROUTE_H
 #define ROUTE_H
-#include <http/method.hpp>
+#include "method.hpp"
 #include <iostream>
 class HTTPRequest;
 class HTTPResponse;

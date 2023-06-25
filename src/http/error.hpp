@@ -1,8 +1,8 @@
 #pragma once
 #ifndef ERROR_HPP
 #define ERROR_HPP
+#include "method.hpp"
 #include <exception>
-#include <http/method.hpp>
 #include <iosfwd>
 #include <string>
 

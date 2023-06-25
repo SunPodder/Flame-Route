@@ -1,7 +1,7 @@
 #ifndef ROUTE_MAP_H
 #define ROUTE_MAP_H
-#include <http/route.hpp>
+#include <iosfwd>
 #include <unordered_map>
-
+class Route;
 typedef std::unordered_map<std::string, Route> RouteMap;
 #endif

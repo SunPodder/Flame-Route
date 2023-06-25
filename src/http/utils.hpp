@@ -1,6 +1,6 @@
 #ifndef INTERNAL_HPP
 #define INTERNAL_HPP
-#include <http/method.hpp>
+#include "method.hpp"
 #include <iosfwd>
 
 std::string getHTTPStatusFromCode(int code);

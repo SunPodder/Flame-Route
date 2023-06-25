@@ -1,8 +1,8 @@
 #ifndef JINJA_HPP
 #define JINJA_HPP
 #include <iosfwd>
-#include <json/json.hpp>
-#include <templates/inja.hpp>
+#include "../json/json.hpp"
+#include "inja.hpp"
 
 namespace Template {
 class Jinja {
