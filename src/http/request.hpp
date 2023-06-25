@@ -1,9 +1,9 @@
 #ifndef REQUEST_H
 #define REQUEST_H
-#include <http/method.hpp>
+#include "../json/json.hpp"
+#include "../utils/string-map.hpp"
+#include "method.hpp"
 #include <iostream>
-#include <json/json.hpp>
-#include <utils/string-map.hpp>
 
 class HTTPRequest;
 

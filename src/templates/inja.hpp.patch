@@ -5,7 +5,7 @@
  #define INCLUDE_INJA_INJA_HPP_
  
 -#include <nlohmann/json.hpp>
-+#include <json/json_impl.hpp>
++#include "../json/json_impl.hpp"
  
  namespace inja {
  #ifndef INJA_DATA_TYPE

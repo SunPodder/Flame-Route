@@ -1,10 +1,10 @@
 #ifndef SERVER_H
 #define SERVER_H
-#include <http/method.hpp>
+#include "../utils/route-map.hpp"
+#include "../utils/shared-queue.hpp"
+#include "../utils/string-map.hpp"
+#include "method.hpp"
 #include <iostream>
-#include <utils/route-map.hpp>
-#include <utils/shared-queue.hpp>
-#include <utils/string-map.hpp>
 class HTTPRequest;
 class HTTPResponse;
 class Socket;

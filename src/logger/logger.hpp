@@ -1,11 +1,9 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
-#include "utils/utils.hpp"
-#include <ctime>
+#include "../utils/utils.hpp"
 #include <iostream>
 #include <string>
 #include <type_traits>
-#include <utility>
 
 class Logger {
   private:
