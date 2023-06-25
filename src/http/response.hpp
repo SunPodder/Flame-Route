@@ -8,7 +8,6 @@ class HTTPResponse {
 	int _to;
 
   public:
-	std::string mimeType;
 	std::string body;
 	StringMap cookie;
 	StringMap headers;

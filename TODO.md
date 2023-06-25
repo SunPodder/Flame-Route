@@ -21,7 +21,7 @@
 - [ ] SSL
 - [ ] PUT
 - [ ] DELETE
-- [ ] compression
+- [x] compression
 - [ ] documentation
 - [ ] modularize code so it's easier to make extensions and plugins
 - [ ] middlewares

@@ -3,6 +3,7 @@
 #include "http/response.hpp"
 #include "utils/route-map.hpp"
 #include "utils/shared-queue.hpp"
+#include <compression/brotli.hpp>
 #include <exception>
 #include <fcntl.h>
 #include <http/method.hpp>
@@ -88,7 +89,7 @@ void* FlameServer::_handle_connection(Socket* client) {
 			this->_handle_static_or_404(*request, *response);
 		} else {
 			route->callback(*request, *response);
-			this->_send_response(*response);
+			this->_send_response(*request, *response);
 		}
 
 		std::string method = getHTTPMethodFromEnum(request->method);
@@ -120,15 +121,24 @@ void* FlameServer::_handle_connection(Socket* client) {
 	return nullptr;
 }
 
-void FlameServer::_send_response(HTTPResponse& response) {
+void FlameServer::_send_response(HTTPRequest& request, HTTPResponse& response) {
 	std::string status = "HTTP/1.1 " + std::to_string(response.status) + " " +
 						 getHTTPStatusFromCode(response.status) + "\r\n";
 	Socket& server = *this->socket;
 
+	// check if client accepts compressed data
+	if (request.headers["Accept-Encoding"].find("br") != std::string::npos) {
+		response.headers["Content-Encoding"] = "br";
+		response.body = Brotli::compress(response.body);
+	} else if (request.headers["Accept-Encoding"].find("gzip") !=
+			   std::string::npos) {
+		// TODO: gzip compression
+	}
+
 	server.send(response.to(), status);
 	this->_send_headers(response);
 
-	server.send(response.to(), "\n");
+	server.send(response.to(), "\r\n");
 	server.send(response.to(), response.body);
 	server.send(response.to(), "\r\n\r\n");
 }
@@ -137,7 +147,7 @@ void FlameServer::_send_response(HTTPResponse& response) {
  * Send HTTP headers
  * @param response: HTTPResponse instance
  */
-void FlameServer::_send_headers(const HTTPResponse& response) {
+void FlameServer::_send_headers(HTTPResponse& response) {
 	std::string date = Flame::Utils::getCTime();
 
 	int size;
@@ -149,16 +159,9 @@ void FlameServer::_send_headers(const HTTPResponse& response) {
 		size = response.body.length();
 	}
 
-	// idk why but this is needed
-	// maybe because of the 4 bytes of newlines
-	// at the end ??
-	// though sendFile was woeking fine without this
-	size += 4;
-
 	std::string raw = "Server: FlameRoute/" + this->version() + "\r\n" +
 					  "Content-Length: " + std::to_string(size) + "\r\n" +
-					  "Content-Type: " + response.mimeType + "\r\n" +
-					  "Date: " + date + "\r\n";
+					  "Date: " + date;
 
 	// add user defined headers
 	for (auto const& [k, v] : response.headers) {
@@ -191,7 +194,7 @@ void FlameServer::_send_file(const std::string& path,
 										   "Could not open file");
 		return;
 	}
-	response.mimeType = getMimeType(path);
+	response.headers["Content-Type"] = getMimeType(path);
 	response.file = fd;
 
 	Socket& server = *this->socket;
@@ -232,7 +235,7 @@ void FlameServer::_handle_static_or_404(const HTTPRequest& request,
 
 const Route* FlameServer::_find_route(HTTPRequest& request) {
 	RouteMap::const_iterator it = this->routes.find(request.path);
-	const Route* r;
+	const Route* r = nullptr;
 
 	if (it != this->routes.end()) {
 		// exact match found
@@ -243,6 +246,8 @@ const Route* FlameServer::_find_route(HTTPRequest& request) {
 		// or /user/:id/more
 		// or /user/:id/:name
 		// if yes, add it to request.params
+		std::vector<std::string> request_parts =
+			Flame::Utils::split(request.path, '/');
 		for (auto const& [k, v] : this->routes) {
 			if (k.find(":") != std::string::npos) {
 				// split url and path by /
@@ -251,19 +256,16 @@ const Route* FlameServer::_find_route(HTTPRequest& request) {
 
 				std::vector<std::string> url_parts =
 					Flame::Utils::split(k, '/');
-				std::vector<std::string> path_parts =
-					Flame::Utils::split(request.path, '/');
-				if (url_parts.size() == path_parts.size()) {
+
+				if (url_parts.size() == request_parts.size()) {
 					bool match = true;
 					for (unsigned long i = 0; i < url_parts.size(); i++) {
-						if (url_parts[i] != path_parts[i]) {
+						if (url_parts[i] != request_parts[i]) {
 							// check if it is a parameter
 							if (url_parts[i].find(":") != std::string::npos) {
-								// it is a parameter
-								// add it to request.params
-								// and continue
+								// add it to request.params and continue
 								std::string key = url_parts[i].substr(1);
-								request.params[key] = path_parts[i];
+								request.params[key] = request_parts[i];
 								continue;
 							}
 							// if not, it is not a match
@@ -271,6 +273,7 @@ const Route* FlameServer::_find_route(HTTPRequest& request) {
 							break;
 						}
 					}
+
 					if (match) {
 						r = &v;
 						break;
@@ -313,11 +316,21 @@ void FlameServer::route(std::string path, const HTTPMethod (&method)[9],
 }
 
 void FlameServer::static_route(std::string path) {
-	this->static_routes.insert({path, path});
+	std::string file_path = path;
+	// file path should be relative to current working directory
+	if (file_path[0] == '/')
+		file_path = file_path.substr(1);
+	// path must start with /
+	if (path[0] != '/')
+		path = "/" + path;
+	this->static_routes.insert({path, file_path});
 	this->_static_route_count++;
 }
 
 void FlameServer::static_route(std::string path, std::string file_path) {
+	// path must start with /
+	if (path[0] != '/')
+		path = "/" + path;
 	this->static_routes.insert({path, file_path});
 	this->_static_route_count++;
 }
