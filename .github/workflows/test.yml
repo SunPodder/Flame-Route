@@ -19,8 +19,41 @@ on:
   workflow_dispatch:
 
 jobs:
+  Brotli:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Brotli
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ~/brotli-install
+          key: libbrotli
+
+      - name: Install Devtools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git cmake clang
+        if: steps.cache.outputs.cache-hit != 'true'
+
+      - name: Checkout Brotli
+        run: |
+          cd ~
+          git clone https://github.com/google/brotli
+        if: steps.cache.outputs.cache-hit != 'true'
+
+      - name: Build Brotli
+        run: |
+          cd ~/brotli
+          git checkout v1.0.9
+          mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX=~/brotli-install ..
+          make -j2
+          make install
+        if: steps.cache.outputs.cache-hit != 'true'
+
   Test:
     runs-on: ubuntu-latest
+    needs: Brotli
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -36,8 +69,22 @@ jobs:
         with:
           cmake-version: '3.26.0'
 
+      - name: Get Brotli
+        uses: actions/cache@v2
+        with:
+          path: ~/brotli-install
+          key: libbrotli
+
+      - name: Install Brotli
+        run: |
+          cd ~/brotli-install
+          ls
+          sudo cp -r include/* /usr/include/
+          sudo cp -r lib/*.a /usr/lib/
+
       - name: Build
         run: |
+          cd $GITHUB_WORKSPACE
           mkdir build
           mkdir build/flame-route
           cd build
