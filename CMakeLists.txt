@@ -1,10 +1,13 @@
 cmake_policy(SET CMP0048 NEW)
 cmake_minimum_required(VERSION 3.0)
 
-Project(FlameRoute VERSION 0.0.6 LANGUAGES CXX)
+project(
+	FlameRoute
+	VERSION 0.0.6
+	LANGUAGES CXX)
 
 if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug)
+	set(CMAKE_BUILD_TYPE Debug)
 endif()
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
@@ -17,10 +20,12 @@ find_package(OpenSSL REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-set(FLAME_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/include/FlameRoute" CACHE INTERNAL "Include directory for FlameRoute")
+set(FLAME_INCLUDE_DIR
+	"${CMAKE_INSTALL_PREFIX}/include/FlameRoute"
+	CACHE INTERNAL "Include directory for FlameRoute")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 add_subdirectory(src)
 add_subdirectory(examples)
-
